@@ -24,7 +24,14 @@ class GoalsController < ApplicationController
   end
 
   def update
+    @goal = Goal.find(params[:id])
 
+    if @goal.update(goal_params)
+      flash[:notice] = 'Your goal was updated'
+      redirect_to goals_path
+    else
+      render :edit
+    end
   end
 
   def show
