@@ -2,7 +2,7 @@
 
 <% @goals.each do |goal| %>
   <ul>
-    <li>This goal is <%= @goals.visibility ? 'public' : 'private' %></li>
+    <li>This goal is <%= goal.visibility ? 'public' : 'private' %></li>
     <li><%= goal.title %></li>
     <li><%= goal.description %></li>
     <li>Created by: <%= goal.creator.username %></li>
