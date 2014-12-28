@@ -7,9 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= link_to 'All Goals', goals_path  %>
-  <%= link_to 'New Goal', new_goal_path %>
-
+  
+<%= render 'layouts/navigation' %>
+<%= render 'layouts/messages' %>
 <%= yield %>
 
 </body>
