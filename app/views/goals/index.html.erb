@@ -3,7 +3,7 @@
 <% @goals.each do |goal| %>
   <ul>
     <li>Category: <%= goal.category.name %></li>
-    <li>This goal is <%= goal.visibility ? 'public' : 'private' %></li>
+    <li>This goal is <%= goal.visibility %></li>
     <li><%= goal.title %></li>
     <li><%= goal.description %></li>
     <li>Created by: <%= goal.creator.username %></li>
