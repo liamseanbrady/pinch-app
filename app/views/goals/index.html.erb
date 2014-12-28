@@ -23,6 +23,10 @@
       <li><%= user.username %></li>
     <% end %>
   </ul>
+  <br/>
+  <%= link_to 'Edit', edit_goal_path(goal) %> |
+  <%= link_to 'Pinch', pinch_goal_path(goal), method: 'post' %>
+  <br/>
   <hr>
   <br/>
 <% end %>
