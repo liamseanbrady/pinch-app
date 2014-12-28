@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  belongs_to :goal
+  has_many :goals
 
   validates :name, presence: true
 end
