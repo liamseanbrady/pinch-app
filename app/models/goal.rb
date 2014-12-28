@@ -1,6 +1,6 @@
 class Goal < ActiveRecord::Base
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
-  has_one :category
+  belongs_to :category
   has_many :learning_resources
 
   has_many :contribution_permissions
