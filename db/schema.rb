@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228171034) do
+ActiveRecord::Schema.define(version: 20141228173829) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20141228171034) do
   create_table "goals", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.boolean  "visibility",  default: false
+    t.string   "visibility",  default: "f"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
