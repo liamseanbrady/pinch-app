@@ -2,8 +2,8 @@ PinchApp::Application.routes.draw do
   root to: 'goals#index'
 
   resources :goals, except: [:destroy] do
+    resources :learning_resources, only: [:new, :create]
     member do
-      resources :learning_resources, only: [:new, :create]
       post :pinch
     end
   end
