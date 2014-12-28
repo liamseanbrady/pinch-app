@@ -9,6 +9,7 @@ class GoalsController < ApplicationController
 
   def create
     @goal = Goal.new(goal_params)
+    @goal.creator = User.first
 
     if @goal.save
       flash[:notice] = 'Your goal was created'
