@@ -38,6 +38,14 @@ class GoalsController < ApplicationController
 
   end
 
+  def pinch
+    goal = Goal.find(params[:id])
+
+    goal.pinchers << User.find(2)
+
+    redirect_to :back
+  end
+
   private
 
   def goal_params
