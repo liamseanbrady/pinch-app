@@ -12,5 +12,5 @@
   <br/>
   <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
   <br/>
-  <%= f.submit 'Create Goal' %>
+  <%= f.submit (@goal.new_record? ? 'Create Goal' : 'Edit Goal') %>
 <% end %>
