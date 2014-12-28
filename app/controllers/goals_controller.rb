@@ -4,7 +4,7 @@ class GoalsController < ApplicationController
   end
 
   def new
-
+    @goal = Goal.new
   end
 
   def create
