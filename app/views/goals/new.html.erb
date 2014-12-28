@@ -7,6 +7,10 @@
   <%= f.label :description %>
   <%= f.text_area :description %>
   <br/>
-  <!-- TODO: Add options box for choosing public or private -->
+  <%= f.label :public, 'Public' %>
+  <%= radio_button_tag 'goal[public]', "true" %>
+  <%= f.label :public, 'Private' %>
+  <%= radio_button_tag 'goal[public]', "false" %>
+  <br/>
   <%= f.submit 'Create Goal' %>
 <% end %>
