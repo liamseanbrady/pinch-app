@@ -14,5 +14,7 @@
   <%= f.label :public, 'Private' %>
   <%= radio_button_tag 'goal[visibility]', "false", true %>
   <br/>
+  <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
+  <br/>
   <%= f.submit 'Create Goal' %>
 <% end %>
