@@ -1,4 +1,6 @@
 class GoalsController < ApplicationController
+  before_action :set_goal, only: [:edit, :update, :show]
+
   def index
     @goals = Goal.all
   end
@@ -19,13 +21,9 @@ class GoalsController < ApplicationController
     end
   end
 
-  def edit
-    @goal = Goal.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @goal = Goal.find(params[:id])
-
     if @goal.update(goal_params)
       flash[:notice] = 'Your goal was updated'
       redirect_to goals_path
@@ -34,9 +32,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  def show
-
-  end
+  def show; end
 
   def pinch
     goal = Goal.find(params[:id])
@@ -50,5 +46,9 @@ class GoalsController < ApplicationController
 
   def goal_params
     params.require(:goal).permit(:title, :description, :visibility, :category_id)
+  end
+
+  def set_goal
+    @goal = Goal.find(params[:id])
   end
 end
