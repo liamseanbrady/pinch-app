@@ -1,0 +1,13 @@
+<%= render 'shared/header', title: "#{@goal.title}" %>
+
+<p><%= @goal.description %></p>
+
+<h4>Resources</h4>
+
+<ul>
+  <% @goal.learning_resources.each do |resource| %>
+    <li><%= resource.summary %></li>
+    <li><%= resource.url %></li>
+    <br/>
+  <% end %>
+</ul>
