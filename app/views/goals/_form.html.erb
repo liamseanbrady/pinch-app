@@ -6,9 +6,9 @@
   <%= f.text_area :description, rows: 4 %>
   <br/>
   <%= f.label :public, 'Public' %>
-  <%= radio_button_tag 'goal[visibility]', "public" %>
+  <%= radio_button_tag 'goal[visibility]', "public", @goal.visibility == 'public' ? true : false %>
   <%= f.label :public, 'Private' %>
-  <%= radio_button_tag 'goal[visibility]', "private", true %>
+  <%= radio_button_tag 'goal[visibility]', "private", @goal.visibility != 'public' ? true : false %>
   <br/>
   <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
   <br/>
