@@ -1,0 +1,12 @@
+<%= render 'shared/header', title: 'Create a New Goal' %>
+
+<%= form_for @goal do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br/>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <br/>
+  <!-- TODO: Add options box for choosing public or private -->
+  <%= f.submit 'Create Goal' %>
+<% end %>
