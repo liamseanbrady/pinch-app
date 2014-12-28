@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
 
   has_many :goals
+  has_many :learning_resources
 
   validates :password, length: {minimum: 8}, on: :create
   validates :username, length: {minimum: 3, maximum: 18}
