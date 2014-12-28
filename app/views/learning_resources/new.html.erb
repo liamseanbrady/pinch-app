@@ -1,0 +1,13 @@
+<%= render 'shared/header', title: "New Resource for '#{@goal.title}'"  %>
+
+<%= render 'shared/errors', obj: @learning_resource %>
+
+<%= form_for [@goal, @learning_resource] do |f| %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <br/>
+  <%= f.label :summary %>
+  <%= f.text_area :summary, rows: 3 %>
+  <br/>
+  <%= f.submit 'Create Resource' %>
+<% end %>
