@@ -16,9 +16,9 @@
   <%= f.text_area :description, rows: 4 %>
   <br/>
   <%= f.label :public, 'Public' %>
-  <%= radio_button_tag 'goal[public]', "true" %>
+  <%= radio_button_tag 'goal[visibility]', "true" %>
   <%= f.label :public, 'Private' %>
-  <%= radio_button_tag 'goal[public]', "false", true %>
+  <%= radio_button_tag 'goal[visibility]', "false", true %>
   <br/>
   <%= f.submit 'Create Goal' %>
 <% end %>
