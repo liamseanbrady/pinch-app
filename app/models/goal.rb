@@ -11,4 +11,5 @@ class Goal < ActiveRecord::Base
 
   validates :title, length: {minimum: 6}
   validates :description, length: {minimum: 15, maximum: 100}
+  validates :category, presence: true
 end
