@@ -14,5 +14,5 @@ PinchApp::Application.routes.draw do
       post :drop
     end
   end
-  resources :categories, only: [:new, :create]
+  resources :categories, except: [:destroy]
 end
