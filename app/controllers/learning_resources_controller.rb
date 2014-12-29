@@ -1,11 +1,11 @@
 class LearningResourcesController < ApplicationController
+
+
   def new
-    @goal = Goal.find(params[:goal_id])
     @learning_resource = LearningResource.new
   end
 
   def create
-    @goal = Goal.find(params[:goal_id])
     @learning_resource = LearningResource.new(learning_resource_params)
     @learning_resource.submitter = current_user
     @goal.learning_resources << @learning_resource
@@ -22,5 +22,9 @@ class LearningResourcesController < ApplicationController
 
   def learning_resource_params
     params.require(:learning_resource).permit(:url, :summary)
+  end
+
+  def set_goal
+    @goal = Goal.find(params[:goal_id])
   end
 end
