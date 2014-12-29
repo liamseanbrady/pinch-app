@@ -39,6 +39,7 @@ class GoalsController < ApplicationController
 
   def pinch
     if !@goal.pinchers.include?(current_user)
+      flash[:notice] = 'You successfully pinched a goal'
       @goal.pinchers << current_user
     else
       flash[:error] = "You've already pinched this goal!"
