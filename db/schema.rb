@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228174315) do
+ActiveRecord::Schema.define(version: 20141229230456) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20141228174315) do
   create_table "contribution_permissions", force: true do |t|
     t.integer  "user_id"
     t.integer  "goal_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contribution_requests", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "goal_id"
+    t.datetime "viewed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
