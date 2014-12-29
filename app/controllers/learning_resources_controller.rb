@@ -5,8 +5,9 @@ class LearningResourcesController < ApplicationController
   end
 
   def create
-    @learning_resource = LearningResource.new(learning_resource_params)
     @goal = Goal.find(params[:goal_id])
+    @learning_resource = LearningResource.new(learning_resource_params)
+    @learning_resource.submitter = current_user
     @goal.learning_resources << @learning_resource
 
     if @learning_resource.save
