@@ -38,7 +38,11 @@ class GoalsController < ApplicationController
   def show; end
 
   def pinch
-    @goal.pinchers << current_user
+    if !@goal.pinchers.include?(current_user)
+      @goal.pinchers << current_user
+    else
+      flash[:error] = "You've already pinched this goal!"
+    end
 
     redirect_to :back
   end
