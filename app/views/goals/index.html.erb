@@ -27,9 +27,11 @@
   </ul>
   <br/>
   <%= link_to 'View Goal', goal_path(goal) %> |
-  <%= link_to 'Edit', edit_goal_path(goal) %> |
-  <%= link_to 'Pinch', pinch_goal_path(goal), method: 'post' %> |
-  <%= link_to 'Add Resource', new_goal_learning_resource_path(goal) %>
+  <% if logged_in? %>
+    <%= link_to 'Edit', edit_goal_path(goal) %> |
+    <%= link_to 'Pinch', pinch_goal_path(goal), method: 'post' %> |
+    <%= link_to 'Add Resource', new_goal_learning_resource_path(goal) %>
+  <% end %>
   <br/>
   <hr>
   <br/>
