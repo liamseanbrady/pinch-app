@@ -1,5 +1,6 @@
 class LearningResourcesController < ApplicationController
-
+  before_action :set_goal
+  before_action :require_user, only: [:new, :create]
 
   def new
     @learning_resource = LearningResource.new
