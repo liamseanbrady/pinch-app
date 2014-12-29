@@ -1,5 +1,6 @@
 class GoalsController < ApplicationController
   before_action :set_goal, only: [:edit, :update, :show]
+  before_action :require_user, except: [:index]
 
   def index
     @goals = Goal.all
