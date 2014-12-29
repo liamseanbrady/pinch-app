@@ -17,12 +17,15 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def edit
-
-  end
+  def edit; end
 
   def update
-
+    if @category.update(category_params)
+      flash[:notice] = 'Your new category was added successfully'
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   def show; end
