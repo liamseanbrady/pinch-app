@@ -2,6 +2,7 @@ class Goal < ActiveRecord::Base
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   belongs_to :category
   has_many :learning_resources
+  has_many :contribution_requests
 
   has_many :contribution_permissions
   has_many :contributors, through: :contribution_permissions, source: :user
