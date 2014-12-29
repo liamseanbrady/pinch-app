@@ -1,8 +1,8 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: [:edit, :update, :show, :pinch]
+  before_action :set_goal, only: [:edit, :update, :show, :pinch, :drop]
   before_action :require_user, except: [:index]
   before_action :require_creator, only: [:edit, :update]
-  before_action :disallow_creator, only: [:pinch]
+  before_action :disallow_creator, only: [:pinch, :drop]
 
   def index
     @goals = Goal.all
@@ -42,6 +42,16 @@ class GoalsController < ApplicationController
       @goal.pinchers << current_user
     else
       flash[:error] = "You've already pinched this goal!"
+    end
+
+    redirect_to :back
+  end
+
+  def drop
+    if @goal.pinchers.include?(current_user)
+      @goal.pinchers.delete(current_user)
+    else
+      flash[:error] = "There was an error dropping the goal"
     end
 
     redirect_to :back
