@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: [:edit, :update, :show]
+  before_action :set_goal, only: [:edit, :update, :show, :pinch]
   before_action :require_user, except: [:index]
   before_action :require_creator, only: [:edit, :update]
   before_action :disallow_creator, only: [:pinch]
@@ -38,8 +38,7 @@ class GoalsController < ApplicationController
   def show; end
 
   def pinch
-    goal = Goal.find(params[:id])
-    goal.pinchers << current_user
+    @goal.pinchers << current_user
 
     redirect_to :back
   end
