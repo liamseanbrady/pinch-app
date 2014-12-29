@@ -36,8 +36,7 @@ class GoalsController < ApplicationController
 
   def pinch
     goal = Goal.find(params[:id])
-
-    goal.pinchers << User.find(2)
+    goal.pinchers << current_user
 
     redirect_to :back
   end
