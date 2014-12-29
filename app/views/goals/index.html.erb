@@ -29,7 +29,11 @@
   <%= link_to 'View Goal', goal_path(goal) %> |
   <% if logged_in? %>
     <%= link_to 'Edit', edit_goal_path(goal) if current_user == goal.creator %> |
-    <%= link_to 'Pinch', pinch_goal_path(goal), method: 'post' if current_user != goal.creator %> |
+    <% if !goal.pinchers.include?(current_user) %>
+      <%= link_to 'Pinch', pinch_goal_path(goal), method: 'post' if current_user != goal.creator %> |
+    <% else %>
+      <%= link_to 'Drop', drop_goal_path(goal), method: 'post' if current_user != goal.creator %> |
+    <% end %>
     <%= link_to 'Add Resource', new_goal_learning_resource_path(goal) if current_user == goal.creator %>
   <% end %>
   <br/>
