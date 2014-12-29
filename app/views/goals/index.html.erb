@@ -1,42 +1,5 @@
 <%= render 'shared/header', title: 'All Goals' %>
 
 <% @goals.each do |goal| %>
-  <ul>
-    <li>Category: <%= goal.category.name %></li>
-    <li>This goal is <%= goal.visibility %></li>
-    <li><%= goal.title %></li>
-    <li><%= goal.description %></li>
-    <li>Created by: <%= goal.creator.username %></li>
-  </ul>
-
-  <h4>Resources</h4>
-  <% goal.learning_resources.each do |resource| %>
-    <ul>
-      <li><%= resource.summary %></li>
-      <li><%= resource.url %></li>
-      <li>Submitted by: <%= resource.submitter.username %></li>
-    </ul>
-    </br>
-  <% end %>
-
-  <h4>Users who have pinched this Goal</h4>
-  <ul>
-    <% goal.pinchers.each do |user| %>
-      <li><%= user.username %></li>
-    <% end %>
-  </ul>
-  <br/>
-  <%= link_to 'View Goal', goal_path(goal) %> |
-  <% if logged_in? %>
-    <%= link_to 'Edit', edit_goal_path(goal) if current_user == goal.creator %> |
-    <% if !goal.pinchers.include?(current_user) %>
-      <%= link_to 'Pinch', pinch_goal_path(goal), method: 'post' if current_user != goal.creator %> |
-    <% else %>
-      <%= link_to 'Drop', drop_goal_path(goal), method: 'post' if current_user != goal.creator %> |
-    <% end %>
-    <%= link_to 'Add Resource', new_goal_learning_resource_path(goal) if current_user == goal.creator %>
-  <% end %>
-  <br/>
-  <hr>
-  <br/>
+  <%= render 'goal', goal: goal %>
 <% end %>

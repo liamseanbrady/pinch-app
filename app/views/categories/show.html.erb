@@ -1,0 +1,5 @@
+<%= render 'shared/header', title: "#{@category.name}" %>
+
+<% @category.goals.each do |goal| %>
+  <%= render 'goals/goal', goal: goal %>
+<% end %>
