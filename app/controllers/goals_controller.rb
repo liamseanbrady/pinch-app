@@ -1,6 +1,7 @@
 class GoalsController < ApplicationController
   before_action :set_goal, only: [:edit, :update, :show]
   before_action :require_user, except: [:index]
+  before_action :require_creator, only: [:edit, :update]
 
   def index
     @goals = Goal.all
@@ -51,4 +52,12 @@ class GoalsController < ApplicationController
   def set_goal
     @goal = Goal.find(params[:id])
   end
+
+  def require_creator
+    if current_user != @goal.creator
+      flash[:error] = 'You can only edit your own goals'
+      redirect_to root_path
+    end
+  end
 end
+
