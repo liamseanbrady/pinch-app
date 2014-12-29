@@ -2,6 +2,7 @@ class GoalsController < ApplicationController
   before_action :set_goal, only: [:edit, :update, :show]
   before_action :require_user, except: [:index]
   before_action :require_creator, only: [:edit, :update]
+  before_action :disallow_creator, only: [:pinch]
 
   def index
     @goals = Goal.all
@@ -56,6 +57,13 @@ class GoalsController < ApplicationController
   def require_creator
     if current_user != @goal.creator
       flash[:error] = 'You can only edit your own goals'
+      redirect_to root_path
+    end
+  end
+
+  def disallow_creator
+    if current_user == @goal.creator
+      flash[:error] = "You can't pinch your own goal"
       redirect_to root_path
     end
   end
