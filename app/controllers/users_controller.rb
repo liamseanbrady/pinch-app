@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = 'You registered successfully'
+      session[:user_id] = @user.id
       redirect_to goals_path
     else
       render :new
