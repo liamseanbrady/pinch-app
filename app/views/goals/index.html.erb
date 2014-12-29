@@ -10,12 +10,14 @@
   </ul>
 
   <h4>Resources</h4>
-  <ul>
-    <% goal.learning_resources.each do |resource| %>
+  <% goal.learning_resources.each do |resource| %>
+    <ul>
       <li><%= resource.summary %></li>
       <li><%= resource.url %></li>
-    <% end %>
-  </ul>
+      <li>Submitted by: <%= resource.submitter %></li>
+    </ul>
+    </br>
+  <% end %>
 
   <h4>Users who have pinched this Goal</h4>
   <ul>
