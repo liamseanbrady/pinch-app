@@ -11,6 +11,7 @@ PinchApp::Application.routes.draw do
     resources :learning_resources, only: [:new, :create]
     member do
       post :pinch
+      post :drop
     end
   end
   resources :categories, only: [:new, :create]
