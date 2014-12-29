@@ -22,12 +22,15 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-
+    if @user.update(user_params)
+      flash[:notice] = 'You successfully updated your profile'
+      redirect_to user_path(current_user)
+    else
+      render :edit
+    end
   end
 
-  def show
-
-  end
+  def show; end
 
   private
 
