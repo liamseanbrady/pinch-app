@@ -1,0 +1,6 @@
+<%= render 'shared/header', title: 'Your Profile' %>
+
+<p>Username: <%= @user.username %></p>
+<p>Joined: <%= display_datetime(@user.created_at) %></p>
+<p>Number of Goals Created: <%= @user.goals.size %></p>
+<p>Number of Goals Pinched: <%= @user.pinches.size %></p>
