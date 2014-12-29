@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
   validates :username, length: {minimum: 3, maximum: 18}, uniqueness: true
   validates :email, presence: true, format: { with: /\A[\w\d]+[@][a-z]+.(com|co.uk)\z/ }, on: :create
   validates :tagline, length: {maximum: 35}
+
+  def admin?
+    self.role == 'admin' if !self.role.blank?
+  end
 end
