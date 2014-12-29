@@ -1,6 +1,7 @@
 class LearningResourcesController < ApplicationController
-  before_action :set_goal
+  before_action :set_goal, only: [:new, :create]
   before_action :require_user, only: [:new, :create]
+  before_action :require_goal_creator, only: [:new, :create]
 
   def new
     @learning_resource = LearningResource.new
@@ -27,5 +28,12 @@ class LearningResourcesController < ApplicationController
 
   def set_goal
     @goal = Goal.find(params[:goal_id])
+  end
+
+  def require_goal_creator
+    if current_user != @goal.creator
+      flash[:error] = "You don't have permission to do that"
+      redirect_to root_path
+    end
   end
 end
