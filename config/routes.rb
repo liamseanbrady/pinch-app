@@ -6,7 +6,11 @@ PinchApp::Application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :users, only: [:create, :edit, :update, :show]
+  resources :users, only: [:create, :edit, :update, :show] do
+    member do
+      get :dashboard
+    end
+  end
   resources :goals, except: [:destroy] do
     resources :learning_resources, only: [:new, :create]
     member do
