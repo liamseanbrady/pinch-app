@@ -13,4 +13,14 @@ class ContributionRequestsController < ApplicationController
 
     redirect_to :back
   end
+
+  def update
+    if params[:accept] == 'true'
+      flash[:notice] = 'You accepted the request'
+    else
+      flash[:notice] = 'You rejected the request'
+    end
+
+    redirect_to :back
+  end
 end
