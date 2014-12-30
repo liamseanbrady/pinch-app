@@ -31,7 +31,8 @@
   <% else %>
     <%= link_to 'Drop', drop_goal_path(goal), method: 'post' if current_user != goal.creator %> |
   <% end %>
-  <%= link_to 'Add Resource', new_goal_learning_resource_path(goal) if current_user == goal.creator %>
+  <%= link_to 'Add Resource', new_goal_learning_resource_path(goal) if current_user == goal.creator %> |
+  <%= link_to 'Request Contributor Status', goal_contribution_requests_path(goal), method: 'post' %>
 <% end %>
 <br/>
 <hr>
