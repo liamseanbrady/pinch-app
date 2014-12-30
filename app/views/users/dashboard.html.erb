@@ -3,7 +3,9 @@
 <% if @user.in_requests.any? %>
   <h2>Contribution Requests</h2>
   <% @user.in_requests.each do |request| %>
-    <p><%= request.sender.username %> has requested contribution status on <%= request.goal.title %><p>
+    <p><%= request.sender.username %> has requested contribution status on <%= request.goal.title %><p> |
+    <%= link_to 'Accept', goal_contribution_request_path(request.goal, request, accept: true), method: 'patch' %> |
+    <%= link_to 'Reject', goal_contribution_request_path(request.goal, request, accept: false), method: 'patch' %>
   <% end %> 
 <% end %>
 
