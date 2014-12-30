@@ -13,7 +13,7 @@ PinchApp::Application.routes.draw do
   end
   resources :goals, except: [:destroy] do
     resources :learning_resources, only: [:new, :create]
-    resources :contribution_requests, only: [:create]
+    resources :contribution_requests, only: [:create, :update]
     member do
       post :pinch
       post :drop
