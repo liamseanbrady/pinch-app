@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, [:edit, :update, :show]
-  before_action :require_user, only: [:edit, :update, :show]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :set_user, [:edit, :update, :show, :dashboard]
+  before_action :require_user, only: [:edit, :update, :show, :dashboard]
+  before_action :require_same_user, only: [:edit, :update, :dashboard]
 
   def new
     @user = User.new
@@ -31,6 +31,8 @@ class UsersController < ApplicationController
   end
 
   def show; end
+
+  def dashboard; end
 
   private
 
