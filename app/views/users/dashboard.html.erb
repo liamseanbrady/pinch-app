@@ -1,0 +1,18 @@
+<%= render 'shared/header', title: 'Your Dashboard' %>
+
+<% if @user.in_requests.any? %>
+  <h2>Contribution Requests</h2>
+  <% @user.in_requests.each do |request| %>
+    <p><%= request.sender.username %> has requested contribution status on <%= request.goal.title %><p>
+  <% end %> 
+<% end %>
+
+<h2>Your Goals</h2>
+<% @user.goals.each do |goal| %>
+  <%= render 'goals/goal', goal: goal %>
+<% end %>
+
+<h2>Pinched Goals</h2>
+<% @user.pinches.each do |goal| %>
+  <%= render 'goals/goal', goal: goal %>
+<% end %>
