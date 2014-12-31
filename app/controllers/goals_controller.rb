@@ -50,7 +50,7 @@ class GoalsController < ApplicationController
 
   def drop
     if @goal.pinchers.include?(current_user)
-      flash[:ntoice] = 'You dropped a goal'
+      flash[:notice] = 'You dropped a goal'
       @goal.pinchers.delete(current_user)
     else
       flash[:error] = "There was an error dropping the goal"
