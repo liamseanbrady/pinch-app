@@ -25,7 +25,9 @@ class ContributionRequestsController < ApplicationController
       flash[:notice] = 'You rejected the request'
       request.mark_as_rejected
     end
-    request.save
+    
+    request.mark_as_unread
+
     redirect_to :back
   end
 
