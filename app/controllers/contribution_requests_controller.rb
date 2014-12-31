@@ -20,13 +20,24 @@ class ContributionRequestsController < ApplicationController
     if params[:accept] == 'true'
       flash[:notice] = 'You accepted the request'
       request.mark_as_accepted
-      contrib = ContributionPermission.create(user: request.sender, goal: request.goal)
-      binding.pry
+      ContributionPermission.create(user: request.sender, goal: request.goal)
     else
       flash[:notice] = 'You rejected the request'
       request.mark_as_rejected
     end
     request.save
+    redirect_to :back
+  end
+
+  def destroy
+    request = ContributionRequest.find(params[:id])
+
+    if request.delete
+      flash[:notice] = 'The notification was deleted'
+    else
+      flash[:error] = 'The notification was not deleted'
+    end
+
     redirect_to :back
   end
 end
