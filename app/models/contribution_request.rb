@@ -4,10 +4,14 @@ class ContributionRequest < ActiveRecord::Base
   belongs_to :goal
 
   def mark_as_accepted
-    self.accepted = true
+    self.update(accepted: true)
   end
 
   def mark_as_rejected
-    self.accepted = false
+    self.update(accepted: false)
+  end
+
+  def mark_as_unread
+    self.update(viewed_at: nil)
   end
 end
