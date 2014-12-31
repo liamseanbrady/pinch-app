@@ -1,9 +1,10 @@
 class ContributionRequestsController < ApplicationController
+  before_action :set_goal, only: [:create]
   before_action :require_user
+  before_action :require_sender_as_pincher, only: [:create]
 
   def create
-    goal = Goal.find(params[:goal_id])
-    request = ContributionRequest.create(sender: current_user, recipient: goal.creator, goal: goal)
+    request = ContributionRequest.create(sender: current_user, recipient: @goal.creator, goal: @goal)
 
     if request.valid?
       flash[:notice] = 'Your request was sent'
@@ -25,7 +26,7 @@ class ContributionRequestsController < ApplicationController
       flash[:notice] = 'You rejected the request'
       request.mark_as_rejected
     end
-    
+
     request.mark_as_unread
 
     redirect_to :back
@@ -41,5 +42,18 @@ class ContributionRequestsController < ApplicationController
     end
 
     redirect_to :back
+  end
+
+  private
+
+  def set_goal
+    @goal = Goal.find(params[:goal_id])
+  end
+
+  def require_sender_as_pincher
+    if !@goal.pincher?(current_user)
+      flash[:error] = 'You must pinch this goal first in order to contribute'
+      redirect_to :back
+    end
   end
 end
