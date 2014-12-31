@@ -14,4 +14,8 @@ class Goal < ActiveRecord::Base
   validates :description, length: {minimum: 15, maximum: 100}
   validates :category, presence: true
   validates :visibility, presence: true
+
+  def pincher?(usr)
+    self.pinchers.include?(usr)
+  end
 end
