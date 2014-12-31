@@ -20,4 +20,16 @@ class User < ActiveRecord::Base
   def admin?
     self.role == 'admin' if !self.role.blank?
   end
+
+  def open_in_requests
+    self.in_requests.where(accepted: nil)
+  end
+
+  def open_out_requests
+    self.out_requests.where(accepted: nil)
+  end
+
+  def closed_out_requests
+    self.out_requests.where.not(accepted: nil)
+  end
 end
