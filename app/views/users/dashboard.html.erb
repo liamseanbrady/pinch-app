@@ -4,6 +4,7 @@
   <h2>Answered Outgoing Requests</h2>
   <% @user.closed_out_requests.each do |request| %>
     <p>Your request for contribution status on <%= request.goal.title %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
+    <%= link_to 'Destroy', goal_contribution_request_path(request.goal, request), method: 'delete' %>
   <% end %>
 <% end %>
 
