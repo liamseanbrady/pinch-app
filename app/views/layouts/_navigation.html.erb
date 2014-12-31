@@ -1,6 +1,6 @@
 <%= link_to 'All Goals', goals_path  %>
 <% if logged_in? %>
-  <%= link_to 'Learning Dashboard', dashboard_user_path(current_user) %>
+  <%= link_to current_user.requests_activity_count.zero? ? "Learning Dashboard" : "Learning Dashboard (#{current_user.requests_activity_count})", dashboard_user_path(current_user) %>
   <%= link_to 'New Goal', new_goal_path %>
   <%= link_to 'New Category', new_category_path if current_user.admin? %>
   <%= link_to 'Log out', logout_path %>
