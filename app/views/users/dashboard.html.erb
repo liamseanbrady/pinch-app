@@ -1,8 +1,22 @@
 <%= render 'shared/header', title: 'Your Dashboard' %>
 
-<% if @user.in_requests.any? %>
-  <h2>Contribution Requests</h2>
-  <% @user.in_requests.each do |request| %>
+<% if @user.closed_out_requests.any? %>
+  <h2>Answered Outgoing Requests</h2>
+  <% @user.closed_out_requests.each do |request| %>
+    <p>Your request for contribution status on <%= request.goal.title %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
+  <% end %>
+<% end %>
+
+<% if @user.open_out_requests.any? %>
+  <h2>Unanswered Outgoing Requests</h2>
+  <% @user.open_out_requests.each do |request| %>
+    <p>You requested contribution status for <%= request.goal.title %> on <%= display_datetime(request.created_at) %></p>
+  <% end %>
+<% end %>
+
+<% if @user.open_in_requests.any? %>
+  <h2>Incoming Requests</h2>
+  <% @user.open_in_requests.each do |request| %>
     <p><%= request.sender.username %> has requested contribution status on <%= request.goal.title %><p> |
     <%= link_to 'Accept', goal_contribution_request_path(request.goal, request, accept: true), method: 'patch' %> |
     <%= link_to 'Reject', goal_contribution_request_path(request.goal, request, accept: false), method: 'patch' %>
