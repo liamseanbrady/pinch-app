@@ -25,11 +25,28 @@ class User < ActiveRecord::Base
     self.in_requests.where(accepted: nil)
   end
 
+  def fresh_open_in_requests
+    self.open_in_requests.where(viewed_at: nil)
+  end
+
   def open_out_requests
     self.out_requests.where(accepted: nil)
   end
 
   def closed_out_requests
     self.out_requests.where.not(accepted: nil)
+  end
+
+  def fresh_closed_out_requests
+    self.closed_out_requests.where(viewed_at: nil)
+  end
+
+  def mark_requests_as_viewed
+    self.open_in_requests.where(viewed_at: nil).update_all(viewed_at: Time.now)
+    self.closed_out_requests.where(viewed_at: nil).update_all(viewed_at: Time.now)
+  end
+
+  def requests_activity_count
+    self.fresh_open_in_requests.count + self.fresh_closed_out_requests.count
   end
 end
