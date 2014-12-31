@@ -32,7 +32,9 @@ class UsersController < ApplicationController
 
   def show; end
 
-  def dashboard; end
+  def dashboard
+    @user.mark_requests_as_viewed
+  end
 
   private
 
