@@ -18,4 +18,8 @@ class Goal < ActiveRecord::Base
   def pincher?(usr)
     self.pinchers.include?(usr)
   end
+
+  def contributor?(usr)
+    self.contributors.include?(usr)
+  end
 end
