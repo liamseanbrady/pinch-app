@@ -22,16 +22,16 @@
   <% end %> 
 <% end %>
 
-<h2>Your Goals</h2>
+<%= render 'shared/header', title: 'Your Goals' %>
 <div class="row">
   <% @user.goals.each do |goal| %>
     <div class="col-lg-4">
-      <%= render 'goals/goal', goal: goal %>
+      <%= render 'goals/goal', goal: goal, show_visibility: true %>
     </div>
   <% end %>
 </div>
 
-<h2>Pinched Goals</h2>
+<%= render 'shared/header', title: 'Pinched Goals' %>
 <div class="row">
   <% @user.pinches.each do |goal| %>
     <div class="col-lg-4">
