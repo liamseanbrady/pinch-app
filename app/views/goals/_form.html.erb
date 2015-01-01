@@ -1,16 +1,29 @@
-<%= form_for @goal do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<%= form_for @goal, html: {role: 'form'} do |f| %>
+  <div class="form-group">
+    <%= f.label :title, class: 'sr-only' %>
+    <%= f.text_field :title, placeholder: "What's your general learning goal? (TIP: keep it short and descriptive)", class: 'form-control' %>
+    <br/>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, class: 'sr-only' %>
+    <%= f.text_area :description, rows: 3, placeholder: 'Give a brief description of exactly what you hope to learn...', class: 'form-control' %>
+    <br/>
+  </div>
+  <div class="form-group">
+    <label class="radio-inline" for="goal_public">
+    <%= radio_button_tag 'goal[visibility]', "public", @goal.visibility == 'public' ? true : false %>
+      Public
+    </label>
+    <label class="radio-inline" for="goal_private">
+    <%= radio_button_tag 'goal[visibility]', "private", @goal.visibility != 'public' ? true : false %>
+      Private
+    </label>
+    <br/>
+  </div>
   <br/>
-  <%= f.label :description %>
-  <%= f.text_area :description, rows: 4 %>
-  <br/>
-  <%= f.label :public, 'Public' %>
-  <%= radio_button_tag 'goal[visibility]', "public", @goal.visibility == 'public' ? true : false %>
-  <%= f.label :public, 'Private' %>
-  <%= radio_button_tag 'goal[visibility]', "private", @goal.visibility != 'public' ? true : false %>
-  <br/>
-  <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
-  <br/>
-  <%= f.submit (@goal.new_record? ? 'Create Goal' : 'Edit Goal') %>
+  <div class="form-group">
+    <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: 'Select a category'}, {class: 'form-control'} %>
+    <br/>
+  </div>
+  <%= f.submit (@goal.new_record? ? 'Create Goal' : 'Edit Goal'), class: 'btn btn-success btn-block' %>
 <% end %>
