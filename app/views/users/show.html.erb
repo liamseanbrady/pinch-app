@@ -5,18 +5,23 @@
   <img src="http://www.gravatar.com/avatar/fb38af3bfd0f713a90173e221dfaba24.png" alt="Picture of LSB" class="img-responsive img-circle center-block">
   <br/>
   <br/>
-  <dl>
-    <dt>Username: </dt>
-    <dd><%= @user.username %></dd>
-    <br/>
-    <dt>Member Since: </dt>
-    <dd><%= display_datetime(@user.created_at) %></dd>
-    <br/>
-    <dt>Goals Created: </dt>
-    <dd><%= @user.public_goals.size %></dd>
-    <br/>
-    <dt>Pinches: </dt>
-    <dd><%= @user.pinches.size %></dd>
+  <dl class="list-group">
+    <span class="list-group-item">
+      <dt>Username: </dt>
+      <dd><%= @user.username %></dd>
+    </span>
+    <span class="list-group-item">
+      <dt>Member Since: </dt>
+      <dd><%= display_datetime(@user.created_at) %></dd>
+    </span>
+    <span class="list-group-item">
+      <dt>Goals Created: </dt>
+      <dd><%= @user.public_goals.size %></dd>
+    </span>
+    <span class="list-group-item">
+      <dt>Pinches: </dt>
+      <dd><%= @user.pinches.size %></dd>
+    </span>
   </dl>
 </div>
 
@@ -32,6 +37,9 @@
       <%= link_to 'Contributing', user_path(@user, tab: 'contributing') %>
     </li>
   </ul>
+
+  <br/>
+
   <% if params[:tab].nil? %>
     <% @user.public_goals.each do |goal| %>
       <%= render 'goals/goal', goal: goal %>
