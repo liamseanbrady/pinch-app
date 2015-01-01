@@ -1,6 +1,7 @@
 class ContributionRequestsController < ApplicationController
-  before_action :set_goal, only: [:create]
+  before_action :set_goal, except: [:update]
   before_action :require_user
+  before_action :disallow_creator, except: [:update]
   before_action :require_sender_as_pincher, only: [:create]
 
   def create
@@ -48,6 +49,13 @@ class ContributionRequestsController < ApplicationController
 
   def set_goal
     @goal = Goal.find(params[:goal_id])
+  end
+
+  def disallow_creator
+    if current_user == @goal.creator
+      flash[:error] = "You can't pinch your own goal"
+      redirect_to root_path
+    end
   end
 
   def require_sender_as_pincher
