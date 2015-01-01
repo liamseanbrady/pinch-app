@@ -1,5 +1,3 @@
-<%= render 'shared/header', title: 'Your Dashboard' %>
-
 <% if @user.closed_out_requests.any? %>
   <h2>Answered Outgoing Requests</h2>
   <% @user.closed_out_requests.each do |request| %>
@@ -25,13 +23,19 @@
 <% end %>
 
 <h2>Your Goals</h2>
-<% @user.goals.each do |goal| %>
-  <div class="col-lg-4">
-    <%= render 'goals/goal', goal: goal %>
-  </div>
-<% end %>
+<div class="row">
+  <% @user.goals.each do |goal| %>
+    <div class="col-lg-4">
+      <%= render 'goals/goal', goal: goal %>
+    </div>
+  <% end %>
+</div>
 
 <h2>Pinched Goals</h2>
-<% @user.pinches.each do |goal| %>
-  <%= render 'goals/goal', goal: goal %>
-<% end %>
+<div class="row">
+  <% @user.pinches.each do |goal| %>
+    <div class="col-lg-4">
+      <%= render 'goals/goal', goal: goal %>
+    </div>
+  <% end %>
+</div>
