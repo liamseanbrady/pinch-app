@@ -1,7 +1,7 @@
 <% show_visibility ||= false %>
 
 <div class="well">
-  <span class="badge"><%= goal.category.name %></span>
+  <span class="badge"><%= link_to goal.category.name, category_path(goal.category) %></span>
   <% if show_visibility %>
     <span class="pull-right label label-<%= goal.visibility == 'public' ? 'success' : 'primary' %>"><%= goal.visibility %></span>
   <% end %>
