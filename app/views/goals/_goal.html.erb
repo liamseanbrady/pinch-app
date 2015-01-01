@@ -1,27 +1,18 @@
-<ul>
-  <li>Category: <%= goal.category.name %></li>
-  <li>This goal is <%= goal.visibility %></li>
-  <li><%= goal.title %></li>
-  <li><%= goal.description %></li>
-  <li>Created by: <%= goal.creator.username %></li>
-</ul>
+<span class="badge"><%= goal.category.name %></span>
+<span class="pull-right label label-<%= goal.visibility == 'public' ? 'success' : 'primary' %>"><%= goal.visibility %></span>
 
-<h4>Resources</h4>
-<% goal.learning_resources.each do |resource| %>
-  <ul>
-    <li><%= resource.summary %></li>
-    <li><%= resource.url %></li>
-    <li>Submitted by: <%= resource.submitter.username %></li>
-  </ul>
-  </br>
-<% end %>
+<h4><%= goal.title %></h4>
+<p><%= goal.description %></p>
+<small>Created by <%= link_to goal.creator.username, user_path(goal.creator) %></small>
+<br/>
+<br/>
+<p><strong><%= goal.learning_resources.size %> learning resources available</strong></p>
 
-<h4>Users who have pinched this Goal</h4>
-<ul>
+<h4>Pinchers</h4>
   <% goal.pinchers.each do |user| %>
-    <li><%= user.username %></li>
+    <%= user.username %>
+    <br/>
   <% end %>
-</ul>
 <br/>
 
 <%= link_to 'View Goal', goal_path(goal) %> |
