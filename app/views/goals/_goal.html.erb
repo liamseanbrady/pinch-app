@@ -1,13 +1,17 @@
+<% show_visibility ||= false %>
+
 <div class="well">
   <span class="badge"><%= goal.category.name %></span>
-  <span class="pull-right label label-<%= goal.visibility == 'public' ? 'success' : 'primary' %>"><%= goal.visibility %></span>
+  <% if show_visibility %>
+    <span class="pull-right label label-<%= goal.visibility == 'public' ? 'success' : 'primary' %>"><%= goal.visibility %></span>
+  <% end %>
 
   <h4><%= link_to goal.title, goal_path(goal) %></h4>
   <p><%= goal.description %></p>
   <small>Created by <%= link_to goal.creator.username, user_path(goal.creator) %></small>
   <br/>
   <br/>
-  <p><strong><%= goal.learning_resources.size %> learning resources available</strong></p>
+  <p><strong><%= goal.learning_resources.size.zero? ? 'No' : goal.learning_resources.size %> learning resources available</strong></p>
   <p><strong>Pinchers: <%= goal.pincher_count %></strong></p>
   <p><strong>Contributors: <%= goal.contributor_count %></strong></p>
 
@@ -31,7 +35,7 @@
               <%= link_to 'Drop', drop_goal_path(goal), method: 'post' if current_user != goal.creator %>
             </li>
             <li>
-              <%= link_to 'Request Contributor Status', goal_contribution_requests_path(goal), method: 'post' if current_user != goal.creator %>
+              <%= link_to 'Request Contributor Status', goal_contribution_requests_path(goal), method: 'post' if current_user != goal.creator && !goal.contributor?(current_user) %>
             </li>
           <% end %>
             <li>
@@ -41,8 +45,5 @@
     </div>
   <% end %>
 </div>
-
-
-
 
 <br/>
