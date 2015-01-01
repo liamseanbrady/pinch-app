@@ -38,7 +38,7 @@ class GoalsController < ApplicationController
   def show; end
 
   def pinch
-    if !@goal.pinchers.include?(current_user)
+    if !@goal.pincher?(current_user)
       flash[:notice] = 'You successfully pinched a goal'
       @goal.pinchers << current_user
     else
@@ -49,7 +49,7 @@ class GoalsController < ApplicationController
   end
 
   def drop
-    if @goal.pinchers.include?(current_user)
+    if @goal.pincher?(current_user)
       flash[:notice] = 'You dropped a goal'
       @goal.pinchers.delete(current_user)
     else
