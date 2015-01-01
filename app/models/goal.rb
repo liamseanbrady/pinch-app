@@ -22,4 +22,12 @@ class Goal < ActiveRecord::Base
   def contributor?(usr)
     self.contributors.include?(usr)
   end
+
+  def pincher_count
+    self.pinchers.count
+  end
+
+  def contributor_count
+    self.contributors.count + 1
+  end
 end
