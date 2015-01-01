@@ -1,6 +1,50 @@
-<%= render 'shared/header', title: 'Your Profile' %>
+<%= render 'shared/header', title: 'Your Profile', subtitle: "#{@user.tagline}" %>
 
-<p>Username: <%= @user.username %></p>
-<p>Joined: <%= display_datetime(@user.created_at) %></p>
-<p>Number of Goals Created: <%= @user.goals.size %></p>
-<p>Number of Goals Pinched: <%= @user.pinches.size %></p>
+<div class="col-md-3 panel panel-default">
+  <br/>
+  <img src="http://www.gravatar.com/avatar/fb38af3bfd0f713a90173e221dfaba24.png" alt="Picture of LSB" class="img-responsive img-circle center-block">
+  <br/>
+  <br/>
+  <dl>
+    <dt>Username: </dt>
+    <dd><%= @user.username %></dd>
+    <br/>
+    <dt>Member Since: </dt>
+    <dd><%= display_datetime(@user.created_at) %></dd>
+    <br/>
+    <dt>Goals Created: </dt>
+    <dd><%= @user.public_goals.size %></dd>
+    <br/>
+    <dt>Pinches: </dt>
+    <dd><%= @user.pinches.size %></dd>
+  </dl>
+</div>
+
+<div class="col-md-9">
+  <ul class="nav nav-tabs">
+    <li role="presentation" class=<%= 'active' if params[:tab].nil? %>>
+      <%= link_to 'Goals', user_path(@user) %>
+    </li>
+    <li role="presentation" class=<%= 'active' if params[:tab] == 'pinches' %>>
+      <%= link_to 'Pinches', user_path(@user, tab: 'pinches') %>
+    </li>
+    <li role="presentation" class=<%= 'active' if params[:tab] == 'contributing' %>>
+      <%= link_to 'Contributing', user_path(@user, tab: 'contributing') %>
+    </li>
+  </ul>
+  <% if params[:tab].nil? %>
+    <% @user.public_goals.each do |goal| %>
+      <%= render 'goals/goal', goal: goal %>
+    <% end %>
+  <% end %>
+  <% if params[:tab] == 'pinches' %>
+    <% @user.pinches.each do |goal| %>
+      <%= render 'goals/goal', goal: goal %>
+    <% end %>
+  <% end %>
+  <% if params[:tab] == 'contributing' %>
+    <% @user.contributing_goals.each do |goal| %>
+      <%= render 'goals/goal', goal: goal %>
+    <% end %>
+  <% end %>
+</div>
