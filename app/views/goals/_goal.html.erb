@@ -7,13 +7,9 @@
 <br/>
 <br/>
 <p><strong><%= goal.learning_resources.size %> learning resources available</strong></p>
+<p><strong>Pinchers: <%= goal.pincher_count %></strong></p>
+<p><strong>Contributors: <%= goal.contributor_count %></strong></p>
 
-<h4>Pinchers</h4>
-  <% goal.pinchers.each do |user| %>
-    <%= user.username %>
-    <br/>
-  <% end %>
-<br/>
 
 <%= link_to 'View Goal', goal_path(goal) %> |
 <% if logged_in? %>
