@@ -49,4 +49,9 @@ class User < ActiveRecord::Base
   def requests_activity_count
     self.fresh_open_in_requests.count + self.fresh_closed_out_requests.count
   end
+
+  def public_goals
+    self.goals.where(visibility: 'public')
+  end
 end
+
