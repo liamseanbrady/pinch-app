@@ -1,5 +1,7 @@
 <%= render 'shared/header', title: 'Edit your Profile' %>
 
-<%= render 'shared/errors', obj: @user %>
+<div class="col-md-6">
+  <%= render 'shared/errors', obj: @user %>
 
-<%= render 'form' %>
+  <%= render 'form' %>
+</div>
