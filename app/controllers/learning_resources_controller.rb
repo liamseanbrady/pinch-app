@@ -31,7 +31,7 @@ class LearningResourcesController < ApplicationController
   end
 
   def require_goal_creator_or_contributor
-    if current_user != @goal.creator || @goal.contributor?(current_user)
+    if current_user != @goal.creator || !@goal.contributor?(current_user)
       flash[:error] = "You don't have permission to do that"
       redirect_to root_path
     end
