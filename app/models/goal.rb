@@ -30,4 +30,8 @@ class Goal < ActiveRecord::Base
   def contributor_count
     self.contributors.count + 1
   end
+
+  def public?
+    self.visibility == 'public'
+  end
 end
