@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :goals
   has_many :learning_resources
+  has_many :likes
   has_many :in_requests, foreign_key: 'recipient_id', class_name: 'ContributionRequest'
   has_many :out_requests, foreign_key: 'sender_id', class_name: 'ContributionRequest'
 
