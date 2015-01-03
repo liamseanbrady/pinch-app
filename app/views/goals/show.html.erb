@@ -8,6 +8,8 @@
   <% @goal.learning_resources.each do |resource| %>
     <li><%= resource.summary %></li>
     <li><%= resource.url %></li>
+    <li>Likes: <%= resource.likes.size %></li>
+    <%= link_to 'Like this resource', like_goal_learning_resource_path(resource.goal, resource), method: 'post' %>
     <br/>
   <% end %>
 </ul>
