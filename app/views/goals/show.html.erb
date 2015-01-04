@@ -1,23 +1,22 @@
 <%= render 'shared/header', title: "#{@goal.title}" %>
 
-<h4>Description</h4>
+<p class="lead"><%= @goal.description %></p>
 
-<p><%= @goal.description %></p>
-
+<br/>
 <h4>Resources</h4>
 
+<br/>
 <div class="row">
-
-<% @goal.learning_resources.each do |resource| %>
-<div class="col-md-4 ">
-  <div class="well">
-    <p><%= resource.summary %></p>
-    <p><%= link_to resource.url, resource.url %></p>
-    <p>Likes: <%= resource.like_count %></p>
-    <br/>
-    <%= link_to 'Like this resource', like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'btn btn-primary btn-block' %>
-  </div>
-</div>
-<% end %>
-
+  <% @goal.learning_resources.each do |resource| %>
+    <div class="col-md-4 ">
+      <div class="well">
+        <p><%= resource.summary %></p>
+        <p><small>Submitted by <%= link_to resource.submitter.username, user_path(resource.submitter) %></small></p>
+        <p><%= resource.like_count %> likes</p>
+        <br/>
+        <%= link_to 'View this resource', resource.url, class: 'btn btn-success btn-block' %>
+        <%= link_to 'Like this resource', like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'btn btn-primary btn-block' %>
+      </div>
+    </div>
+  <% end %>
 </div>
