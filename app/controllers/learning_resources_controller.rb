@@ -29,7 +29,7 @@ class LearningResourcesController < ApplicationController
     if like.valid?
       flash[:notice] = 'You liked a resource!'
     else
-      flash[:error] = 'There was an error liking the resource. Try again.'
+      flash[:error] = like.errors.messages.keys.include?(:creator) ? 'You can only like a resource once' : 'There was an error liking the resource. Try again.'
     end
 
     redirect_to :back
