@@ -5,4 +5,8 @@ class LearningResource < ActiveRecord::Base
 
   validates :url, presence: true
   validates :summary, length: {minimum: 15}
+
+  def like_count
+    self.likes.size
+  end
 end
