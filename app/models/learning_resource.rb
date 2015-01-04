@@ -6,6 +6,10 @@ class LearningResource < ActiveRecord::Base
   validates :url, presence: true
   validates :summary, length: {minimum: 15}
 
+  def liked_by?(usr)
+    self.likes.where(creator: usr).any?
+  end
+
   def like_count
     self.likes.size
   end
