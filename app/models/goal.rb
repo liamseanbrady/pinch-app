@@ -34,4 +34,8 @@ class Goal < ActiveRecord::Base
   def public?
     self.visibility == 'public'
   end
+
+  def total_likes
+    self.learning_resources.any? ? self.learning_resources.map(&:like_count).inject('+') : 0
+  end
 end
