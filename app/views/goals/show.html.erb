@@ -3,20 +3,42 @@
 <p class="lead"><%= @goal.description %></p>
 
 <br/>
-<h4>Resources</h4>
 
-<br/>
 <div class="row">
-  <% @goal.learning_resources.each do |resource| %>
-    <div class="col-md-4 ">
+  <div class="col-md-8">
+    <h4>Resources</h4>
+    <br/>
+    <% @goal.learning_resources.each do |resource| %>
       <div class="well">
         <p><%= resource.summary %></p>
         <p><small>Submitted by <%= link_to resource.submitter.username, user_path(resource.submitter) %></small></p>
         <p><%= resource.like_count %> likes</p>
         <br/>
-        <%= link_to 'View this resource', resource.url, class: 'btn btn-success btn-block' %>
-        <%= link_to 'Like this resource', like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'btn btn-primary btn-block' %>
+        <%= link_to resource.url, class: 'btn btn-primary' do %>
+          <span class="glyphicon glyphicon-eye-open"></span> View
+        <% end %>
+        <%= link_to like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'btn btn-default' do %>
+          <span class="glyphicon glyphicon-thumbs-up"></span> Like
+        <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <h4>Creator</h4>
+    <br/>
+    <%= link_to @goal.creator.username, user_path(@goal.creator) %>
+    <br/>
+    <br/>
+    <h4>Contributors</h4>
+    <% if @goal.contributors.any? %>
+      <ul>
+        <% @goal.contributors.each do |user| %>
+          <li><%= link_to user.username, user_path(user) %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">This goal doesn't have any contributors yet...</p>
+    <% end %>
+  </div>
 </div>
