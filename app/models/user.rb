@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
 
   has_many :goals
+  has_many :public_goals, -> { where visibility: 'public' }, class_name: 'Goal'
   has_many :learning_resources
   has_many :likes
   has_many :in_requests, foreign_key: 'recipient_id', class_name: 'ContributionRequest'
@@ -21,6 +22,8 @@ class User < ActiveRecord::Base
   def admin?
     self.role == 'admin' if !self.role.blank?
   end
+
+  # TODO: Should these be made into associations, like has_many public_goals  ?
 
   def open_in_requests
     self.in_requests.where(accepted: nil)
@@ -49,10 +52,6 @@ class User < ActiveRecord::Base
 
   def requests_activity_count
     self.fresh_open_in_requests.count + self.fresh_closed_out_requests.count
-  end
-
-  def public_goals
-    self.goals.where(visibility: 'public')
   end
 end
 
