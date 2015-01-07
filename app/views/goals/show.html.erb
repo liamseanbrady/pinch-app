@@ -25,11 +25,13 @@
   </div>
 
   <div class="col-md-4">
-    <h4>Creator</h4>
-    <br/>
-    <%= link_to @goal.creator.username, user_path(@goal.creator) %>
-    <br/>
-    <br/>
+    <% if @goal.creator != current_user %>
+      <h4>Creator</h4>
+      <br/>
+      <%= link_to @goal.creator.username, user_path(@goal.creator) %>
+      <br/>
+      <br/>
+      <% end %>
     <h4>Contributors</h4>
     <% if @goal.contributors.any? %>
       <ul>
@@ -38,7 +40,7 @@
         <% end %>
       </ul>
     <% else %>
-      <p class="text-muted">This goal doesn't have any contributors yet...</p>
+      <p class="text-muted">This goal doesn't have any other contributors yet...</p>
     <% end %>
   </div>
 </div>
