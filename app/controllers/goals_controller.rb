@@ -5,7 +5,7 @@ class GoalsController < ApplicationController
   before_action :disallow_creator, only: [:pinch, :drop]
 
   def index
-    @goals = Goal.all
+    @goals = Goal.where(visibility: 'public')
   end
 
   def new
