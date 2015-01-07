@@ -16,7 +16,7 @@
       <ul class="nav navbar-nav">
         <% if logged_in? %>
           <li>
-            <%= link_to current_user.requests_activity_count.zero? ? "Dashboard" : "Dashboard (#{current_user.requests_activity_count})", dashboard_user_path(current_user) %>
+            <%= link_to current_user.new_notification_count.zero? ? "Dashboard" : "Dashboard (#{current_user.new_notification_count})", dashboard_user_path(current_user) %>
           </li>
           <li>
             <%= link_to 'New Goal', new_goal_path %>
