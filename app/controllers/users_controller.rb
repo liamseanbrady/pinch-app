@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   def dashboard
     @user.mark_requests_as_viewed
+    @user.mark_pinched_notifications_as_viewed
   end
 
   private
