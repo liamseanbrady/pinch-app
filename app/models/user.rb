@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   has_many :pinch_relationships
   has_many :pinches, through: :pinch_relationships, source: :goal
 
+  has_many :pinched_notifications, foreign_key: 'goal_creator_id', class_name: 'PinchNotification'
+  has_many :pinch_notifications, foreign_key: 'pincher_id'
+
   validates :password, length: {minimum: 8}, on: :create
   validates :username, length: {minimum: 3, maximum: 18}, uniqueness: { case_sensitive: false }
   validates :email, presence: true, format: { with: /\A[\w\d]+[@][a-z]+.(com|co.uk)\z/ }, on: :create
