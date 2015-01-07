@@ -10,6 +10,8 @@ class Goal < ActiveRecord::Base
   has_many :pinch_relationships
   has_many :pinchers, through: :pinch_relationships, source: :user
 
+  has_many :pinch_notifications
+
   validates :title, length: {minimum: 6}
   validates :description, length: {minimum: 15, maximum: 100}
   validates :category, presence: true
