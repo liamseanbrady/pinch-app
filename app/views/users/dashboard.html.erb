@@ -1,3 +1,10 @@
+<% if @user.pinched_notifications.any? %>
+  <h2>Pinch Notifications</h2>
+  <% @user.pinched_notifications.each do |pinched_notif| %>
+    <p><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %> pinched <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %> on <%= display_datetime(pinched_notif.created_at) %></p>
+  <% end %>
+<% end %>
+
 <% if @user.closed_out_requests.any? %>
   <h2>Answered Outgoing Requests</h2>
   <% @user.closed_out_requests.each do |request| %>
