@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :dashboard]
-  before_action :require_user, only: [:edit, :update, :show, :dashboard]
+  before_action :require_user, only: [:edit, :update, :show, :dashboard, :notifications]
   before_action :require_same_user, only: [:edit, :update, :dashboard]
 
   def new
@@ -32,9 +32,11 @@ class UsersController < ApplicationController
 
   def show; end
 
-  def dashboard
-    @user.mark_requests_as_viewed
-    @user.mark_pinched_notifications_as_viewed
+  def dashboard; end
+
+  def notifications
+    current_user.mark_requests_as_viewed
+    current_user.mark_pinched_notifications_as_viewed
   end
 
   private
