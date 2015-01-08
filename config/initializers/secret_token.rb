@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-PinchApp::Application.config.secret_key_base = '5c3b04281185b437af7f2b9b976957baa05fb7667c9f2cd606bbd0b7d1df801209c9926589ad68a8f6d2998522725786d1826b997a6823995619647a3c0f1845'
+PinchApp::Application.config.secret_key_base = 'noneofyourbusiness'
