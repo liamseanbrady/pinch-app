@@ -1,0 +1,35 @@
+<% if current_user.notification_count.zero? %>
+  <h4 class="lead">You currently have no notifications</h4>
+<% end %>
+
+<% if current_user.pinched_notifications.any? %>
+  <h2>Pinch Notifications</h2>
+  <% current_user.pinched_notifications.each do |pinched_notif| %>
+    <p><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %> pinched <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %> on <%= display_datetime(pinched_notif.created_at) %></p>
+    <%= link_to 'Destroy', pinch_notification_path(pinched_notif), method: 'delete' %>
+  <% end %>
+<% end %>
+
+<% if current_user.closed_out_requests.any? %>
+  <h2>Answered Outgoing Requests</h2>
+  <% current_user.closed_out_requests.each do |request| %>
+    <p>Your request for contribution status on <%= request.goal.title %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
+    <%= link_to 'Destroy', goal_contribution_request_path(request.goal, request), method: 'delete' %>
+  <% end %>
+<% end %>
+
+<% if current_user.open_out_requests.any? %>
+  <h2>Unanswered Outgoing Requests</h2>
+  <% current_user.open_out_requests.each do |request| %>
+    <p>You requested contribution status for <%= request.goal.title %> on <%= display_datetime(request.created_at) %></p>
+  <% end %>
+<% end %>
+
+<% if current_user.open_in_requests.any? %>
+  <h2>Incoming Requests</h2>
+  <% current_user.open_in_requests.each do |request| %>
+    <p><%= request.sender.username %> has requested contribution status on <%= request.goal.title %><p> |
+    <%= link_to 'Accept', goal_contribution_request_path(request.goal, request, accept: true), method: 'patch' %> |
+    <%= link_to 'Reject', goal_contribution_request_path(request.goal, request, accept: false), method: 'patch' %>
+  <% end %> 
+<% end %>
