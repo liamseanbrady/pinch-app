@@ -19,3 +19,33 @@
     color: #FFF;
   }
 }
+
+.glyphicon-lg {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 40px;
+}
+
+.empty-message {
+  margin-top: 80px;
+}
+
+.navbar {
+  background-color: #FF5930;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  border: 0;
+
+  .nav li a {
+    color: white;
+    &:hover, &:active {
+      color: white;
+    }
+  }
+
+  .navbar-brand {
+    color: white;
+  }
+}
