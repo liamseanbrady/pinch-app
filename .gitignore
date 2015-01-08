@@ -15,5 +15,5 @@
 /log/*.log
 /tmp
 
-* Ignore secret token
+# Ignore secret token
 /config/initializers/secret_token.rb
