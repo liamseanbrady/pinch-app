@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
     self.fresh_open_in_requests.count + self.fresh_closed_out_requests.count
   end
 
+  def notification_count
+    self.open_in_requests.count + self.closed_out_requests.count + self.pinched_notifications.count
+  end
+
   def new_notification_count
     self.requests_activity_count + self.pinched_notifications.where(viewed_at: nil).count
   end
