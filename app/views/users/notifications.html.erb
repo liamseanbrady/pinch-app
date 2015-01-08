@@ -1,5 +1,11 @@
 <% if current_user.notification_count.zero? %>
-  <h4 class="lead">You currently have no notifications</h4>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="empty-message text-center text-muted">
+      <span class="glyphicon glyphicon-inbox glyphicon-lg"></span>
+      <br/>
+      <h4>You have no notifications</h4>
+    </div>
+  </div>
 <% end %>
 
 <% if current_user.pinched_notifications.any? %>
