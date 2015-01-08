@@ -6,6 +6,8 @@ PinchApp::Application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy', as: 'logout'
 
+  get '/notifications', to: 'users#notifications', as: 'notifications'
+
   resources :users, only: [:create, :edit, :update, :show] do
     member do
       get :dashboard
