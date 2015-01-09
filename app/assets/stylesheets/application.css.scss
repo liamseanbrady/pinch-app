@@ -31,7 +31,7 @@
 }
 
 .navbar {
-  background-color: #FF5930;
+  background-color: #333;
   border-radius: 0;
   padding: 0;
   margin: 0;
@@ -42,6 +42,17 @@
     color: white;
     &:hover, &:active {
       color: white;
+    }
+  }
+
+  .dropdown li a {
+    color: #333;
+    &:hover, &:active {
+      color: #333;
+    }
+    .glyphicon {
+      margin-right: 10px;
+      margin-left: -2px;
     }
   }
 
