@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  FOUR_DAYS = 4 * 24 * 60 * 60
+  TWO_DAYS = 2 * 24 * 60 * 60
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   belongs_to :category
@@ -42,7 +42,7 @@ class Goal < ActiveRecord::Base
   end
 
   def recently_added?
-    Time.now.sec - FOUR_DAYS < self.created_at.sec
+    Time.now.sec - TWO_DAYS < self.created_at.sec
   end
 
   def total_likes
