@@ -45,11 +45,13 @@ $main-theme: #E84319;
   margin-bottom: 20px;
   border: 0;
 
-  .nav li a {
-    color: white;
-    &:hover, &:active {
+  .nav li {
+    a {
       color: white;
-      background: lighten($main-theme, 7);
+      &:hover, &:active {
+        color: white;
+        background: lighten($main-theme, 7);
+      }
     }
   }
 
@@ -95,6 +97,52 @@ a {
   &:hover {
     color: #333;
   }
+}
+
+.global-header {
+  color: #BBB;
+  font-weight: 100;
+  font-size: 2.8em;
+  margin-bottom: 30px;
+}
+
+input[type="text"], input[type="password"] {
+  background: #F3F3F3;
+  border: 0;
+  box-shadow: none;
+  border-bottom: 2px rgba(255, 255, 255, 0);
+  &:focus, &:active {
+    background-color: #FAFAFA;
+    border-bottom: 2px solid $main-theme;
+    outline: transparent;
+  }
+}
+
+textarea.form-control {
+  background: #F3F3F3;
+  border: 0;
+  box-shadow: none;
+  border-bottom: 2px rgba(255, 255, 255, 0);
+  &:focus {
+    background-color: #FAFAFA;
+    border-bottom: 2px solid $main-theme;
+    outline: transparent;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #F3F3F3 inset;
+}
+
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.important-center {
+  margin-top: 50px;
 }
 
 
