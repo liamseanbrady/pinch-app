@@ -1,4 +1,6 @@
 class Goal < ActiveRecord::Base
+  FOUR_DAYS = 4 * 24 * 60 * 60
+
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   belongs_to :category
   has_many :learning_resources
@@ -37,6 +39,10 @@ class Goal < ActiveRecord::Base
 
   def public?
     self.visibility == 'public'
+  end
+
+  def recently_added?
+    Time.now.sec - FOUR_DAYS < self.created_at.sec
   end
 
   def total_likes
