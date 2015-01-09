@@ -12,6 +12,8 @@ class Goal < ActiveRecord::Base
 
   has_many :pinch_notifications
 
+  scope :public_goals, -> { (where visibility: 'public') }
+
   validates :title, length: {minimum: 6}
   validates :description, length: {minimum: 15, maximum: 100}
   validates :category, presence: true
