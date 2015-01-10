@@ -15,8 +15,11 @@
 @import "bootstrap";
 
 $main-theme: #E84319;
+$blue: #8A6DA5;
+$grey: #B3B3B3;
 
 .badge {
+  background: $grey;
   a {
     color: #FFF;
   }
@@ -26,6 +29,11 @@ $main-theme: #E84319;
     background-color: $main-theme;
 }
 
+.glyphicon-md {
+  font-size: 16px;
+  margin-right: 3px;
+}
+
 .glyphicon-lg {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -33,9 +41,6 @@ $main-theme: #E84319;
   color: #DDD;
 }
 
-.empty-message {
-  margin-top: 80px;
-}
 
 .navbar {
   background: $main-theme;
@@ -55,15 +60,22 @@ $main-theme: #E84319;
     }
   }
 
-  .dropdown li a {
-    color: #333;
-    &:hover, &:active {
-      color: #FFF;
-      background: $main-theme;
-    }
-    .glyphicon {
-      margin-right: 10px;
-      margin-left: -2px;
+  .navbar-nav > .open > a:focus {
+    color: white;
+    background: lighten($main-theme, 7);
+  }
+
+  .dropdown {
+    li a {
+      color: #333;
+      &:hover, &:active {
+        color: #FFF;
+        background: $main-theme;
+      }
+      .glyphicon {
+        margin-right: 10px;
+        margin-left: -2px;
+      }
     }
   }
 
@@ -81,6 +93,23 @@ $main-theme: #E84319;
       &:hover, &:active, &:visited {
         background: lighten($main-theme, 7)
       }
+    }
+  }
+}
+
+.nav-pills {
+  a {
+    background: #DDD;
+    color: #AAA;
+    &:hover {
+      background: #DEDEDE;
+      color: #BBB;
+    }
+  }
+  li.active a {
+    background: $main-theme;
+    &:hover {
+      background: lighten($main-theme, 7);
     }
   }
 }
@@ -144,6 +173,57 @@ input:-webkit-autofill {
 .important-center {
   margin-top: 50px;
 }
+
+.btn {
+  border: none;
+}
+
+.btn-default {
+  background: $grey;
+  color: #FFF;
+  border: none;
+  &:hover {
+    background: lighten($grey, 7);
+    color: #FFF;
+  }
+}
+
+.btn-pinch {
+  background: $main-theme;
+  color: #FFF;
+  border: none;
+  &:hover {
+    background: lighten($main-theme, 7);
+    color: #FFF;
+  }
+}
+
+.btn-primary {
+  background: $blue;
+  color: #FFF;
+  border: none;
+  &:hover {
+    background: lighten($blue, 7);
+    color: #FFF;
+  }
+}
+
+.goal-title {
+  margin-top: 20px;
+}
+
+.notification-container {
+  margin-top: 30px;
+}
+
+.empty-message {
+  margin-top: 80px;
+}
+
+.notification-panel {
+  padding: 5px 50px;
+}
+
 
 
 
