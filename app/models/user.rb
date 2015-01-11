@@ -62,7 +62,11 @@ class User < ActiveRecord::Base
   end
 
   def notification_count
-    self.open_in_requests.count + self.closed_out_requests.count + self.pinched_notifications.count
+    self.request_count + self.pinched_notifications.count
+  end
+
+  def read_request_count
+    self.in_requests.where.not(viewed_at: nil).count
   end
 
   def new_notification_count
