@@ -14,4 +14,12 @@ class ContributionRequest < ActiveRecord::Base
   def mark_as_unread
     self.update(viewed_at: nil)
   end
+
+  def mark_as_read
+    self.update(viewed_at: Time.now)
+  end
+
+  def read?
+    !self.viewed_at.nil?
+  end
 end
