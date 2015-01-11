@@ -52,10 +52,12 @@ $grey: #B3B3B3;
 
   .nav li {
     a {
-      color: white;
-      &:hover, &:active {
+      &:hover, &:active, &:visited {
         color: white;
         background: lighten($main-theme, 7);
+      }
+      &:link {
+        color: white;
       }
     }
   }
@@ -65,9 +67,12 @@ $grey: #B3B3B3;
     background: lighten($main-theme, 7);
   }
 
-  .dropdown {
+  .dropdown .dropdown-menu {
     li a {
       color: #333;
+      &:link {
+        color: #333;
+      }
       &:hover, &:active {
         color: #FFF;
         background: $main-theme;
@@ -192,7 +197,7 @@ input:-webkit-autofill {
   background: $main-theme;
   color: #FFF;
   border: none;
-  &:hover {
+  &:hover, &:active {
     background: lighten($main-theme, 7);
     color: #FFF;
   }
@@ -214,6 +219,13 @@ input:-webkit-autofill {
 
 .notification-container {
   margin-top: 30px;
+  .nav .active .badge {
+    color: $main-theme;
+  }
+
+  .badge {
+    color: #FFF;
+  }
 }
 
 .empty-message {
@@ -223,7 +235,6 @@ input:-webkit-autofill {
 .notification-panel {
   padding: 5px 50px;
 }
-
 
 
 
