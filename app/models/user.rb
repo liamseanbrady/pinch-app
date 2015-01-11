@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def notification_count
-    self.request_count + self.pinched_notifications.count
+    self.requests_activity_count + self.pinched_notifications.count
   end
 
   def read_request_count
