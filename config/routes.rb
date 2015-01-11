@@ -14,15 +14,21 @@ PinchApp::Application.routes.draw do
     end
   end
   resources :goals, except: [:destroy] do
+    member do
+      post :pinch
+      post :drop
+    end
     resources :learning_resources, only: [:new, :create] do
       member do
         post :like
       end
     end
-    resources :contribution_requests, only: [:create, :update, :destroy]
-    member do
-      post :pinch
-      post :drop
+    resources :contribution_requests, only: [:create, :destroy] do
+      member do
+        patch :accept
+        patch :reject
+        patch :read
+      end
     end
   end
   resources :categories, except: [:destroy]
