@@ -6,10 +6,14 @@
   <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked">
       <li class=<%= 'active' if params[:tab].nil? %>>
-        <%= link_to 'Unread', notifications_path %>
+        <%= link_to notifications_path do %>
+          Unread <span class="badge pull-right"><%= current_user.new_notification_count %></span>
+        <% end %>
       </li>
       <li class=<%= 'active' if params[:tab] == 'read' %>>
-        <%= link_to 'Read', notifications_path(tab: 'read') %>
+        <%= link_to notifications_path(tab: 'read') do %>
+          Awaiting Action <span class="pull-right badge"><%= current_user.read_request_count %></span>
+        <% end %>
       </li>
     </ul>
   </div>
@@ -25,11 +29,12 @@
       <% else %>
         <% current_user.fresh_open_in_requests.each do |request| %>
           <p><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p> |
-          <%= link_to 'Accept', goal_contribution_request_path(request.goal, request, accept: true), method: 'patch' %> |
-          <%= link_to 'Reject', goal_contribution_request_path(request.goal, request, accept: false), method: 'patch' %>
+          <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch' %> |
+          <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch' %> |
+          <%= link_to 'Decide Later', read_goal_contribution_request_path(request.goal, request), method: 'patch' %>
         <% end %>
         <% current_user.fresh_closed_out_requests.each do |request| %>
-          <p>Your request for contribution status on <%= request.goal.title %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
+          <p>Your request for contribution status on <%= link_to request.goal.title, goal_path(request.goal) %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
           <%= link_to 'Destroy', goal_contribution_request_path(request.goal, request), method: 'delete' %>
         <% end %>
       <% end %>
@@ -40,8 +45,8 @@
     <% if params[:tab] == 'read' %>
       <% current_user.open_in_requests.each do |request| %>
         <p><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p> |
-        <%= link_to 'Accept', goal_contribution_request_path(request.goal, request, accept: true), method: 'patch' %> |
-        <%= link_to 'Reject', goal_contribution_request_path(request.goal, request, accept: false), method: 'patch' %>
+        <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch' %> |
+        <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch' %>
       <% end %>
       <% current_user.closed_out_requests.each do |request| %>
         <p>Your request for contribution status on <%= request.goal.title %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
@@ -49,37 +54,13 @@
       <% end %>
     <% end %>
 
-   <!--  <% if current_user.pinched_notifications.any? %>
-      <h2>Pinch Notifications</h2>
+    <% if current_user.pinched_notifications.any? %>
       <% current_user.pinched_notifications.each do |pinched_notif| %>
-        <p><%= pinched_notif.pincher.username %> pinched <%= pinched_notif.goal.title %> on <%= pinched_notif.created_at %><p>
+        <p><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %> pinched <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %> on <%= display_datetime(pinched_notif.created_at) %><p>
         <%= link_to 'Destroy', pinch_notification_path(pinched_notif), method: 'delete' %>
       <% end %>
     <% end %>
 
-    <% if current_user.closed_out_requests.any? %>
-      <h2>Answered Outgoing Requests</h2>
-      <% current_user.closed_out_requests.each do |request| %>
-        <p>Your request for contribution status on <%= request.goal.title %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
-        <%= link_to 'Destroy', goal_contribution_request_path(request.goal, request), method: 'delete' %>
-      <% end %>
-    <% end %>
-
-    <% if current_user.open_out_requests.any? %>
-      <h2>Unanswered Outgoing Requests</h2>
-      <% current_user.open_out_requests.each do |request| %>
-        <p>You requested contribution status for <%= request.goal.title %> on <%= display_datetime(request.created_at) %></p>
-      <% end %>
-    <% end %>
-
-    <% if current_user.open_in_requests.any? %>
-      <h2>Incoming Requests</h2>
-      <% current_user.open_in_requests.each do |request| %>
-        <p><%= request.sender.username %> has requested contribution status on <%= request.goal.title %><p> |
-        <%= link_to 'Accept', goal_contribution_request_path(request.goal, request, accept: true), method: 'patch' %> |
-        <%= link_to 'Reject', goal_contribution_request_path(request.goal, request, accept: false), method: 'patch' %>
-      <% end %> 
-    <% end %> -->
   </div>
 </div>
 
