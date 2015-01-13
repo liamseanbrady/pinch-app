@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  TWO_DAYS = 2 * 24 * 60 * 60
+  ONE_FOR_GOAL_CREATOR = 1
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   belongs_to :category
@@ -34,15 +34,19 @@ class Goal < ActiveRecord::Base
   end
 
   def contributor_count
-    self.contributors.count + 1
+    self.contributors.count + ONE_FOR_GOAL_CREATOR
   end
 
   def public?
     self.visibility == 'public'
   end
 
-  def recently_added?
-    Time.now.sec - TWO_DAYS < self.created_at.sec
+  def days_ago_added_less_than?(num)
+    Time.now.sec - days_to_seconds(num) < self.created_at.sec
+  end
+
+  def days_to_seconds(num)
+    num * 24 * 60 * 60
   end
 
   def total_likes
