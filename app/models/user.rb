@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :pinch_relationships
   has_many :pinches, through: :pinch_relationships, source: :goal
 
-  has_many :pinched_notifications, foreign_key: 'goal_creator_id', class_name: 'PinchNotification'
+  has_many :notifications_of_goal_being_pinched, foreign_key: 'goal_creator_id', class_name: 'PinchNotification'
   has_many :pinch_notifications, foreign_key: 'pincher_id'
 
   validates :password, length: {minimum: 8}, on: :create
@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def new_notification_count
-    self.requests_activity_count + self.pinched_notifications.where(viewed_at: nil).count
+    self.requests_activity_count + self.notifications_of_goal_being_pinched.where(viewed_at: nil).count
   end
 end
 
