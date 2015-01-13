@@ -41,6 +41,7 @@ class GoalsController < ApplicationController
     if !@goal.pincher?(current_user) && @goal.public?
       flash[:notice] = 'You successfully pinched a goal'
       @goal.pinchers << current_user
+      PinchNotification.create(pincher: current_user, goal: @goal, goal_creator: @goal.creator)
     else
       flash[:error] = "There was an error - goal couldn't be pinched!"
     end
@@ -78,7 +79,7 @@ class GoalsController < ApplicationController
 
   def disallow_creator
     if current_user == @goal.creator
-      flash[:error] = "You can't pinch your own goal"
+      flash[:error] = "You can't do that your own goal"
       redirect_to root_path
     end
   end
