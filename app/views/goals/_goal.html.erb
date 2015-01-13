@@ -4,7 +4,7 @@
   <span class="badge"><%= link_to goal.category.name, category_path(goal.category) %></span>
   <% if show_visibility %>
     <span class="pull-right label label-<%= goal.visibility == 'public' ? 'success' : 'primary' %>"><%= goal.visibility %></span>
-  <% elsif goal.recently_added? %>
+  <% elsif goal.days_ago_added_less_than?(2) %>
     <span class="pull-right label label-hot">New</span>
   <% end %>
 
