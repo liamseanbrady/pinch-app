@@ -27,7 +27,7 @@ PinchApp::Application.routes.draw do
       member do
         patch :accept
         patch :reject
-        patch :read
+        patch :mark_as_read
       end
     end
   end
