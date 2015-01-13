@@ -17,6 +17,13 @@
 $main-theme: #E84319;
 $blue: #8A6DA5;
 $grey: #B3B3B3;
+$dark-grey: #666;
+$x-light-grey: #F6F6F6;
+
+p {
+  font-size: 16px;
+  color: $dark-grey; 
+}
 
 .badge {
   background: $grey;
@@ -95,8 +102,15 @@ $grey: #B3B3B3;
 
     button {
       border: 1px solid #FFF;
-      &:hover, &:active, &:visited {
+      background: $main-theme;
+      &:visited, &:link {
+        background: $main-theme;
+      }
+      &:hover, &:active {
         background: lighten($main-theme, 7)
+      }
+      .navbar-toggle {
+        background: $main-theme;
       }
     }
   }
@@ -115,6 +129,31 @@ $grey: #B3B3B3;
     background: $main-theme;
     &:hover {
       background: lighten($main-theme, 7);
+    }
+  }
+}
+
+.nav-tabs {
+  li a {
+    border: none;
+    color: $dark-grey;
+    &:visited {
+      color: $grey;
+      background: none;
+    }
+    &:hover, &:active {
+      color: $main-theme;
+      background: none;
+    }
+  }
+  li.active a {
+    color: $main-theme;
+    &:visited {
+      color: $main-theme;
+    }
+    &:active, &:hover {
+      color: $main-theme;
+      background: none;
     }
   }
 }
@@ -187,7 +226,11 @@ input:-webkit-autofill {
   background: $grey;
   color: #FFF;
   border: none;
-  &:hover {
+  &:link, &:visited {
+    background: $grey;
+    color: #FFF;
+  }
+  &:hover, &:active {
     background: lighten($grey, 7);
     color: #FFF;
   }
@@ -207,6 +250,9 @@ input:-webkit-autofill {
   background: $blue;
   color: #FFF;
   border: none;
+  &:link, &:visited {
+    background: $blue;
+  }
   &:hover, &:active {
     background: lighten($blue, 7);
     color: #FFF;
@@ -234,6 +280,11 @@ input:-webkit-autofill {
 
 .notification-panel {
   padding: 5px 50px;
+}
+
+.notification-text {
+  font-size: 18px;
+  color: $dark-grey;
 }
 
 
