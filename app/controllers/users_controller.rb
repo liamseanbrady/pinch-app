@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :dashboard]
   before_action :require_user, only: [:edit, :update, :show, :dashboard, :notifications]
-  before_action :require_same_user, only: [:edit, :update, :dashboard]
+  before_action :require_user_is_set_user, only: [:edit, :update, :dashboard]
 
   def new
     @user = User.new
@@ -46,9 +46,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def require_same_user
+  def require_user_is_set_user
     if current_user != @user
-      flash[:error] = 'You can only edit your own profile' 
+      flash[:error] = 'You are not authorized to view this page'
       redirect_to root_path
     end
   end
