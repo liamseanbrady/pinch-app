@@ -1,12 +1,15 @@
 class ContributionRequestsController < ApplicationController
-  before_action :set_goal, except: [:accept, :reject, :read]
-  before_action :set_contribution_request, only: [:destroy, :accept, :reject, :read]
+  before_action :set_goal, except: [:accept, :reject, :mark_as_read]
+  before_action :set_contribution_request, only: [:destroy, :accept, :reject, :mark_as_read]
   before_action :require_user
-  before_action :disallow_creator, except: [:accept, :reject, :read]
-  before_action :require_sender_is_pincher, only: [:create]
-  before_action :require_contribution_request_is_unread, only: [:read]
+  before_action :disallow_creator, only: [:create, :destroy]
 
   def create
+    if !@goal.pincher?(current_user)
+      flash[:error] = 'You must pinch this goal first in order to contribute'
+      redirect_to :back
+    end
+
     request = ContributionRequest.create(sender: current_user, recipient: @goal.creator, goal: @goal)
 
     if request.valid?
@@ -45,7 +48,12 @@ class ContributionRequestsController < ApplicationController
     redirect_to :back
   end
 
-  def read
+  def mark_as_read
+    if @request.read?
+      flash[:error] = "You can only mark a request as read if it's currently unread..."
+      redirect_to :back
+    end
+
     @request.mark_as_read
     flash[:notice] = 'You archived the request'
     redirect_to :back
@@ -65,20 +73,6 @@ class ContributionRequestsController < ApplicationController
     if current_user == @goal.creator
       flash[:error] = "You can't pinch your own goal"
       redirect_to root_path
-    end
-  end
-
-  def require_sender_is_pincher
-    if !@goal.pincher?(current_user)
-      flash[:error] = 'You must pinch this goal first in order to contribute'
-      redirect_to :back
-    end
-  end
-
-  def require_contribution_request_is_unread
-    if @request.read?
-      flash[:error] = "You can only mark a request as read if it's currently unread..."
-      redirect_to :back
     end
   end
 end
