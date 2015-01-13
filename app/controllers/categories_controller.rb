@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      flash[:notice] = 'Your new category was added successfully'
+      flash[:notice] = 'You updated your category'
       redirect_to root_path
     else
       render :edit
