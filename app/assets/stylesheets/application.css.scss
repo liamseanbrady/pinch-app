@@ -27,8 +27,12 @@ p {
 
 .badge {
   background: $grey;
+  padding: 4px 10px;
   a {
     color: #FFF;
+    &:hover, &:active {
+      text-decoration: none;
+    }
   }
 }
 
