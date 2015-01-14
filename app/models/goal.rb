@@ -29,6 +29,10 @@ class Goal < ActiveRecord::Base
     self.contributors.include?(usr)
   end
 
+  def contribution_request_pending?(usr)
+    self.contribution_requests.where(sender: usr).any?
+  end
+
   def pincher_count
     self.pinchers.count
   end
