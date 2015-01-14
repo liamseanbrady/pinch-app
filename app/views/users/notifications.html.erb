@@ -20,6 +20,7 @@
 
   <div class="col-md-9 notification-panel">
     <% if params[:tab].nil? %>
+
       <% if current_user.new_notification_count.zero? %>
           <div class="empty-message text-center text-muted">
             <span class="glyphicon glyphicon-inbox glyphicon-lg"></span>
@@ -39,12 +40,27 @@
         <% end %>
       <% end %>
 
+      <% if current_user.notifications_of_goal_being_pinched.any? %>
+        <% current_user.notifications_of_goal_being_pinched.each do |pinched_notif| %>
+          <p class="notification-text"><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %> pinched <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %> on <%= display_datetime(pinched_notif.created_at) %><p>
+          <%= link_to 'Destroy', pinch_notification_path(pinched_notif), method: 'delete', class: 'btn btn-danger' %>
+        <% end %>
+      <% end %>
 
     <% end %>
 
     <!-- TODO: Change these below to read_open_in_request and read_pinched_notifications -->
 
     <% if params[:tab] == 'read' %>
+
+      <% if current_user.read_request_count.zero? %>
+          <div class="empty-message text-center text-muted">
+            <span class="glyphicon glyphicon-ok glyphicon-lg glyphicon-success"></span>
+            <br/>
+            <h4>Relax - you've taken care of everything.</h4>
+          </div>
+      <% end %>
+
       <% current_user.open_in_requests.each do |request| %>
         <p class="notification-text"><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p>
         <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
@@ -52,12 +68,6 @@
       <% end %>
     <% end %>
 
-    <% if current_user.notifications_of_goal_being_pinched.any? %>
-      <% current_user.notifications_of_goal_being_pinched.each do |pinched_notif| %>
-        <p class="notification-text"><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %> pinched <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %> on <%= display_datetime(pinched_notif.created_at) %><p>
-        <%= link_to 'Destroy', pinch_notification_path(pinched_notif), method: 'delete', class: 'btn btn-danger' %>
-      <% end %>
-    <% end %>
 
   </div>
 </div>
