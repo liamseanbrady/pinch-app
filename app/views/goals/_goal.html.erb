@@ -34,8 +34,14 @@
         <% end %>
       <% end %>
       <% if current_user != goal.creator && !goal.contributor?(current_user) %>
-        <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success' do %>
-          <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Contribute
+        <% if goal.contribution_request_pending?(current_user) %>
+          <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success-disabled' do %>
+            <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Request Pending...
+          <% end %>
+        <% else %>
+          <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success' do %>
+            <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Contribute
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
