@@ -46,7 +46,7 @@ class Goal < ActiveRecord::Base
   end
 
   def days_ago_added_less_than?(num)
-    Time.now.sec - days_to_seconds(num) < self.created_at.sec
+    (Time.now.to_i - days_to_seconds(num)) < self.created_at.to_i
   end
 
   def days_to_seconds(num)
