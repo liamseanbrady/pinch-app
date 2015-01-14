@@ -48,15 +48,6 @@ class User < ActiveRecord::Base
     self.closed_out_requests.where(viewed_at: nil)
   end
 
-  def mark_requests_as_viewed
-    self.open_in_requests.where(viewed_at: nil).update_all(viewed_at: Time.now)
-    self.closed_out_requests.where(viewed_at: nil).update_all(viewed_at: Time.now)
-  end
-
-  def mark_pinched_notifications_as_viewed
-    self.pinched_notifications.where(viewed_at: nil).update_all(viewed_at: Time.now)
-  end
-
   def requests_activity_count
     self.fresh_open_in_requests.count + self.fresh_closed_out_requests.count
   end
