@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     self.open_in_requests.where(viewed_at: nil)
   end
 
+  def read_open_in_requests
+    self.open_in_requests.where.not(viewed_at: nil)
+  end
+
   def open_out_requests
     self.out_requests.where(accepted: nil)
   end
