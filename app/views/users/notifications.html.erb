@@ -42,17 +42,13 @@
 
     <% end %>
 
-    <!-- TODO: Change these below to read.open_in_request and read_pinched_notifications -->
+    <!-- TODO: Change these below to read_open_in_request and read_pinched_notifications -->
 
     <% if params[:tab] == 'read' %>
       <% current_user.open_in_requests.each do |request| %>
         <p class="notification-text"><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p>
         <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
         <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
-      <% end %>
-      <% current_user.closed_out_requests.each do |request| %>
-        <p class="notification-text">Your request for contribution status on <%= link_to request.goal.title, goal_path(request.goal) %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
-        <%= link_to 'Destroy', goal_contribution_request_path(request.goal, request), method: 'delete', class: 'btn btn-danger' %>
       <% end %>
     <% end %>
 
