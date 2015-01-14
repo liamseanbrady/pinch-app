@@ -24,12 +24,12 @@ class LearningResourcesController < ApplicationController
   def like
     if current_user == @learning_resource.submitter
       flash[:error] = "You can't like a resource you submitted"
-      redirect_to :back
+      redirect_to :back and return
     end
 
     if !@goal.pincher?(current_user)
       flash[:error] = 'You have to pinch a goal in order to like it!'
-      redirect_to :back
+      redirect_to :back and return
     end
 
     like = Like.create(creator: current_user, likeable: @learning_resource)
