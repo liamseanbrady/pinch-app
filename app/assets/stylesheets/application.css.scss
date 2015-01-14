@@ -183,28 +183,29 @@ a {
   margin-bottom: 30px;
 }
 
-input[type="text"], input[type="password"] {
-  background: #F3F3F3;
+input[type="text"], input[type="password"], textarea.form-control {
+  font-size: 16px;
+  color: darken($grey, 4);
+  background: darken($x-light-grey, 3);
   border: 0;
   box-shadow: none;
-  border-bottom: 2px rgba(255, 255, 255, 0);
+  border-bottom: 2px solid transparent;
   &:focus, &:active {
-    background-color: #FAFAFA;
+    color: $dark-grey;
+    background-color: $x-light-grey;
     border-bottom: 2px solid $main-theme;
     outline: transparent;
   }
 }
 
+input[type="text"], input[type="password"] {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
 textarea.form-control {
-  background: #F3F3F3;
-  border: 0;
-  box-shadow: none;
-  border-bottom: 2px rgba(255, 255, 255, 0);
-  &:focus {
-    background-color: #FAFAFA;
-    border-bottom: 2px solid $main-theme;
-    outline: transparent;
-  }
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 input:-webkit-autofill {
