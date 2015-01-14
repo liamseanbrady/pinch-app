@@ -61,7 +61,7 @@
           </div>
       <% end %>
 
-      <% current_user.open_in_requests.each do |request| %>
+      <% current_user.read_open_in_requests.each do |request| %>
         <p class="notification-text"><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p>
         <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
         <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
