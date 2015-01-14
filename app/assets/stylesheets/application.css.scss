@@ -19,6 +19,7 @@ $blue: #8A6DA5;
 $grey: #B3B3B3;
 $dark-grey: #666;
 $x-light-grey: #F6F6F6;
+$success: #5cb85c;
 
 p {
   font-size: 16px;
@@ -34,6 +35,9 @@ a:hover {
   padding: 4px 10px;
   a {
     color: #FFF;
+    &:link, &:visited {
+      text-decoration: none;
+    }
     &:hover, &:active {
       text-decoration: none;
     }
@@ -57,7 +61,7 @@ a:hover {
 }
 
 .glyphicon-success {
-  color: #5cb85c;
+  color: $success;
 }
 
 .navbar {
@@ -269,6 +273,12 @@ input:-webkit-autofill {
     background: lighten($blue, 7);
     color: #FFF;
   }
+}
+
+.btn-success-disabled {
+  pointer-events: none;
+  color: #FFF;
+  background: darken($success, 10);
 }
 
 .goal-title {
