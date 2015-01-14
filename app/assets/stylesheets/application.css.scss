@@ -25,6 +25,10 @@ p {
   color: $dark-grey; 
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .badge {
   background: $grey;
   padding: 4px 10px;
