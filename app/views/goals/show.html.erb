@@ -6,12 +6,32 @@
 <br/>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-12">
+    <% if @goal.creator != current_user %>
+      <h4 class="generic-subheading">Creator</h4>
+      <br/>
+      <%= link_to @goal.creator.username, user_path(@goal.creator) %>
+      <br/>
+      <br/>
+    <% end %>
+
+    <h4 class="generic-subheading">Contributors</h4>
+    </br>
+    <% if @goal.contributors.any? %>
+      <ul>
+        <% @goal.contributors.each do |user| %>
+          <li><%= link_to user.username, user_path(user) %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">This goal doesn't have any other contributors yet...</p>
+    <% end %>
+
     <h4 class="generic-subheading">Resources</h4>
     <br/>
     <div class="row">
       <% @goal.learning_resources.each do |resource| %>
-        <div class="col-md-6 goal-grid">
+        <div class="col-lg-3 col-md-4 col-sm-6 goal-grid">
           <div class="well panel">
             <div class="resource-content">
               <p><%= resource.summary %></p>
@@ -32,7 +52,7 @@
 
   </div>
 
-  <div class="col-md-4">
+<!--   <div class="col-md-4">
     <% if @goal.creator != current_user %>
       <h4 class="generic-subheading">Creator</h4>
       <br/>
@@ -51,5 +71,5 @@
     <% else %>
       <p class="text-muted">This goal doesn't have any other contributors yet...</p>
     <% end %>
-  </div>
+  </div> -->
 </div>
