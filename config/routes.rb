@@ -19,6 +19,9 @@ PinchApp::Application.routes.draw do
       post :pinch
       post :drop
     end
+    collection do
+      get :search
+    end
     resources :learning_resources, only: [:new, :create] do
       member do
         post :like
