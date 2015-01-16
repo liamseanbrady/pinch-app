@@ -60,6 +60,17 @@ class GoalsController < ApplicationController
     redirect_to :back
   end
 
+  def search
+    @search_term = params[:search_term]
+
+    if !@search_term.empty?
+      @goals = Goal.public_goals.where('title LIKE ?', "%#{@search_term}%")
+    else
+      flash[:error] = 'Your search term was empty...'
+      redirect_to :back
+    end
+  end
+
   private
 
   def goal_params
