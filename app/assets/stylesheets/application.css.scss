@@ -14,7 +14,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-$main-theme: #E84319;
+$main-theme: #D85239;
 $blue: #8A6DA5;
 $grey: #B3B3B3;
 $dark-grey: #666;
@@ -60,8 +60,25 @@ a:hover {
   color: #DDD;
 }
 
+.glyphicon-about {
+  font-size: 200px;
+  text-align: center;
+}
+
+.glyphicon-purple {
+  color: $blue;
+}
+
+.glyphicon-main {
+  color: $main-theme;
+}
+
 .glyphicon-success {
   color: $success;
+}
+
+.about-box {
+  margin-bottom: 90px;
 }
 
 .navbar {
@@ -69,14 +86,14 @@ a:hover {
   border-radius: 0;
   padding: 0;
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   border: 0;
 
   .nav li {
     a {
       &:hover, &:active, &:visited {
         color: white;
-        background: lighten($main-theme, 7);
+        background: lighten($main-theme, 3);
       }
       &:link {
         color: white;
@@ -107,7 +124,12 @@ a:hover {
   }
 
   .navbar-brand {
-    color: white;
+    &:link,, &:visited {
+      color: #FFF;
+    }
+    &:hover, &:active {
+      color: darken(#FFF, 5);
+    }
   }
 
   .navbar-header {
@@ -232,6 +254,7 @@ input:-webkit-autofill {
 
 .important-center {
   margin-top: 50px;
+  text-align: center;
 }
 
 .btn {
@@ -311,5 +334,42 @@ input:-webkit-autofill {
   color: $dark-grey;
 }
 
+.jumbotron {
+  background: $x-light-grey;
+  width: 100%;
+  margin-bottom: 100px;
+}
 
+h1.jumbotron-heading {
+  font-size: 55px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 300;
+  text-align: left;
+}
+
+h4.jumbotron-subheading {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: left;
+  color: $main-theme;
+}
+
+p.jumbotron-text {
+  font-size: 18px;
+  color: darken($grey, 5);
+  padding-bottom: 50px;
+  font-weight: 300;
+}
+
+.img-logo-jumbotron {
+  margin-top: 50px;
+  margin-left: 40px;
+}
+
+.pinchy-brand {
+  margin-top: 3px;
+  height: 40px;
+  width: 34px;
+}
 
