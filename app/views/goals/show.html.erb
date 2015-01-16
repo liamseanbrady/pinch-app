@@ -3,36 +3,45 @@
 <p class="lead"><%= @goal.description %></p>
 
 <br/>
+<br/>
 
 <div class="row">
   <div class="col-md-8">
-    <h4>Resources</h4>
+    <h4 class="generic-subheading">Resources</h4>
     <br/>
-    <% @goal.learning_resources.each do |resource| %>
-      <div class="well">
-        <p><%= resource.summary %></p>
-        <p><small>Submitted by <%= link_to resource.submitter.username, user_path(resource.submitter) %></small></p>
-        <p><%= resource.like_count %> likes</p>
-        <br/>
-        <%= link_to resource.url, class: 'btn btn-primary' do %>
-          <span class="glyphicon glyphicon-eye-open"></span> View
-        <% end %>
-        <%= link_to like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'btn btn-default' do %>
-          <span class="glyphicon glyphicon-thumbs-up"></span> Like
-        <% end %>
-      </div>
-    <% end %>
+    <div class="row">
+      <% @goal.learning_resources.each do |resource| %>
+        <div class="col-md-6 goal-grid">
+          <div class="well panel">
+            <div class="resource-content">
+              <p><%= resource.summary %></p>
+              <p><small>Submitted by <%= link_to resource.submitter.username, user_path(resource.submitter) %></small></p>
+              <p><%= resource.like_count %> likes</p>
+            </div>
+            <%= link_to resource.url, class: 'btn btn-primary' do %>
+              <span class="glyphicon glyphicon-eye-open"></span> View
+            <% end %>
+            <%= link_to like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'btn btn-default' do %>
+              <span class="glyphicon glyphicon-thumbs-up"></span> Like
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
   </div>
 
   <div class="col-md-4">
     <% if @goal.creator != current_user %>
-      <h4>Creator</h4>
+      <h4 class="generic-subheading">Creator</h4>
       <br/>
       <%= link_to @goal.creator.username, user_path(@goal.creator) %>
       <br/>
       <br/>
       <% end %>
-    <h4>Contributors</h4>
+    <h4 class="generic-subheading">Contributors</h4>
+    </br>
     <% if @goal.contributors.any? %>
       <ul>
         <% @goal.contributors.each do |user| %>
