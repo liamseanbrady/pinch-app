@@ -12,7 +12,7 @@
     <div class="jumbotron">
       <div class="container">
         <div class="col-md-6">
-          <h1 class="important-center jumbotron-heading">
+          <h1 class="jumbotron-heading">
             Open-sourcing learning for everyone...
           </h1>
           <h4 class="jumbotron-subheading">
@@ -21,6 +21,14 @@
           <p class="jumbotron-text">
             With Pinch, you can create, consume, and collate tried and tested <strong>free</strong> resources to learn about the topics you want to learn about right now. Join us today!
           </p>
+          <div class="row">
+            <div class="col-md-5">
+              <%= link_to 'How Pinch Works', register_path, class: 'btn btn-more btn-block' %>
+            </div>
+            <div class="col-md-5">
+              <%= link_to 'Register', register_path, class: 'btn btn-register btn-block' %>
+            </div>
+          </div>
         </div>
         <img src="/mr_pinchy.png" class="text-center col-sm-5 img-logo-jumbotron">
       </div>
