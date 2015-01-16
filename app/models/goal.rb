@@ -32,6 +32,9 @@ class Goal < ActiveRecord::Base
   def dropped_by_user(usr)
     permission = self.contribution_permissions.where(user: usr).first
     permission.dependent_goal_dropped if permission
+
+    request = self.contribution_requests.where(sender: usr).first
+    request.dependent_goal_dropped if request
   end
 
   def contribution_request_pending?(usr)
