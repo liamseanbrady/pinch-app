@@ -1,0 +1,5 @@
+<%= render 'shared/header', title: "Results for '#{@search_term}'" %>
+
+<% @goals.each do |goal| %>
+  <%= render 'goal', goal: goal %>
+<% end %>
