@@ -259,6 +259,8 @@ input:-webkit-autofill {
 
 .btn {
   border: none;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 .btn-default {
@@ -283,6 +285,36 @@ input:-webkit-autofill {
     background: lighten($main-theme, 7);
     color: #FFF;
   }
+}
+
+.btn-register {
+  background: $success;
+  color: #FFF;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 15px;
+  &:hover, &:active {
+    background: lighten($success, 5);
+    color: #FFF;
+  }
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.btn-more {
+  background: $grey;
+  color: #FFF;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 15px;
+  &:hover, &:active {
+    background: lighten($grey, 5);
+    color: #FFF;
+  }
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .btn-primary {
@@ -336,40 +368,36 @@ input:-webkit-autofill {
 
 .jumbotron {
   background: $x-light-grey;
+  background: url('http://subtlepatterns.com/patterns/footer_lodyas.png');
   width: 100%;
   margin-bottom: 100px;
 }
 
 h1.jumbotron-heading {
   font-size: 55px;
-  color: #333;
+  color: #FFF;
+  margin-top: 25px;
   margin-bottom: 20px;
   font-weight: 300;
   text-align: left;
 }
 
 h4.jumbotron-subheading {
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 20px;
   text-align: left;
   color: $main-theme;
 }
 
 p.jumbotron-text {
-  font-size: 18px;
-  color: darken($grey, 5);
-  padding-bottom: 50px;
+  font-size: 17px;
+  color: darken(#FFF, 5);
+  padding-bottom: 20px;
   font-weight: 300;
 }
 
 .img-logo-jumbotron {
-  margin-top: 50px;
+  margin-top: 90px;
   margin-left: 40px;
-}
-
-.pinchy-brand {
-  margin-top: 3px;
-  height: 40px;
-  width: 34px;
 }
 
