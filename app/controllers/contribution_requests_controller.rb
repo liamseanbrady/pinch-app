@@ -2,12 +2,12 @@ class ContributionRequestsController < ApplicationController
   before_action :set_goal, except: [:accept, :reject, :mark_as_read]
   before_action :set_contribution_request, only: [:destroy, :accept, :reject, :mark_as_read]
   before_action :require_user
-  before_action :disallow_creator, only: [:create, :destroy]
+  before_action :disallow_goal_creator, only: [:create, :destroy]
 
   def create
     if !@goal.pincher?(current_user)
       flash[:error] = 'You must pinch this goal first in order to contribute'
-      redirect_to :back
+      redirect_to :back and return
     end
 
     request = ContributionRequest.create(sender: current_user, recipient: @goal.creator, goal: @goal)
@@ -69,9 +69,9 @@ class ContributionRequestsController < ApplicationController
     @request = ContributionRequest.find(params[:id])
   end
 
-  def disallow_creator
+  def disallow_goal_creator
     if current_user == @goal.creator
-      flash[:error] = "You can't pinch your own goal"
+      flash[:error] = "You can't request to contribute on your own goal"
       redirect_to root_path
     end
   end
