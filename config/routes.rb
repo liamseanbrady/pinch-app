@@ -1,6 +1,7 @@
 PinchApp::Application.routes.draw do
-  root to: 'goals#index'
+  root to: 'welcome#about'
 
+  get '/about', to: 'welcome#about'
   get '/register', to: 'users#new', as: 'register'
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create'
