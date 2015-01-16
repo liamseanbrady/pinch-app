@@ -195,6 +195,21 @@ a:hover {
   }
 }
 
+.nav-search {
+  margin-top:8px;
+  margin-left: 18px;
+  input[type="text"] {
+    font-size: 15px;
+    border-bottom: 2px solid darken($x-light-grey, 3);
+    &:focus, &:active {
+      color: $dark-grey;
+      background-color: $x-light-grey;
+      border-bottom: 2px solid $x-light-grey;
+      outline: transparent;
+    }
+  }
+}
+
 .well {
   background: #F6F6F6;
   box-shadow: 0 0;
@@ -327,6 +342,54 @@ input:-webkit-autofill {
   &:hover, &:active {
     background: lighten($blue, 7);
     color: #FFF;
+  }
+}
+
+.btn-search {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  &:link, &:visited {
+    color: #FFF;
+  }
+  &:hover, &:active, &:focus {
+    color: #FFF;
+  }
+}
+
+nav button.btn-login {
+  a {
+    border: none;
+    background: none;
+    color: #FFF;
+    box-shadow: 0 0;
+    &:link, &:visited {
+      border: none;
+      background: none;
+      color: #FFF;
+      text-decoration: none;
+      box-shadow: 0 0;
+    }
+    &:hover, &:active, &:focus {
+      border: none;
+      background: none;
+      color: #FFF;
+      text-decoration: none;
+      box-shadow: 0 0;
+    }
+  }
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border: 1px solid #FFF;
+  background: $main-theme;
+  color: #FFF;
+  &:link, &:visited {
+    color: #FFF;
+    background: $main-theme;
+  }
+  &:hover, &:active {
+    color: #FFF;
+    border: 1px solid #FFF;
+    background: lighten($main-theme, 5);
   }
 }
 
