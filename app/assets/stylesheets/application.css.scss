@@ -21,13 +21,8 @@ $dark-grey: #666;
 $x-light-grey: #F6F6F6;
 $success: #5cb85c;
 
-p {
-  font-size: 16px;
-  color: $dark-grey; 
-}
-
-a:hover {
-  text-decoration: none;
+.generic-subheading {
+  color: $grey;
 }
 
 .badge {
@@ -215,20 +210,20 @@ a:hover {
   box-shadow: 0 0;
   border: 0;
   border-radius: 0;
+  height: 90%;
 }
 
-a {
-  color: $main-theme;
-  &:hover {
-    color: #333;
-  }
+.resource-content {
+  height: 180px;
 }
+
 
 .global-header {
   color: #BBB;
   font-weight: 100;
   font-size: 2.8em;
-  margin-bottom: 30px;
+  padding-top: 35px;
+  margin-bottom: 20px;
 }
 
 input[type="text"], input[type="password"], textarea.form-control {
@@ -462,5 +457,18 @@ p.jumbotron-text {
 .img-logo-jumbotron {
   margin-top: 90px;
   margin-left: 40px;
+}
+
+p {
+  font-size: 16px;
+  color: $dark-grey; 
+}
+
+a {
+  color: $main-theme;
+  &:hover {
+    color: #333;
+    text-decoration: none;
+  }
 }
 
