@@ -34,6 +34,7 @@ class ContributionRequestsController < ApplicationController
   def accept
     flash[:notice] = 'You accepted the request'
     @request.mark_as_accepted
+    # TODO: move this somewhere more appropriate
     ContributionPermission.create(user: @request.sender, goal: @request.goal)
     @request.mark_as_unread
 
