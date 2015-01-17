@@ -62,7 +62,7 @@ class Goal < ActiveRecord::Base
   end
 
   def total_likes
-    self.learning_resources.any? ? self.learning_resources.map(&:like_count).inject('+') : 0
+    self.no_learning_resources? ? 0 : self.learning_resources.map(&:like_count).inject('+')
   end
   
   def learning_resource_count
