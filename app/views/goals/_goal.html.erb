@@ -36,7 +36,7 @@
       <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success-disabled' do %>
         <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Request Pending...
       <% end %>
-    <% else %>
+    <% elsif !goal.contributor?(current_user) %>
       <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success' do %>
         <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Contribute
       <% end %>
