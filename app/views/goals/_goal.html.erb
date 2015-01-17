@@ -21,41 +21,42 @@
 
   <br/>
 
-  <% if logged_in? %>
-    <% if current_user == goal.creator %>
-      <%= link_to edit_goal_path(goal), class: 'btn btn-default' do %>
-        <span class="glyphicon glyphicon-md glyphicon-wrench"></span> Edit
-      <% end %>
+<% if logged_in? %>
+
+  <% if current_user == goal.creator %>
+    <%= link_to edit_goal_path(goal), class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-md glyphicon-wrench"></span> Edit
     <% end %>
-    <% if goal.pincher?(current_user) %>
-      <% if current_user != goal.creator %>
-        <%= link_to drop_goal_path(goal), method: 'post', class: 'btn btn-danger' do %>
-          <span class="glyphicon glyphicon-md glyphicon-trash"></span> Drop
-        <% end %>
-      <% end %>
-      <% if current_user != goal.creator && !goal.contributor?(current_user) %>
-        <% if goal.contribution_request_pending?(current_user) %>
-          <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success-disabled' do %>
-            <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Request Pending...
-          <% end %>
-        <% else %>
-          <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success' do %>
-            <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Contribute
-          <% end %>
-        <% end %>
-      <% end %>
+  <% end %>
+  
+  <% if goal.pincher?(current_user) %>
+    <%= link_to drop_goal_path(goal), method: 'post', class: 'btn btn-danger' do %>
+      <span class="glyphicon glyphicon-md glyphicon-trash"></span> Drop
     <% end %>
-    <% if current_user == goal.creator || goal.contributor?(current_user) %>
-      <%= link_to new_goal_learning_resource_path(goal), class: 'btn btn-primary' do %>
-        <span class="glyphicon glyphicon-md glyphicon-plus-sign"></span> Add resource
+    <% if !goal.contributor?(current_user) && goal.contribution_request_pending?(current_user) %>
+      <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success-disabled' do %>
+        <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Request Pending...
       <% end %>
-    <% end %>
-    <% if !goal.pincher?(current_user) && current_user != goal.creator %>
-      <%= link_to pinch_goal_path(goal), method: 'post', class: 'btn btn-pinch' do %>
-        <span class="glyphicon glyphicon-md glyphicon-send"></span> Pinch
+    <% else %>
+      <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success' do %>
+        <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Contribute
       <% end %>
     <% end %>
   <% end %>
+
+  <% if current_user == goal.creator || goal.contributor?(current_user) %>
+    <%= link_to new_goal_learning_resource_path(goal), class: 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-md glyphicon-plus-sign"></span> Add resource
+    <% end %>
+  <% end %>
+
+  <% if !goal.pincher?(current_user) && current_user != goal.creator %>
+    <%= link_to pinch_goal_path(goal), method: 'post', class: 'btn btn-pinch' do %>
+      <span class="glyphicon glyphicon-md glyphicon-send"></span> Pinch
+    <% end %>
+  <% end %>
+
+<% end %>
 </div>
 
 <br/>
