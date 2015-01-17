@@ -8,13 +8,12 @@
     <span class="pull-right label label-hot">New</span>
   <% end %>
 
-  <br/>
   <h4 class="goal-title"><%= link_to goal.title, goal_path(goal) %></h4>
   <p><%= goal.description %></p>
   <small>Created by <%= link_to goal.creator.username, user_path(goal.creator) %></small>
   <br/>
   <br/>
-  <p><strong><%= goal.learning_resources.size.zero? ? 'No' : goal.learning_resources.size %> learning resources available</strong></p>
+  <p><strong><%= goal.no_learning_resources? ? 'No' : goal.learning_resource_count %> learning resources available</strong></p>
   <p><strong>Pinchers: <%= goal.pincher_count %></strong></p>
   <p><strong>Contributors: <%= goal.contributor_count %></strong></p>
   <p><strong>Total likes: <%= goal.total_likes %></strong></p>
