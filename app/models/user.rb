@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   validates :password, length: {minimum: 8}, on: :create
   validates :username, length: {minimum: 3, maximum: 18}, uniqueness: { case_sensitive: false }
-  validates :email, presence: true, format: { with: /\A[\w\d]+[@][a-z]+.(com|co.uk)\z/ }, on: :create
+  validates :email, presence: true, format: { with: /\A[\w\d]+[@][a-z]+.(com|co.uk)\z/ }
   validates :tagline, length: {maximum: 35}
 
   def admin?
