@@ -29,20 +29,20 @@
             <h4>You have no unread notifications</h4>
           </div>
       <% else %>
-        <% current_user.fresh_open_in_requests.each do |request| %>
+        <% current_user.incoming_contribution_requests_pending_unread.each do |request| %>
           <p class="notification-text"><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p>
           <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
           <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
           <%= link_to 'Decide Later', mark_as_read_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-default' %>
         <% end %>
-        <% current_user.fresh_closed_out_requests.each do |request| %>
+        <% current_user.outgoing_contribution_requests_accepted_unread.each do |request| %>
           <p class="notification-text">Your request for contribution status on <%= link_to request.goal.title, goal_path(request.goal) %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
           <%= link_to 'Destroy', goal_contribution_request_path(request.goal, request), method: 'delete', class: 'btn btn-danger' %>
         <% end %>
       <% end %>
 
-      <% if current_user.notifications_of_goal_being_pinched.any? %>
-        <% current_user.notifications_of_goal_being_pinched.each do |pinched_notif| %>
+      <% if current_user.own_goals_pinched_notifications.any? %>
+        <% current_user.own_goals_pinched_notifications.each do |pinched_notif| %>
           <p class="notification-text"><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %> pinched <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %> on <%= display_datetime(pinched_notif.created_at) %><p>
           <%= link_to 'Destroy', pinch_notification_path(pinched_notif), method: 'delete', class: 'btn btn-danger' %>
         <% end %>
@@ -62,7 +62,7 @@
           </div>
       <% end %>
 
-      <% current_user.read_open_in_requests.each do |request| %>
+      <% current_user.incoming_contribution_requests_pending_read.each do |request| %>
         <p class="notification-text"><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p>
         <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
         <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
