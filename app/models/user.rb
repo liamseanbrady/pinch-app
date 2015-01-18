@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   has_many :public_goals, -> { where visibility: 'public' }, class_name: 'Goal'
   has_many :learning_resources
   has_many :likes
-  has_many :in_requests, foreign_key: 'recipient_id', class_name: 'ContributionRequest'
-  has_many :out_requests, foreign_key: 'sender_id', class_name: 'ContributionRequest'
+  has_many :incoming_contribution_requests, foreign_key: 'recipient_id', class_name: 'ContributionRequest'
+  has_many :outgoing_contribution_requests, foreign_key: 'sender_id', class_name: 'ContributionRequest'
 
   has_many :contribution_permissions
   has_many :contributing_goals, through: :contribution_permissions, source: :goal
@@ -28,32 +28,32 @@ class User < ActiveRecord::Base
 
   # TODO: Should these be made into associations, like has_many public_goals  ?
 
-  def open_in_requests
-    self.in_requests.where(accepted: nil)
+  def open_incoming_contribution_requests
+    self.incoming_contribution_requests.where(accepted: nil)
   end
 
-  def fresh_open_in_requests
-    self.open_in_requests.where(viewed_at: nil)
+  def fresh_open_incoming_contribution_requests
+    self.open_incoming_contribution_requests.where(viewed_at: nil)
   end
 
-  def read_open_in_requests
-    self.open_in_requests.where.not(viewed_at: nil)
+  def read_open_incoming_contribution_requests
+    self.open_incoming_contribution_requests.where.not(viewed_at: nil)
   end
 
-  def open_out_requests
-    self.out_requests.where(accepted: nil)
+  def open_outgoing_contribution_requests
+    self.outgoing_contribution_requests.where(accepted: nil)
   end
 
-  def closed_out_requests
-    self.out_requests.where.not(accepted: nil)
+  def closed_outgoing_contribution_requests
+    self.outgoing_contribution_requests.where.not(accepted: nil)
   end
 
-  def fresh_closed_out_requests
-    self.closed_out_requests.where(viewed_at: nil)
+  def fresh_closed_outgoing_contribution_requests
+    self.closed_outgoing_contribution_requests.where(viewed_at: nil)
   end
 
   def requests_activity_count
-    self.fresh_open_in_requests.count + self.fresh_closed_out_requests.count
+    self.fresh_open_incoming_contribution_requests.count + self.fresh_closed_outgoing_contribution_requests.count
   end
 
   def notification_count
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   end
 
   def read_request_count
-    self.in_requests.where.not(viewed_at: nil).count
+    self.incoming_contribution_requests.where.not(viewed_at: nil).count
   end
 
   def new_notification_count
