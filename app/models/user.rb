@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
   has_many :pinch_relationships
   has_many :pinches, through: :pinch_relationships, source: :goal
 
-  has_many :notifications_of_goal_being_pinched, foreign_key: 'goal_creator_id', class_name: 'PinchNotification'
-  has_many :pinch_notifications, foreign_key: 'pincher_id'
+  has_many :own_goals_pinched_notifications, foreign_key: 'goal_creator_id', class_name: 'PinchNotification'
+  has_many :others_goals_pinched_notifications, foreign_key: 'pincher_id', class_name: 'PinchNotification'
 
   validates :password, length: {minimum: 8}, on: :create
   validates :username, length: {minimum: 3, maximum: 18}, uniqueness: { case_sensitive: false }
@@ -28,44 +28,37 @@ class User < ActiveRecord::Base
 
   # TODO: Should these be made into associations, like has_many public_goals  ?
 
-  def open_incoming_contribution_requests
-    self.incoming_contribution_requests.where(accepted: nil)
+  def incoming_contribution_requests_pending
+    incoming_contribution_requests.pending
   end
 
-  def unread_open_incoming_contribution_requests
-    self.open_incoming_contribution_requests.where(viewed_at: nil)
+  def incoming_contribution_requests_pending_unread
+    incoming_contribution_requests_pending.unread
   end
 
-  def read_open_incoming_contribution_requests
-    self.open_incoming_contribution_requests.where.not(viewed_at: nil)
+  def incoming_contribution_requests_pending_read
+    incoming_contribution_requests_pending.read
   end
 
-  def open_outgoing_contribution_requests
-    self.outgoing_contribution_requests.where(accepted: nil)
+  def outgoing_contribution_requests_accepted_unread
+    outgoing_contribution_requests.accepted.unread
   end
 
-  def closed_outgoing_contribution_requests
-    self.outgoing_contribution_requests.where.not(accepted: nil)
-  end
-
-  def unread_closed_outgoing_contribution_requests
-    self.closed_outgoing_contribution_requests.where(viewed_at: nil)
-  end
-
+  # TODO: Needs better name
   def requests_activity_count
-    self.unread_open_incoming_contribution_requests.count + self.unread_closed_outgoing_contribution_requests.count
-  end
-
-  def notification_count
-    self.requests_activity_count + self.pinched_notifications.count
+    incoming_contribution_requests_pending_unread.count + outgoing_contribution_requests_accepted_unread.count
   end
 
   def read_request_count
-    self.incoming_contribution_requests.where.not(viewed_at: nil).count
+    incoming_contribution_requests_pending_read.count
+  end
+
+  def notification_count
+    requests_activity_count + own_goals_pinched_notifications.count
   end
 
   def new_notification_count
-    self.requests_activity_count + self.notifications_of_goal_being_pinched.where(viewed_at: nil).count
+    requests_activity_count + own_goals_pinched_notifications.unread.count
   end
 end
 
