@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     self.incoming_contribution_requests.where(accepted: nil)
   end
 
-  def fresh_open_incoming_contribution_requests
+  def unread_open_incoming_contribution_requests
     self.open_incoming_contribution_requests.where(viewed_at: nil)
   end
 
@@ -48,12 +48,12 @@ class User < ActiveRecord::Base
     self.outgoing_contribution_requests.where.not(accepted: nil)
   end
 
-  def fresh_closed_outgoing_contribution_requests
+  def unread_closed_outgoing_contribution_requests
     self.closed_outgoing_contribution_requests.where(viewed_at: nil)
   end
 
   def requests_activity_count
-    self.fresh_open_incoming_contribution_requests.count + self.fresh_closed_outgoing_contribution_requests.count
+    self.unread_open_incoming_contribution_requests.count + self.unread_closed_outgoing_contribution_requests.count
   end
 
   def notification_count
