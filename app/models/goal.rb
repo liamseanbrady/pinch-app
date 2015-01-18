@@ -1,4 +1,6 @@
 class Goal < ActiveRecord::Base
+  include Chronologicable
+
   ONE_FOR_GOAL_CREATOR = 1
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
@@ -51,14 +53,6 @@ class Goal < ActiveRecord::Base
 
   def public?
     self.visibility == 'public'
-  end
-
-  def days_ago_added_less_than?(num)
-    (Time.now.to_i - days_to_seconds(num)) < self.created_at.to_i
-  end
-
-  def days_to_seconds(num)
-    num * 24 * 60 * 60
   end
 
   def total_likes
