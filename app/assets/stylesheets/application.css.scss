@@ -18,6 +18,7 @@ $main-theme: #D85239;
 $blue: #8A6DA5;
 $grey: #B3B3B3;
 $dark-grey: #666;
+$x-dark-grey: #333;
 $x-light-grey: #F6F6F6;
 $success: #5cb85c;
 
@@ -213,8 +214,47 @@ $success: #5cb85c;
   height: 90%;
 }
 
+.panel-default {
+  border: 2px solid darken($x-light-grey, 2);
+}
+
+.panel-default h4 {
+  font-size: 17px;
+  font-weight: 500;
+  color: $dark-grey;
+  a:hover, a:active {
+    color: $main-theme;
+  }
+}
+
+.panel {
+  .panel-heading {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background: #FFF;
+    border-bottom: 2px solid darken($x-light-grey, 2);
+    .category {
+      a:link, a:visited {
+        color: darken($grey, 3);
+      }
+    }
+  }
+
+  .goal-body {
+    p {
+        font-size: 16px;
+        color: $dark-grey;
+        font-weight: 400; 
+    }
+  }
+}
+
 .resource-content {
   height: 180px;
+}
+
+.goal-body {
+  height: 150px;
 }
 
 
@@ -394,10 +434,6 @@ nav button.btn-login {
   background: darken($success, 10);
 }
 
-.goal-title {
-  margin-top: 20px;
-}
-
 .notification-container {
   margin-top: 30px;
   .nav .active .badge {
@@ -493,3 +529,52 @@ a {
   }
 }
 
+.color-hot {
+  color: $dark-grey;
+  .glyphicon {
+    color: $main-theme;
+    padding-top: 5px;
+    margin-left: 5px;
+    font-size: 16px;
+  }
+}
+
+.goal-title {
+  a:link, a:visited {
+    color: $x-dark-grey;
+  }
+  a:hover, a:active {
+    color: $dark-grey;
+  }
+}
+
+.info-glyph {
+  margin-left: 4px;
+  margin-top: -3px;
+  .glyphicon {
+    color: $main-theme;
+  }
+}
+
+.goal-info {
+  display: none;
+}
+
+#goal-buttons {
+  display: none;
+}
+
+#goal-buttons-close {
+  display: none;
+}
+
+#goal-buttons-open {
+  font-size: 16px;
+  margin-top: 22px;
+}
+
+#goal-buttons-close {
+  font-size: 14px;
+  margin-top: 12px;
+  margin-right: -3px;
+}
