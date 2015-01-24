@@ -21,14 +21,14 @@ $(document).ready(function() {
   });
 
   $(document).on('click', '#goal-buttons-open', function() {
-    $(this).hide();
-    $(this).siblings('#goal-buttons').show();
-    $(this).siblings('#goal-buttons-close').show();
+    $(this).toggle();
+    $(this).siblings('#goal-buttons').toggle();
+    $(this).siblings('#goal-buttons-close').toggle();
   });
 
   $(document).on('click', '#goal-buttons-close', function() {
-    $(this).hide();
-    $(this).siblings('#goal-buttons').hide();
-    $(this).siblings('#goal-buttons-open').show();
+    $(this).toggle();
+    $(this).siblings('#goal-buttons').toggle();
+    $(this).siblings('#goal-buttons-open').toggle();
   });
 });
