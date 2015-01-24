@@ -14,3 +14,21 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function() {
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+
+  $(document).on('click', '#goal-buttons-open', function() {
+    $(this).hide();
+    $(this).siblings('#goal-buttons').show();
+    $(this).siblings('#goal-buttons-close').show();
+  });
+
+  $(document).on('click', '#goal-buttons-close', function() {
+    $(this).hide();
+    $(this).siblings('#goal-buttons').hide();
+    $(this).siblings('#goal-buttons-open').show();
+  });
+});
