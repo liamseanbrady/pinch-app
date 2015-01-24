@@ -1,5 +1,8 @@
 <%= render 'shared/header', title: 'All Goals' %>
-
-<% @goals.each do |goal| %>
-  <%= render 'goal', goal: goal %>
-<% end %>
+<div class="row">
+  <% @goals.each do |goal| %>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <%= render 'goals/goal', goal: goal %>
+    </div>
+  <% end %>
+</div>
