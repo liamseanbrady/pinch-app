@@ -1,61 +1,79 @@
 <% show_visibility ||= false %>
 
-<div class="well">
-  <span class="badge"><%= link_to goal.category.name, category_path(goal.category) %></span>
-  <% if show_visibility %>
-    <span class="pull-right label label-<%= goal.visibility == 'public' ? 'success' : 'primary' %>"><%= goal.visibility %></span>
-  <% elsif goal.days_ago_added_less_than?(2) %>
-    <span class="pull-right label label-hot">New</span>
-  <% end %>
+<div class="panel panel-default custom-panel-heading">
+  <div class="panel-heading">
+    <span class="category"><%= link_to goal.category.name, category_path(goal.category) %></span>
+    <span class="pull-right color-hot info-glyph">
+      <span class="glyphicon glyphicon-heart" data-toggle="tooltip" data-placement="top" title= <%= goal.total_likes %> >
+      </span>
+    </span>
+    <span class="pull-right color-hot info-glyph">
+      <span class="glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title= <%= goal.contributor_count %> >
+      </span>
+      <span class="glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title= <%= goal.learning_resource_count %> >
+      </span>
+    </span>
+  </div>
 
-  <h4 class="goal-title"><%= link_to goal.title, goal_path(goal) %></h4>
-  <p><%= goal.description %></p>
-  <small>Created by <%= link_to goal.creator.username, user_path(goal.creator) %></small>
-  <br/>
-  <br/>
-  <p><strong><%= goal.no_learning_resources? ? 'No' : goal.learning_resource_count %> learning resources available</strong></p>
-  <p><strong>Pinchers: <%= goal.pincher_count %></strong></p>
-  <p><strong>Contributors: <%= goal.contributor_count %></strong></p>
-  <p><strong>Total likes: <%= goal.total_likes %></strong></p>
+  <div class="panel-body">
+    <div class="goal-body">
+      <h4 class="goal-title"><%= link_to goal.title, goal_path(goal) %></h4>
+      <p><%= goal.description %></p>
+       <!-- Use img here instead -->
+      <small>Created by <%= link_to goal.creator.username, user_path(goal.creator) %></small>
+    </div>
+    <br/>
+    <br/>
+    <div class="goal-info">
+      <p><strong><%= goal.no_learning_resources? ? 'No' : goal.learning_resource_count %> learning resources available</strong></p>
+      <p><strong>Pinchers: <%= goal.pincher_count %></strong></p>
+      <p><strong>Contributors: <%= goal.contributor_count %></strong></p>
+    </div>
 
-  <br/>
+    <br/>
 
-<% if logged_in? %>
+    <% if logged_in? %>
 
-  <% if current_user == goal.creator %>
-    <%= link_to edit_goal_path(goal), class: 'btn btn-default' do %>
-      <span class="glyphicon glyphicon-md glyphicon-wrench"></span> Edit
+      <span id="goal-buttons-open" class="glyphicon glyphicon-cog pull-left"></span>
+      <span id="goal-buttons-close" class="glyphicon glyphicon-chevron-left pull-right"></span>
+
+      <div id="goal-buttons">
+        <% if current_user == goal.creator %>
+          <%= link_to edit_goal_path(goal), class: 'btn btn-default' do %>
+            <span class="glyphicon glyphicon-md glyphicon-wrench"></span> Edit
+          <% end %>
+        <% end %>
+        
+        <% if goal.pincher?(current_user) %>
+          <%= link_to drop_goal_path(goal), method: 'post', class: 'btn btn-danger' do %>
+            <span class="glyphicon glyphicon-md glyphicon-trash"></span> Drop
+          <% end %>
+          <% if !goal.contributor?(current_user) && goal.contribution_request_pending?(current_user) %>
+            <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success-disabled' do %>
+              <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Pending...
+            <% end %>
+          <% elsif !goal.contributor?(current_user) %>
+            <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success' do %>
+              <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Contribute
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if current_user == goal.creator || goal.contributor?(current_user) %>
+          <%= link_to new_goal_learning_resource_path(goal), class: 'btn btn-primary' do %>
+            <span class="glyphicon glyphicon-md glyphicon-plus-sign"></span> Add resource
+          <% end %>
+        <% end %>
+
+        <% if !goal.pincher?(current_user) && current_user != goal.creator %>
+          <%= link_to pinch_goal_path(goal), method: 'post', class: 'btn btn-pinch' do %>
+            <span class="glyphicon glyphicon-md glyphicon-send"></span> Pinch
+          <% end %>
+        <% end %>
+      </div>
+
     <% end %>
-  <% end %>
-  
-  <% if goal.pincher?(current_user) %>
-    <%= link_to drop_goal_path(goal), method: 'post', class: 'btn btn-danger' do %>
-      <span class="glyphicon glyphicon-md glyphicon-trash"></span> Drop
-    <% end %>
-    <% if !goal.contributor?(current_user) && goal.contribution_request_pending?(current_user) %>
-      <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success-disabled' do %>
-        <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Request Pending...
-      <% end %>
-    <% elsif !goal.contributor?(current_user) %>
-      <%= link_to goal_contribution_requests_path(goal), method: 'post', class: 'btn btn-success' do %>
-        <span class="glyphicon glyphicon-md glyphicon-pencil"></span> Contribute
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <% if current_user == goal.creator || goal.contributor?(current_user) %>
-    <%= link_to new_goal_learning_resource_path(goal), class: 'btn btn-primary' do %>
-      <span class="glyphicon glyphicon-md glyphicon-plus-sign"></span> Add resource
-    <% end %>
-  <% end %>
-
-  <% if !goal.pincher?(current_user) && current_user != goal.creator %>
-    <%= link_to pinch_goal_path(goal), method: 'post', class: 'btn btn-pinch' do %>
-      <span class="glyphicon glyphicon-md glyphicon-send"></span> Pinch
-    <% end %>
-  <% end %>
-
-<% end %>
+  </div> 
 </div>
 
 <br/>
