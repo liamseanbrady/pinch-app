@@ -1,7 +1,7 @@
 <%= render 'shared/header', title: 'Your Goals' %>
 <div class="row">
   <% @user.goals.each do |goal| %>
-    <div class="col-lg-4">
+    <div class="col-lg-3 col-md-4 col-sm-6">
       <%= render 'goals/goal', goal: goal, show_visibility: true %>
     </div>
   <% end %>
@@ -10,7 +10,7 @@
 <%= render 'shared/header', title: 'Pinched Goals' %>
 <div class="row">
   <% @user.pinches.each do |goal| %>
-    <div class="col-lg-4">
+    <div class="col-lg-3 col-md-4 col-sm-6">
       <%= render 'goals/goal', goal: goal %>
     </div>
   <% end %>
