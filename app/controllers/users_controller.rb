@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :dashboard]
   before_action :require_user, only: [:edit, :update, :show, :dashboard, :notifications]
   before_action :require_user_is_set_user, only: [:edit, :update, :dashboard]
+  before_action :redirect_logged_in_user, only: [:new, :create]
 
   def new
     @user = User.new
@@ -50,6 +51,12 @@ class UsersController < ApplicationController
     if current_user != @user
       flash[:error] = 'You are not authorized to view this page'
       redirect_to root_path
+    end
+  end
+
+  def redirect_logged_in_user
+    if logged_in?
+      redirect_to dashboard_user_path(current_user)
     end
   end
 end
