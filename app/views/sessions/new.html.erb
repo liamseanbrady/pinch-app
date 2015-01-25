@@ -1,11 +1,15 @@
-<%= render 'shared/header', title: 'Log in' %>
+<div class="col-md-6 col-md-offset-3">
+  <%= render 'shared/header', title: 'Log in' %>
+  <%= form_tag '/login' do %>
+    <div class="form-group">
+      <%= label_tag :username, nil, class: 'sr-only' %>
+      <%= text_field_tag :username, params[:username] || '', placeholder: 'Username or Email Address', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password, nil, class: 'sr-only' %>
+      <%= password_field_tag :password, params[:password] || '', placeholder: 'Enter you password', class: 'form-control' %>
+    </div>
+    <%= submit_tag 'Log in', class: 'btn btn-success btn-block' %>
+  <% end %>
+</div>
 
-<%= form_tag '/login' do %>
-  <%= label_tag :username %>
-  <%= text_field_tag :username, params[:username] || '' %>
-  <br/>
-  <%= label_tag :password %>
-  <%= password_field_tag :password, params[:password] || '' %>
-  <br/>
-  <%= submit_tag 'Log in' %>
-<% end %>
