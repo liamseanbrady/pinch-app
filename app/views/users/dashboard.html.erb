@@ -7,11 +7,13 @@
   <% end %>
 </div>
 
-<%= render 'shared/header', title: 'Pinched Goals' %>
-<div class="row">
-  <% @user.pinches.each do |goal| %>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <%= render 'goals/goal', goal: goal %>
-    </div>
-  <% end %>
-</div>
+<% if @user.pinches.any? %>
+  <%= render 'shared/header', title: 'Pinched Goals' %>
+  <div class="row">
+    <% @user.pinches.each do |goal| %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <%= render 'goals/goal', goal: goal %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
