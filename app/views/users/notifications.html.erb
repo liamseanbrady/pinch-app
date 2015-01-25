@@ -19,56 +19,112 @@
     </ul>
   </div>
 
-  <div class="col-md-9 notification-panel">
-    <% if params[:tab].nil? %>
 
-      <% if current_user.new_notification_count.zero? %>
+<div class="col-md-9 notification-panel">
+
+              
+  <% if params[:tab].nil? %>
+    <div class="table-responsive">
+      <table id="mytable" class="table table-striped">
+        <% if current_user.new_notification_count.zero? %>
           <div class="empty-message text-center text-muted">
             <span class="glyphicon glyphicon-inbox glyphicon-lg"></span>
             <br/>
             <h4>You have no unread notifications</h4>
           </div>
-      <% else %>
-        <% current_user.incoming_contribution_requests_pending_unread.each do |request| %>
-          <p class="notification-text"><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p>
-          <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
-          <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
-          <%= link_to 'Decide Later', mark_as_read_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-default' %>
         <% end %>
-        <% current_user.outgoing_contribution_requests_accepted_unread.each do |request| %>
-          <p class="notification-text">Your request for contribution status on <%= link_to request.goal.title, goal_path(request.goal) %> was <%= request.accepted ? 'accepted' : 'rejected' %></p>
-          <%= link_to 'Destroy', goal_contribution_request_path(request.goal, request), method: 'delete', class: 'btn btn-danger' %>
+        <% if !current_user.new_notification_count.zero? || current_user.own_goals_pinched_notifications.any? %>
+          <thead>
+            <th>Sender</th>
+            <th>Message</th>
+            <th>Sent</th>
+            <th>Options</th>
+          </thead>
         <% end %>
-      <% end %>
 
-      <% if current_user.own_goals_pinched_notifications.any? %>
-        <% current_user.own_goals_pinched_notifications.each do |pinched_notif| %>
-          <p class="notification-text"><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %> pinched <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %> on <%= display_datetime(pinched_notif.created_at) %><p>
-          <%= link_to 'Destroy', pinch_notification_path(pinched_notif), method: 'delete', class: 'btn btn-danger' %>
+        <tbody>
+
+          <% if !current_user.new_notification_count.zero? %>
+            <% current_user.incoming_contribution_requests_pending_unread.each do |request| %>
+              <tr>
+                <td><%= link_to request.sender.username, user_path(request.sender) %></td>
+                <td class=""> I'd like to be a contributor to <%= link_to request.goal.title, goal_path(request.goal) %></td>
+                <td><%= display_datetime(request.created_at) %></td>
+                <td>
+                  <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
+                  <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
+                  <%= link_to 'Decide Later', mark_as_read_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-default' %>
+                </td>
+              </tr>
+            <% end %>
+            
+            <% current_user.outgoing_contribution_requests_accepted_unread.each do |request| %>
+              <tr>
+                <td><%= link_to request.recipient.username, user_path(request.recipient) %></td>
+                <td class="">Your request for contribution status on <%= link_to request.goal.title, goal_path(request.goal) %> was <%= request.accepted ? 'accepted' : 'rejected' %></td>
+                <td><%= display_datetime(request.created_at) %></td>
+                <td><%= link_to 'Destroy', goal_contribution_request_path(request.goal, request), method: 'delete', class: 'btn btn-danger' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+
+          <% if current_user.own_goals_pinched_notifications.any? %>
+            <% current_user.own_goals_pinched_notifications.each do |pinched_notif| %>
+              <tr>
+                <td><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %></td>
+                <td class="">Hey, I pinched your goal <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %></td>
+                <td><%= display_datetime(pinched_notif.created_at) %></td>
+                <td><%= link_to 'Destroy', pinch_notification_path(pinched_notif), method: 'delete', class: 'btn btn-danger' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+
+  <% if params[:tab] == 'read' %>
+    <div class="table-responsive">
+      <table id="mytable" class="table table-striped">
+
+        <% if !current_user.read_request_count.zero? || current_user.incoming_contribution_requests_pending_read.any? %>
+          <thead>
+            <th>Sender</th>
+            <th>Message</th>
+            <th>Sent</th>
+            <th>Options</th>
+          </thead>
         <% end %>
-      <% end %>
+      
+        <tbody>
 
-    <% end %>
+          <% if current_user.read_request_count.zero? %>
+              <div class="empty-message text-center text-muted">
+                <span class="glyphicon glyphicon-ok glyphicon-lg glyphicon-success"></span>
+                <br/>
+                <h4>Relax - you've taken care of everything.</h4>
+              </div>
+          <% end %>
 
-    <% if params[:tab] == 'read' %>
+          <% current_user.incoming_contribution_requests_pending_read.each do |request| %>
+            <tr>
+              <td><%= link_to request.sender.username, user_path(request.sender) %></td>
+              <td class=""> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %></td>
+              <td><%= display_datetime(request.created_at) %></td>
+              <td>
+              <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
+              <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
+              </td>
+            </tr>
+          <% end %>
 
-      <% if current_user.read_request_count.zero? %>
-          <div class="empty-message text-center text-muted">
-            <span class="glyphicon glyphicon-ok glyphicon-lg glyphicon-success"></span>
-            <br/>
-            <h4>Relax - you've taken care of everything.</h4>
-          </div>
-      <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 
-      <% current_user.incoming_contribution_requests_pending_read.each do |request| %>
-        <p class="notification-text"><%= link_to request.sender.username, user_path(request.sender) %> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %><p>
-        <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
-        <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
-      <% end %>
-    <% end %>
-
-  </div>
 
 </div>
+
 
 
