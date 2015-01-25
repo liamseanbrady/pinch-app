@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: /\A[\w\d]+[@][a-z]+.(com|co.uk)\z/ }
   validates :tagline, length: {maximum: 35}
 
+  before_save :gravatar_url if :email_changed?
+
+
   def admin?
     self.role == 'admin' if !self.role.blank?
   end
@@ -59,6 +62,11 @@ class User < ActiveRecord::Base
 
   def new_notification_count
     requests_activity_count + own_goals_pinched_notifications.unread.count
+  end
+
+  def gravatar_url
+    email_hash = Digest::MD5.hexdigest(self.email)
+    "http://www.gravatar.com/avatar/#{email_hash}"
   end
 end
 
