@@ -3,14 +3,40 @@
 <p class="lead"><%= @goal.description %></p>
 
 <br/>
+<br/>
+<br/>
 
+<div class="row resources col-md-8">
+  <h4 class="generic-subheading">Resources</h4>
+  <br/>
+  <div class="row">
+    <% @goal.learning_resources.each do |resource| %>
+      <div class="col-lg-6 col-md-6 col-sm-6 goal-grid">
+        <div class="well">
+          <div class="resource-content">
+            <p class="resource-summary"><%= link_to resource.summary, resource.url %></p>
+            <p><small>Submitted by <%= link_to resource.submitter.username, user_path(resource.submitter) %></small></p>
+          </div>
+          <div class="like-footer">
+            <span class="pull-left like-text"><span class="highlight"><%= resource.like_count %></span> <%= resource.like_count == 1 ? 'person loves' : 'people love' %> this resource</span>
+            <span class= <%= resource.liked_by?(current_user) ? 'fill' : 'clear' %>>
+              <%= link_to like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'pull-right' do %>
+                <span class="glyphicon glyphicon-heart"></span>
+              <% end %>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<div class="row col-md-12 contributors">
+<div class="row col-md-3 col-md-offset-1 contributors">
   <h4 class="generic-subheading">Contributors</h4>
   </br>
-  <div class="col-md-1 col-sm-3 col-xs-4 img-center">
+  <div class="col-md-4 col-sm-3 col-xs-4 img-center">
     <%= link_to user_path(@goal.creator) do %>
-      <img src="http://www.gravatar.com/avatar/fb38af3bfd0f713a90173e221dfaba24.png" alt="creator image" title=<%= @goal.creator.username %> class="img-responsive img-circle">
+      <img src=<%= "#{@goal.creator.gravatar_url}" %> alt="creator image" class="img-responsive img-circle" data-toggle="tooltip" data-placement="top" title= <%= "#{@goal.creator.username}" %> >
     <% end %>
     <div class="creator-label">
       <span class="label label-hot">Creator</span>
@@ -18,38 +44,11 @@
   </div>
   <% if @goal.contributors.any? %>
     <% @goal.contributors.each do |user| %>
-      <div class="col-md-1 col-sm-3 col-xs-4 img-center">
+      <div class="col-md-4 col-sm-3 col-xs-4 img-center">
         <%= link_to user_path(user) do %>
-          <img src="http://www.gravatar.com/avatar/fb38af3bfd0f713a90173e221dfaba24.png" alt="contributor image" title=<%= user.username %> class="img-responsive img-circle">
+          <img src= <%= "#{user.gravatar_url}" %> alt="contributor image" title=<%= user.username %> class="img-responsive img-circle" data-toggle="tooltip" data-placement="top" title= <%= "#{user.username}" %> >
         <% end %>
       </div>
     <% end %>
   <% end %>
-</div>
-
-<br/>
-<br/>
-
-<div class="resources">
-  <h4 class="generic-subheading">Resources</h4>
-  <br/>
-  <div class="row">
-    <% @goal.learning_resources.each do |resource| %>
-      <div class="col-lg-3 col-md-4 col-sm-6 goal-grid">
-        <div class="well panel">
-          <div class="resource-content">
-            <p><%= resource.summary %></p>
-            <p><small>Submitted by <%= link_to resource.submitter.username, user_path(resource.submitter) %></small></p>
-            <p><%= resource.like_count %> likes</p>
-          </div>
-          <%= link_to resource.url, class: 'btn btn-primary' do %>
-            <span class="glyphicon glyphicon-eye-open"></span> View
-          <% end %>
-          <%= link_to like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'btn btn-default' do %>
-            <span class="glyphicon glyphicon-thumbs-up"></span> Like
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
 </div>
