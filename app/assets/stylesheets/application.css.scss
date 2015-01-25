@@ -203,6 +203,23 @@ $danger: #E63048;
   }
 }
 
+.profile .nav-pills {
+  a {
+    background: #DDD;
+    color: #AAA;
+    &:hover {
+      background: #DDD;
+      color: #777;
+    }
+  }
+  li.active a {
+    background: $main-theme;
+    &:hover {
+      background: lighten($main-theme, 7);
+    }
+  }
+}
+
 .nav-tabs {
   li a {
     border: none;
@@ -264,6 +281,10 @@ $danger: #E63048;
   }
 }
 
+.goal-panel .panel-body {
+  height: 268px;
+}
+
 .panel {
   .panel-heading {
     padding-top: 14px;
@@ -279,9 +300,9 @@ $danger: #E63048;
 
   .goal-body {
     p {
-        font-size: 16px;
-        color: $dark-grey;
-        font-weight: 400;
+      font-size: 16px;
+      color: $dark-grey;
+      font-weight: 400;
     }
   }
 }
@@ -290,7 +311,8 @@ $danger: #E63048;
   .panel, .well {
     background: #FFF;
     box-shadow: 0 0;
-    border: 2px solid $x-light-grey;
+    border: 2px solid darken($x-light-grey, 8);
+    border-radius: 4px;
   }
 }
 
@@ -303,7 +325,7 @@ $danger: #E63048;
   font-size: 18px;
   font-weight: 600px;
   a:link, a:visited {
-    color: $dark-grey;
+    color: $x-dark-grey;
   }
   a:hover, a:active {
     color: $main-theme;
@@ -342,6 +364,14 @@ $danger: #E63048;
   color: #BBB;
   font-weight: 100;
   font-size: 2.8em;
+  padding-top: 35px;
+  margin-bottom: 20px;
+}
+
+.global-subtitle {
+  color: $main-theme;
+  font-weight: 100;
+  font-size: 1em;
   padding-top: 35px;
   margin-bottom: 20px;
 }
