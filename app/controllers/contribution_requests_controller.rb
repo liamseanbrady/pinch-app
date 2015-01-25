@@ -10,6 +10,11 @@ class ContributionRequestsController < ApplicationController
       redirect_to :back and return
     end
 
+    if !@goal.public?
+      flash[:error] = "You're not allowed to contribute to a private goal"
+      redirect_to :back and return
+    end
+
     request = ContributionRequest.create(sender: current_user, recipient: @goal.creator, goal: @goal)
 
     if request.valid?
