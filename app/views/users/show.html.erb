@@ -1,24 +1,31 @@
-<%= render 'shared/header', title: 'Your Profile', subtitle: "#{@user.tagline}" %>
+<%= render 'shared/header', title: "#{@user.username}", subtitle: " - #{@user.tagline}" %>
 
 <div class="col-md-3">
-  <br/>
-  <img src= <%= @user.gravatar_url %> alt= <%= @user.username %> class="img-responsive img-circle center-block">
-  <br/>
-  <br/>
-  <dl>
-    <dt>Username: </dt>
-    <dd><%= @user.username %></dd>
-    <dt>Member Since: </dt>
-    <dd><%= display_datetime(@user.created_at) %></dd>
-    <dt>Goals Created: </dt>
-    <dd><%= @user.public_goals.size %></dd>
-    <dt>Pinches: </dt>
-    <dd><%= @user.pinches.size %></dd>
-  </dl>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <img src= <%= @user.gravatar_url %> alt= <%= @user.username %> class="img-responsive img-circle center-block">
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @user.username %></span>
+      Username
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= display_datetime(@user.created_at) %></span>
+      Joined
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @user.public_goals.size %></span>
+      Goals Created
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @user.pinches.size %></span>
+      Pinches
+    </li>
+  </ul>
 </div>
 
-<div class="col-md-9">
-  <ul class="nav nav-tabs">
+<div class="col-md-9 profile">
+  <ul class="nav nav-pills nav-justified">
     <li role="presentation" class=<%= 'active' if params[:tab].nil? %>>
       <%= link_to user_path(@user) do %>
         <span class="glyphicon glyphicon-record glyphicon-md"></span> Goals
