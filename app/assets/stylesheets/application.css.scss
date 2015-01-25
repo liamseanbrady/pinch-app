@@ -21,9 +21,33 @@ $dark-grey: #666;
 $x-dark-grey: #333;
 $x-light-grey: #F6F6F6;
 $success: #5cb85c;
+$danger: #E63048;
 
 .generic-subheading {
   color: $grey;
+}
+
+.alert {
+  margin-top: 30px;
+  color: #FFF;
+  border: none;
+  .close {
+    color: #FFF;
+    opacity: 1;
+    margin-top: -3px;
+    a:hover, a:active {
+      opacity: 0.7;
+      text-shadow: 0;
+    }
+  }
+}
+
+.alert-danger {
+  background-color: $danger;
+}
+
+.alert-success {
+  background-color: $success;
 }
 
 .badge {
@@ -40,8 +64,21 @@ $success: #5cb85c;
   }
 }
 
+.label-public {
+  background-color: $success;
+}
+
+.label-private {
+  background-color: $grey;
+}
+
+.new-goal {
+  font-size: 14px;
+  width: 100%;
+}
+
 .label-hot {
-    background-color: $main-theme;
+  background-color: $main-theme;
 }
 
 .glyphicon-md {
@@ -244,13 +281,56 @@ $success: #5cb85c;
     p {
         font-size: 16px;
         color: $dark-grey;
-        font-weight: 400; 
+        font-weight: 400;
     }
+  }
+}
+
+.goal-grid {
+  .panel, .well {
+    background: #FFF;
+    box-shadow: 0 0;
+    border: 2px solid $x-light-grey;
   }
 }
 
 .resource-content {
   height: 180px;
+}
+
+.resource-summary {
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: 600px;
+  a:link, a:visited {
+    color: $dark-grey;
+  }
+  a:hover, a:active {
+    color: $main-theme;
+  }
+}
+
+.like-footer {
+  padding-bottom: 14px;
+  .clear a {
+    &:link, &:visited {
+      color: lighten($grey, 12);
+    }
+    &:hover, &:active {
+      color: $main-theme;
+    }
+  }
+  .fill a {
+    &:link, &:visited {
+      color: $main-theme;
+    }
+    &:hover, &:active {
+      color: $main-theme;
+    }
+  }
+  .highlight {
+    color: $main-theme;
+  }
 }
 
 .goal-body {
