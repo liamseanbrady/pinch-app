@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include Gravatarable
+  include Sluggable
 
   has_secure_password validations: false
 
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
   before_save :gravatar_url if :email_changed?
 
   gravatar_column :email
+  sluggable_column :username
 
 
   def admin?
