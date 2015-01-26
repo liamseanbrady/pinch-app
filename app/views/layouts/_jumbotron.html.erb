@@ -13,14 +13,16 @@
         </p>
         <div class="row">
           <div class="col-md-5">
-            <%= link_to 'How Pinch Works', register_path, class: 'btn btn-more btn-block' %>
+            <%= link_to 'How Pinch Works', '#about', class: 'btn btn-more btn-block' %>
           </div>
           <div class="col-md-5">
             <%= link_to 'Register', register_path, class: 'btn btn-register btn-block' %>
           </div>
         </div>
       </div>
-      <img src="/mr_pinchy.png" class="text-center col-sm-5 img-logo-jumbotron">
+      <div class="visible-md-block visible-lg-inline-block col-md-6">
+        <img src="/mr_pinchy.png" class="text-center col-md-12 img-logo-jumbotron">
+      </div>
     </div>
   </div>
 <% end %>
