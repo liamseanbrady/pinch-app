@@ -120,7 +120,7 @@ $danger: #E63048;
 }
 
 .about-box {
-  margin-top: 20px;
+  margin-top: 40px;
   padding-left: 30px;
   padding-right: 30px;
   p {
@@ -481,6 +481,9 @@ input:-webkit-autofill {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 15px;
+  &:link, &:visited {
+    color: #FFF;
+  }
   &:hover, &:active {
     background: lighten($success, 5);
     color: #FFF;
@@ -496,6 +499,9 @@ input:-webkit-autofill {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 15px;
+  &:link, &:visited {
+    color: #FFF;
+  }
   &:hover, &:active {
     background: lighten($grey, 5);
     color: #FFF;
@@ -629,7 +635,7 @@ p.jumbotron-text {
 }
 
 .img-logo-jumbotron {
-  margin-top: 90px;
+  margin-top: 50px;
   margin-left: 40px;
 }
 
