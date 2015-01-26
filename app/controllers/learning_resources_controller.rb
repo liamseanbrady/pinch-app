@@ -54,7 +54,7 @@ class LearningResourcesController < ApplicationController
   end
 
   def set_goal
-    @goal = Goal.find(params[:goal_id])
+    @goal = Goal.find_by(slug: params[:goal_id])
   end
 
   def require_goal_creator_or_contributor

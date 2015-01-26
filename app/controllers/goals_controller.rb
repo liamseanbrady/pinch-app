@@ -78,7 +78,7 @@ class GoalsController < ApplicationController
   end
 
   def set_goal
-    @goal = Goal.find(params[:id])
+    @goal = Goal.find_by(slug: params[:id])
   end
 
   def require_creator
