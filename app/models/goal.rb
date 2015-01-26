@@ -1,5 +1,6 @@
 class Goal < ActiveRecord::Base
   include Chronologicable
+  include Sluggable
 
   ONE_FOR_GOAL_CREATOR = 1
 
@@ -22,6 +23,8 @@ class Goal < ActiveRecord::Base
   validates :description, length: {minimum: 15, maximum: 100}
   validates :category, presence: true
   validates :visibility, presence: true
+
+  sluggable_column :title
 
   def pincher?(usr)
     self.pinchers.include?(usr)
