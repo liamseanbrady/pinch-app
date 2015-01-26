@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Gravatarable
+
   has_secure_password validations: false
 
   has_many :goals
@@ -23,6 +25,8 @@ class User < ActiveRecord::Base
   validates :tagline, length: {maximum: 35}
 
   before_save :gravatar_url if :email_changed?
+
+  gravatar_column :email
 
 
   def admin?
@@ -62,11 +66,6 @@ class User < ActiveRecord::Base
 
   def new_notification_count
     requests_activity_count + own_goals_pinched_notifications.unread.count
-  end
-
-  def gravatar_url
-    email_hash = Digest::MD5.hexdigest(self.email)
-    "http://www.gravatar.com/avatar/#{email_hash}"
   end
 end
 
