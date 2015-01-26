@@ -188,6 +188,7 @@ $danger: #E63048;
   }
 
   .navbar-header {
+    margin-top: 5px;
     .icon-bar {
       background-color: #FFF;
     }
@@ -722,3 +723,35 @@ a {
   margin-top: 12px;
   margin-right: -3px;
 }
+
+.nav-gravatar {
+  display: inline;
+  width: 30px;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  background-color: lighten($main-theme, 7);
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: lighten($main-theme, 7);
+}
+
+ul.nav.navbar-nav li {
+  a {
+    height: 60px;
+    padding-top: 20px;
+  }
+}
+
+ul.nav.navbar-nav .dropdown-menu > li {
+  a {
+    height: 40px;
+    padding-top: 10px;
+  }
+}
+
+ul.nav.navbar-nav li a.dropdown-toggle {
+  padding-top: 16px
+}
+
