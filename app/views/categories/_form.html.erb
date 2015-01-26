@@ -1,6 +1,10 @@
-<%= form_for @category do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<%= form_for @category, html: {role: 'form', autocomplete: "off"} do |f| %>
+  <div class="form-group">
+    <%= f.label :name, class: 'sr-only' %>
+    <%= f.text_field :name, placeholder: 'Enter a category name', class: 'form-control' %>
+  </div>
   <br/>
-  <%= f.submit 'Create Category' %>
+  <div class="form-group">
+    <%= f.submit 'Create Category', class: 'btn btn-success btn-block' %>
+  </div>
 <% end %>
