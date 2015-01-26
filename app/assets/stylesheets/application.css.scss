@@ -94,8 +94,8 @@ $danger: #E63048;
 }
 
 .glyphicon-about {
-  font-size: 110px;
-  text-align: center;
+  font-size: 40px;
+  color: $main-theme;
 }
 
 .glyphicon-purple {
@@ -110,8 +110,30 @@ $danger: #E63048;
   color: $success;
 }
 
-.about-box {
+.about-container {
+  margin-top: 0;
   margin-bottom: 90px;
+  h2 {
+    font-size: 22px;
+    color: $main-theme;
+  }
+}
+
+.about-box {
+  margin-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  p {
+    margin-top: 20px;
+  }
+}
+
+.footer {
+  text-align: center;
+  color: $grey;
+  border-top: 2px solid $x-light-grey;
+  padding-top: 25px;
+  margin-bottom: 25px;
 }
 
 .navbar {
@@ -376,6 +398,11 @@ $danger: #E63048;
   margin-bottom: 20px;
 }
 
+.list-group-item-padded {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
 input[type="text"], input[type="password"], textarea.form-control {
   font-size: 16px;
   color: darken($grey, 4);
@@ -571,10 +598,11 @@ nav button.btn-login {
 }
 
 .jumbotron {
-  background: $x-light-grey;
-  background: url('http://subtlepatterns.com/patterns/footer_lodyas.png');
+  background: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0)), url('http://7-themes.com/data_images/out/36/6894141-blurred.jpg') no-repeat right bottom;
+  background-size: 100% 100%;
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 70px;
+  padding-bottom: 6%;
 }
 
 h1.jumbotron-heading {
