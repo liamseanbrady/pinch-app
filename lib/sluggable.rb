@@ -31,9 +31,10 @@ module Sluggable
 
     def to_slug(str)
       str = str.strip
+      str.gsub!(/\//, '')
       str.gsub!(/\s/, '-')
       str.gsub!(/-+/, '-')
-      str.gsub!(/\A-+/, '')
+      str.downcase
     end
 
     def append_suffix(slug, id)
