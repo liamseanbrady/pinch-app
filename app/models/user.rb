@@ -22,10 +22,10 @@ class User < ActiveRecord::Base
 
   validates :password, length: {minimum: 8}, on: :create
   validates :username, length: {minimum: 3, maximum: 18}, uniqueness: { case_sensitive: false }
-  validates :email, presence: true, format: { with: /\A[\w\d]+[@][a-z]+.[a-z]\z/ }
+  validates :email, presence: true, format: { with: %r{\A[\w\d]+[@][a-z]+\.[a-zA-Z]+\z} }
   validates :tagline, length: {maximum: 35}
 
-  before_save :gravatar_url if :email_changed?
+  # before_save :gravatar_url if :email_changed?
 
   gravatar_column :email
   sluggable_column :username
