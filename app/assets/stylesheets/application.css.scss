@@ -158,10 +158,16 @@ $danger: #E63048;
     a {
       &:hover, &:active, &:visited {
         color: white;
-        background: lighten($main-theme, 3);
+        background: lighten($main-theme, 5);
       }
       &:link {
         color: white;
+      }
+    }
+    &.current a {
+      &:link, &:active, &:visited {
+        color: white;
+        background: lighten($main-theme, 5);
       }
     }
   }
