@@ -27,6 +27,7 @@ module Gravatarable
   module ClassMethods
     def call_class_methods
       class_attribute :email_addr
+      before_save :gravatar_url if "#{self.email_addr}_changed?".to_sym
     end
 
     def gravatar_column(col_name)
