@@ -45,8 +45,6 @@
 
     <% if logged_in? %>
 
-      
-
       <div >
         <% if current_user == goal.creator %>
           <%= link_to edit_goal_path(goal), class: '' do %>
