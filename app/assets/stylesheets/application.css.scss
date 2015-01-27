@@ -82,8 +82,13 @@ $danger: #E63048;
 }
 
 .glyphicon-md {
-  font-size: 16px;
-  margin-right: 3px;
+  font-size: 18px;
+  margin-left: 4px;
+  margin-right: 8px;
+  color: $grey;
+  &:hover, &:active {
+    color: $main-theme;
+  }
 }
 
 .glyphicon-lg {
