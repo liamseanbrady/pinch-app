@@ -27,7 +27,7 @@ class LearningResourcesController < ApplicationController
       redirect_to :back and return
     end
 
-    if !@goal.pincher?(current_user)
+    if !@goal.pincher?(current_user) && current_user != @goal.creator
       flash[:error] = 'You have to pinch a goal in order to like it!'
       redirect_to :back and return
     end
