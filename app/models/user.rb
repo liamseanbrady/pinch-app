@@ -25,8 +25,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: %r{\A[\w\d]+[@][a-z]+\.[a-zA-Z]+\z} }
   validates :tagline, length: {maximum: 35}
 
-  # before_save :gravatar_url if :email_changed?
-
   gravatar_column :email
   sluggable_column :username
 
