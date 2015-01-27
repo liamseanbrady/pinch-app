@@ -64,7 +64,7 @@ class GoalsController < ApplicationController
     @search_term = params[:search_term]
 
     if !@search_term.empty?
-      @goals = Goal.public_goals.where('LOWER(title) LIKE ?', "%#{@search_term}%")
+      @goals = Goal.public_goals.where('LOWER(title) LIKE ?', "%#{@search_term.downcase}%")
     else
       flash[:error] = 'Your search term was empty...'
       redirect_to :back
