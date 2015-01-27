@@ -18,6 +18,7 @@ class Goal < ActiveRecord::Base
   has_many :pinch_notifications
 
   scope :public_goals, -> { (where visibility: 'public') }
+  scope :popular, -> { order 'created_at desc'}
 
   validates :title, length: {minimum: 6}
   validates :description, length: {minimum: 15, maximum: 100}
