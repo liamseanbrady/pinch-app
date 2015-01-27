@@ -40,46 +40,9 @@
     <br/>
     <br/>
 
-
-
-
-    <% if logged_in? %>
-
-      <div >
-        <% if current_user == goal.creator %>
-          <%= link_to edit_goal_path(goal), class: '' do %>
-            <span class="glyphicon glyphicon-md glyphicon-wrench" data-toggle="tooltip" data-placement="top" title="Edit"></span>
-          <% end %>
-        <% end %>
-        
-        <% if goal.pincher?(current_user) %>
-          <%= link_to drop_goal_path(goal), method: 'post', class: '' do %>
-            <span class="glyphicon glyphicon-md glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Drop goal"></span>
-          <% end %>
-          <% if !goal.contributor?(current_user) && goal.contribution_request_pending?(current_user) %>
-              <span class="glyphicon glyphicon-lock glyphicon-md glyphicon-disabled" data-toggle="tooltip" data-placement="top" title="Request pending..."></span>
-          <% elsif !goal.contributor?(current_user) %>
-            <%= link_to goal_contribution_requests_path(goal), method: 'post', class: '' do %>
-              <span class="glyphicon glyphicon-lock glyphicon-md" data-toggle="tooltip" data-placement="top" title="Request contributor status"></span>
-            <% end %>
-          <% end %>
-        <% end %>
-
-        <% if current_user == goal.creator || goal.contributor?(current_user) %>
-          <%= link_to new_goal_learning_resource_path(goal), class: '' do %>
-            <span class="glyphicon glyphicon-md glyphicon-plus-sign" data-toggle="tooltip" data-placement="top" title="Add resource"></span>
-          <% end %>
-        <% end %>
-
-        <% if !goal.pincher?(current_user) && current_user != goal.creator %>
-          <%= link_to pinch_goal_path(goal), method: 'post', class: '' do %>
-            <span class="glyphicon glyphicon-bookmark glyphicon-md" data-toggle="tooltip" data-placement="top" title="Pinch" ></span>
-          <% end %>
-        <% end %>
-      </div>
-
-    <% end %>
-
+    <div class="row col-md-12">
+      <%= render 'goals/option_buttons', goal: goal %>
+    </div>
 
 
   </div> 
