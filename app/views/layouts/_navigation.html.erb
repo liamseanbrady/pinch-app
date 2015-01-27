@@ -23,16 +23,16 @@
 
       <ul class="nav navbar-nav">
         <% if logged_in? %>
-          <li class= <%= 'active' if params[:controller] == 'goals' && params[:action] == 'index' %> >
+          <li class= <%= 'current' if params[:controller] == 'goals' && params[:action] == 'index' %> >
             <%= link_to 'Browse', goals_path %>
           </li>
-          <li class= <%= 'active' if params[:action] == 'dashboard' %> >
+          <li class= <%= 'current' if params[:action] == 'dashboard' %> >
             <%= link_to 'Dashboard', dashboard_user_path(current_user) %>
           </li>
-          <li class= <%= 'active' if params[:controller] == 'goals' && params[:action] == 'new' %> >
+          <li class= <%= 'current' if params[:controller] == 'goals' && params[:action] == 'new' %> >
             <%= link_to 'New Goal', new_goal_path %>
           </li>
-          <li class= <%= 'active' if params[:controller] == 'categories' && params[:action] == 'new' %> >
+          <li class= <%= 'current' if params[:controller] == 'categories' && params[:action] == 'new' %> >
             <%= link_to 'New Category', new_category_path if current_user.admin? %>
           </li>
           <li class="dropdown">
