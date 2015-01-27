@@ -20,15 +20,11 @@ $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip()
   });
 
-  $(document).on('click', '#goal-buttons-open', function() {
-    $(this).toggle();
-    $(this).siblings('#goal-buttons').toggle();
-    $(this).siblings('#goal-buttons-close').toggle();
-  });
+  $('#search-form').hide();
 
-  $(document).on('click', '#goal-buttons-close', function() {
-    $(this).toggle();
-    $(this).siblings('#goal-buttons').toggle();
-    $(this).siblings('#goal-buttons-open').toggle();
+  $('#search-button').on('click', function() {
+    $('#search-form').toggle();
   });
 });
+
+
