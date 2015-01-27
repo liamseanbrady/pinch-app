@@ -285,8 +285,9 @@ $danger: #E63048;
 }
 
 .nav-search {
-  margin-top:8px;
-  margin-left: 18px;
+  margin-top:13px;
+  margin-left: 10px;
+  margin-right: 10px;
   input[type="text"] {
     font-size: 15px;
     border-bottom: 2px solid darken($x-light-grey, 3);
@@ -297,6 +298,24 @@ $danger: #E63048;
       outline: transparent;
     }
   }
+  .btn-default {
+    background: $main-theme;
+    border: 1px solid #FFF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    &:hover, &:active {
+      background: lighten($main-theme, 5);
+    }
+  }
+}
+
+#search-button {
+  margin-top: 18px;
+  font-size: 18px;
+  color: #FFF;
+  margin-right: 15px;
+  margin-left: 15px;
+  cursor: pointer;
 }
 
 .well {
