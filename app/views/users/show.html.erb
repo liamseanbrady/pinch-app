@@ -25,6 +25,12 @@
       <span class="badge"><%= @user.pinches.size %></span>
       Pinches
     </li>
+    <% if @user.github? %>
+      <li class="list-group-item list-group-item-link">
+        <span class="badge"><%= link_to @user.github_username, to_github(@user.github_username) %></span>
+        Github
+      </li>
+    <% end %>
   </ul>
 </div>
 
