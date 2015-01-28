@@ -9,7 +9,7 @@ module Gravatarable
 
   module InstanceMethods
     def gravatar_url
-      email = self.send(self.class.email_addr.to_sym)
+      email = self.send(self.class.email_addr.to_sym).downcase
       email_hash = hash_email(email)
       gravatar_path(email_hash)
     end
