@@ -23,9 +23,9 @@ class User < ActiveRecord::Base
 
   validates :password, length: {minimum: 8}, on: :create
   validates :username, length: {minimum: 3, maximum: 18}, uniqueness: { case_sensitive: false }
-  validates :email, presence: true, format: { with: %r{\A[\w\d]+[@][a-z]+\.[a-zA-Z]+\z} }
+  validates :email, presence: true, format: { with: %r{\A[\w\d]+[@][a-zA-Z]+\.[a-zA-Z]+\z} }
   validates :tagline, length: {maximum: 35}, allow_blank: true
-  validates :github_username, format: { with: %r{\A[^-][a-zA-z1-9-]+\z} }, allow_blank: true
+  validates :github_username, format: { with: %r{\A[^-][a-zA-Z1-9-]+\z} }, allow_blank: true
 
   gravatar_column :email
   sluggable_column :username
