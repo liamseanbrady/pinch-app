@@ -25,7 +25,15 @@ class Goal < ActiveRecord::Base
   validates :category, presence: true
   validates :visibility, presence: true
 
+  validate :pinched_goal_cannot_be_made_private
+
   sluggable_column :title
+
+  def pinched_goal_cannot_be_made_private
+    if visibility == 'private' && !pincher_count.zero?
+      errors.add(:visibility, "can't be private if your goal has been pinched.")
+    end
+  end
 
   def pincher?(usr)
     self.pinchers.include?(usr)
