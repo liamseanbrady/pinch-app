@@ -23,24 +23,45 @@ class LearningResourcesController < ApplicationController
 
   def like
     if current_user == @learning_resource.submitter
-      flash[:error] = "You can't like a resource you submitted"
-      redirect_to :back and return
+      respond_to do |format|
+        format.html do
+          flash.now[:error] = "You can't like a resource you submitted"
+          redirect_to :back and return
+        end
+        format.js do
+          @message = "You cannot like a resource you submitted"
+          return
+        end
+      end
     end
 
     if !@goal.pincher?(current_user) && current_user != @goal.creator
-      flash[:error] = 'You have to pinch a goal in order to like it!'
-      redirect_to :back and return
+      respond_to do |format|
+        format.html do
+          flash.now[:error] = 'You have to pinch the goal in order to like this resource!'
+          redirect_to :back and return
+        end
+        format.js do
+          @message = 'You have to pinch the goal in order to like this resource!'
+          return
+        end
+      end
     end
 
-    like = Like.create(creator: current_user, likeable: @learning_resource)
+    @like = Like.create(creator: current_user, likeable: @learning_resource)
 
-    if like.valid?
-      flash[:notice] = 'You liked a resource!'
-    else
-      flash[:error] = @learning_resource.liked_by?(current_user) ? 'You can only like a resource once' : 'There was an error liking the resource. Try again.'
+    respond_to do |format|
+      format.html do
+        if @like.valid?
+          flash[:notice] = 'You liked a resource!'
+        else
+          flash[:error] = @learning_resource.liked_by?(current_user) ? 'You can only like a resource once' : 'There was an error liking the resource. Try again.'
+        end
+
+        redirect_to :back
+      end
+      format.js
     end
-
-    redirect_to :back
   end
 
   private
