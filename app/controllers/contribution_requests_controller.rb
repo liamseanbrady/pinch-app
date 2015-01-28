@@ -57,7 +57,7 @@ class ContributionRequestsController < ApplicationController
   def mark_as_read
     if @request.read?
       flash[:error] = "You can only mark a request as read if it's currently unread..."
-      redirect_to :back
+      redirect_to :back and return
     end
 
     @request.mark_as_read
