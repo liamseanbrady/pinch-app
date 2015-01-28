@@ -4,13 +4,13 @@
   <div class="panel-heading">
     <span class="category"><%= link_to goal.category.name, category_path(goal.category) %></span>
     <span class="pull-right color-hot info-glyph">
-      <span class="glyphicon glyphicon-heart" data-toggle="tooltip" data-placement="top" title= <%= goal.total_likes %> >
+      <span class="glyphicon glyphicon-heart" data-toggle="tooltip" data-placement="top" title= "<%= goal.total_likes %>" >
       </span>
     </span>
     <span class="pull-right color-hot info-glyph">
-      <span class="glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title= <%= goal.contributor_count %> >
+      <span class="glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title= "<%= goal.contributor_count %> contributor<%= 's' if goal.contributor_count != 1 %>" >
       </span>
-      <span class="glyphicon glyphicon-file" data-toggle="tooltip" data-placement="top" title= <%= goal.learning_resource_count %> >
+      <span class="glyphicon glyphicon-file" data-toggle="tooltip" data-placement="top" title= "<%= goal.learning_resource_count %> resource<%= 's' if goal.learning_resource_count != 1 %>" >
       </span>
     </span>
   </div>
