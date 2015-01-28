@@ -3,7 +3,7 @@ module Gravatarable
     base.send(:include, InstanceMethods)
     base.extend ClassMethods
     base.class_eval do
-      class_class_setup
+      call_class_setup
     end
   end
 
