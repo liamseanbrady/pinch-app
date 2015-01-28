@@ -33,7 +33,7 @@
             <h4>You have no unread notifications</h4>
           </div>
         <% end %>
-        <% if !current_user.new_notification_count.zero? || current_user.own_goals_pinched_notifications.any? %>
+        <% if !current_user.new_notification_count.zero? || current_user.pinched_notifications.any? %>
           <thead>
             <th>Sender</th>
             <th>Message</th>
@@ -68,8 +68,8 @@
             <% end %>
           <% end %>
 
-          <% if current_user.own_goals_pinched_notifications.any? %>
-            <% current_user.own_goals_pinched_notifications.each do |pinched_notif| %>
+          <% if current_user.pinched_notifications.any? %>
+            <% current_user.pinched_notifications.each do |pinched_notif| %>
               <tr>
                 <td><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %></td>
                 <td class="">Hey, I pinched your goal <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %></td>
