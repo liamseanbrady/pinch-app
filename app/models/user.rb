@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   validates :username, length: {minimum: 3, maximum: 18}, uniqueness: { case_sensitive: false }
   validates :email, presence: true, format: { with: %r{\A[\w\d]+[@][a-z]+\.[a-zA-Z]+\z} }
   validates :tagline, length: {maximum: 35}
+  validates :github_username, format: { with: %r{\A[^-][a-zA-z1-9-]+\z} }, allow_blank: true
 
   gravatar_column :email
   sluggable_column :username
@@ -35,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   def github?
-    !self.github_username.nil?
+    !self.github_username.blank?
   end
 
   # TODO: Should these be made into associations, like has_many public_goals  ?
