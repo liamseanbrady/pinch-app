@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
     self.role == 'admin' if !self.role.blank?
   end
 
+  def github?
+    !self.github_username.nil?
+  end
+
   # TODO: Should these be made into associations, like has_many public_goals  ?
 
   def incoming_contribution_requests_pending
