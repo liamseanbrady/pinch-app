@@ -6,4 +6,8 @@ module ApplicationHelper
   def friendly_url(url)
     url.start_with?('http') ? url : "http://#{url}"
   end
+
+  def to_github(username)
+    "https://github.com/#{username}"
+  end
 end
