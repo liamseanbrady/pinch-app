@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def friendly_url(url)
-    url.start_with?('http://') ? url : "http://#{url}"
+    url.start_with?('http') ? url : "http://#{url}"
   end
 end
