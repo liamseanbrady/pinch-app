@@ -20,7 +20,7 @@
       <div class="col-lg-6 col-md-6 col-sm-6 goal-grid">
         <div class="well">
           <div class="resource-content">
-            <p class="resource-summary"><%= link_to resource.summary, resource.url %> <span class="glyphicon glyphicon-link"></span></p>
+            <p class="resource-summary"><%= link_to resource.summary, friendly_url(resource.url) %> <span class="glyphicon glyphicon-link"></span></p>
             <p><small>Submitted by <%= link_to resource.submitter.username, user_path(resource.submitter) %></small></p>
           </div>
           <div class="like-footer">
