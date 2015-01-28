@@ -24,9 +24,9 @@
             <p><small>Submitted by <%= link_to resource.submitter.username, user_path(resource.submitter) %></small></p>
           </div>
           <div class="like-footer">
-            <span class="pull-left like-text"><span class="highlight"><%= resource.like_count %></span> <%= resource.like_count == 1 ? 'person loves' : 'people love' %> this resource</span>
+            <span class="pull-left like-text"><span id="resource_<%= resource.id %>" class="highlight"><%= resource.like_count %></span> <span id="inflection_<%= resource.id %>"><%= resource.like_count == 1 ? 'person loves' : 'people love' %></span> this resource</span>
             <span class= <%= resource.liked_by?(current_user) ? 'fill' : 'clear' %>>
-              <%= link_to like_goal_learning_resource_path(resource.goal, resource), method: 'post', class: 'pull-right' do %>
+              <%= link_to like_goal_learning_resource_path(resource.goal, resource), method: 'post', remote: true, class: 'pull-right' do %>
                 <span class="glyphicon glyphicon-heart"></span>
               <% end %>
             </span>
