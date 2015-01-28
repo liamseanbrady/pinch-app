@@ -39,8 +39,6 @@ class User < ActiveRecord::Base
     !self.github_username.blank?
   end
 
-  # TODO: Should these be made into associations, like has_many public_goals  ?
-
   def incoming_contribution_requests_pending
     incoming_contribution_requests.pending
   end
