@@ -7,7 +7,7 @@ module ApplicationHelper
     url.start_with?('http') ? url : "http://#{url}"
   end
 
-  def to_github(username)
+  def to_github_url(username)
     "https://github.com/#{username}"
   end
 end
