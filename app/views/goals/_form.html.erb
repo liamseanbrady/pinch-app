@@ -1,13 +1,11 @@
 <%= form_for @goal, html: {role: 'form'} do |f| %>
   <div class="form-group">
     <%= f.label :title, class: 'sr-only' %>
-    <%= f.text_field :title, placeholder: "What's your general learning goal? (TIP: keep it short and descriptive)", class: 'form-control' %>
-    <br/>
+    <%= f.text_field :title, placeholder: "What's your learning goal? (example: Array Methods in Ruby)", class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :description, class: 'sr-only' %>
-    <%= f.text_area :description, rows: 3, placeholder: 'Give a brief description of exactly what you hope to learn...', class: 'form-control' %>
-    <br/>
+    <%= f.text_area :description, rows: 3, placeholder: 'Give a brief description of what you hope to learn...', class: 'form-control' %>
   </div>
   <div class="form-group">
     <label class="radio-inline" for="goal_public">
@@ -18,9 +16,7 @@
     <%= radio_button_tag 'goal[visibility]', "private", @goal.visibility != 'public' ? true : false %>
       Private
     </label>
-    <br/>
   </div>
-  <br/>
   <div class="form-group">
     <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: 'Select a category'}, {class: 'form-control'} %>
     <br/>
