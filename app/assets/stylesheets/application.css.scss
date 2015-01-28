@@ -442,6 +442,16 @@ $danger: #E63048;
   }
 }
 
+.list-group-item-link a {
+  &:link, &:visited {
+    background: $x-light-grey;
+    color: lighten($dark-grey, 8);
+  }
+  &:hover, &:active {
+    color: $main-theme;
+  }
+}
+
 .list-group-item-padded {
   padding-top: 25px;
   padding-bottom: 25px;
