@@ -19,7 +19,7 @@
     <div class="goal-body">
       <div class="new-goal">
         <% if goal.days_ago_added_less_than?(1) %>
-          <span class="label label-hot">This goal is brand new</span>
+          <span class="label label-hot">new</span>
         <% end %>
         <% if show_visibility %>
           <% if goal.visibility == 'public' %>
