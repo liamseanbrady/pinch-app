@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
   gravatar_column :email
   sluggable_column :username
 
+  # Can't set default at db level because it will show up in the registration form instead of placeholder
+  # This callback still runs even when the record's persisted? == true. Strange.
+  before_save :default_tagline_if_tagline_empty if :new_record?
+
 
   def admin?
     self.role == 'admin' if !self.role.blank?
@@ -37,6 +41,10 @@ class User < ActiveRecord::Base
 
   def github?
     !self.github_username.blank?
+  end
+
+  def default_tagline_if_tagline_empty
+    self.tagline = 'Here to learn...' if self.tagline.empty?
   end
 
   def incoming_contribution_requests_pending
