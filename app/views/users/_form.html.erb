@@ -12,6 +12,10 @@
     <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
   </div>
   <div class="form-group">
+    <%= f.label :github_username, class: 'sr-only' %>
+    <%= f.text_field :github_username, placeholder: "Github username (optional)", class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :tagline, class: 'sr-only' %>
     <%= f.text_area :tagline, rows: 2, placeholder: "Tagline - sum yourself up here", class: 'form-control' %>
   </div>
