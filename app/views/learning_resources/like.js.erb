@@ -1,0 +1,11 @@
+<% if !@like.nil? && @like.valid? %>
+  $("#resource_<%= @learning_resource.id %>").html("<%= @learning_resource.like_count %>");
+  $("#inflection_<%= @learning_resource.id %>").html("<%= @learning_resource.like_count == 1 ? 'person loves' : 'people love' %>");
+  $("#resource_<%= @learning_resource.id %>").parent().next('.clear').removeClass('clear').addClass('fill');
+<% else %>
+  <% if @message %>
+    alert("<%= @message %>")
+  <% else %>
+    alert('You can only like a resource once!')
+  <% end %>
+<% end %>
