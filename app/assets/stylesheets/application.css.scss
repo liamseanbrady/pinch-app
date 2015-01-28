@@ -326,6 +326,15 @@ $danger: #E63048;
   height: 90%;
 }
 
+.panel-danger {
+  color: $dark-grey;
+  font-size: 18px;
+  border: 2px solid $main-theme;
+  .panel-heading {
+    color: $main-theme;
+  }
+}
+
 .panel-default {
   border: 2px solid darken($x-light-grey, 2);
 }
@@ -491,6 +500,14 @@ input:-webkit-autofill {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form-container form {
+  margin-bottom: 40px;
 }
 
 .important-center {
