@@ -1,11 +1,11 @@
 <%= render 'shared/header', title: "#{@user.username}", subtitle: " - #{@user.tagline}" %>
-
-<div class="col-md-3">
+<div class="row">
+<div class="col-md-4">
   <ul class="list-group">
     <li class="list-group-item list-group-item-padded">
       <img src= <%= @user.gravatar_url %> alt= <%= @user.username %> class="img-responsive img-circle center-block">
     </li>
-    <li class="list-group-item">
+    <li class="list-group-item clearfix">
       <span class="badge"><%= @user.username %></span>
       Username
     </li>
@@ -15,7 +15,7 @@
     </li>
     <li class="list-group-item">
       <span class="badge"><%= @user.public_goals.size %></span>
-      Goals Created
+      Goals created
     </li>
     <li class="list-group-item">
       <span class="badge"><%= @user.contributing_goals.size %></span>
@@ -27,14 +27,14 @@
     </li>
     <% if @user.github? %>
       <li class="list-group-item list-group-item-link">
-        <span class="badge"><%= link_to @user.github_username, to_github_url(@user.github_username) %></span>
+        <span class="badge"><%= link_to @user.github_username, to_github_url(@user.github_username), target: 'blank' %></span>
         Github
       </li>
     <% end %>
   </ul>
 </div>
 
-<div class="col-md-9 profile">
+<div class="col-md-8 profile">
   <ul class="nav nav-pills">
     <li role="presentation" class=<%= 'active' if params[:tab].nil? %>>
       <%= link_to user_path(@user) do %>
@@ -70,4 +70,5 @@
       <%= render 'goals/goal', goal: goal %>
     <% end %>
   <% end %>
+</div>
 </div>
