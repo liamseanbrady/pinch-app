@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   sluggable_column :username
 
   # Can't set default at db level because it will show up in the registration form instead of placeholder
-  # This callback still runs even when the record's persisted? == true. Strange.
+  # This callback still runs even when self.persisted? == true. Strange.
   before_save :default_tagline_if_tagline_empty if :new_record?
 
 
