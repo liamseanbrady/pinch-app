@@ -2,7 +2,7 @@ class Goal < ActiveRecord::Base
   include Chronologicable
   include Sluggable
 
-  ONE_FOR_GOAL_CREATOR = 1
+  ONE_FOR_GOAL_OWNER = 1
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   belongs_to :category
@@ -60,7 +60,7 @@ class Goal < ActiveRecord::Base
   end
 
   def contributor_count
-    self.contributors.count + ONE_FOR_GOAL_CREATOR
+    self.contributors.count + goal_owner
   end
 
   def public?
@@ -77,5 +77,11 @@ class Goal < ActiveRecord::Base
 
   def learning_resources_empty?
     self.learning_resource_count.zero?
+  end
+
+  private
+
+  def goal_owner
+    ONE_FOR_GOAL_OWNER
   end
 end
