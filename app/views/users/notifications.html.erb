@@ -37,8 +37,8 @@
           <thead>
             <th>Sender</th>
             <th>Message</th>
-            <th>Sent</th>
-            <th>Options</th>
+            <th class="col-md-2">Date</th>
+            <th class="notification-buttons-unread">Options</th>
           </thead>
         <% end %>
 
@@ -48,12 +48,18 @@
             <% current_user.incoming_contribution_requests_pending_unread.each do |request| %>
               <tr>
                 <td><%= link_to request.sender.username, user_path(request.sender) %></td>
-                <td class=""> I'd like to be a contributor to <%= link_to request.goal.title, goal_path(request.goal) %></td>
+                <td> I'd like to be a contributor to <%= link_to request.goal.title, goal_path(request.goal) %></td>
                 <td><%= display_datetime(request.created_at) %></td>
                 <td>
-                  <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
-                  <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
-                  <%= link_to 'Decide Later', mark_as_read_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-default' %>
+                  <%= link_to accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success', 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Accept" do %>
+                    <span class="glyphicon glyphicon-ok"></span>
+                  <% end %>
+                  <%= link_to reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger', 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Reject" do %>
+                    <span class="glyphicon glyphicon-remove"></span>
+                  <% end %>
+                  <%= link_to mark_as_read_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-default', 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Mark as read" do %>
+                    <span class="glyphicon glyphicon-inbox"></span>
+                  <% end %>
                 </td>
               </tr>
             <% end %>
@@ -63,7 +69,7 @@
                 <td><%= link_to request.recipient.username, user_path(request.recipient) %></td>
                 <td class="">Your request for contribution status on <%= link_to request.goal.title, goal_path(request.goal) %> was <%= request.accepted ? 'accepted' : 'rejected' %></td>
                 <td><%= display_datetime(request.created_at) %></td>
-                <td><%= link_to 'Okay', goal_contribution_request_path(request.goal, request), method: 'delete', class: 'btn btn-default' %></td>
+                <td><%= link_to 'Okay', goal_contribution_request_path(request.goal, request), method: 'delete', class: 'btn btn-default btn-block' %></td>
               </tr>
             <% end %>
           <% end %>
@@ -74,7 +80,7 @@
                 <td><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %></td>
                 <td class="">Hey, I pinched your goal <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %></td>
                 <td><%= display_datetime(pinched_notif.created_at) %></td>
-                <td><%= link_to 'Okay', pinch_notification_path(pinched_notif), method: 'delete', class: 'btn btn-default' %></td>
+                <td><%= link_to 'Okay', pinch_notification_path(pinched_notif), method: 'delete', class: 'btn btn-default btn-block' %></td>
               </tr>
             <% end %>
           <% end %>
@@ -91,8 +97,8 @@
           <thead>
             <th>Sender</th>
             <th>Message</th>
-            <th>Sent</th>
-            <th>Options</th>
+            <th class="col-md-2">Date</th>
+            <th class="notification-buttons-read">Options</th>
           </thead>
         <% end %>
       
@@ -109,11 +115,15 @@
           <% current_user.incoming_contribution_requests_pending_read.each do |request| %>
             <tr>
               <td><%= link_to request.sender.username, user_path(request.sender) %></td>
-              <td class=""> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %></td>
+              <td> has requested contribution status on <%= link_to request.goal.title, goal_path(request.goal) %></td>
               <td><%= display_datetime(request.created_at) %></td>
               <td>
-              <%= link_to 'Accept', accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success' %>
-              <%= link_to 'Reject', reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger' %>
+              <%= link_to accept_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-success', 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Accept" do %>
+                <span class="glyphicon glyphicon-ok"></span>
+              <% end %>
+              <%= link_to reject_goal_contribution_request_path(request.goal, request), method: 'patch', class: 'btn btn-danger', 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Reject" do %>
+                <span class="glyphicon glyphicon-remove"></span>
+              <% end %>
               </td>
             </tr>
           <% end %>
