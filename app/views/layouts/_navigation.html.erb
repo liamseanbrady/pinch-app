@@ -46,7 +46,7 @@
               <% if current_user.new_notification_count.zero? %>
                 <%= current_user.username %>
               <% else %>
-                <%= current_user.username %>  <span class="glyphicon glyphicon-bell"></span>
+                <%= current_user.username %>  <div class="glyphicon glyphicon-bell glyphicon-notification"></div>
               <% end %>
               <span class="caret"></span>
             <% end %>
