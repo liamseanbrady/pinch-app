@@ -3,6 +3,8 @@ class LearningResourcesController < ApplicationController
   before_action :set_goal, only: [:new, :create, :like]
   before_action :require_user, only: [:new, :create, :like]
   before_action :require_goal_creator_or_contributor, only: [:new, :create]
+  before_action :disallow_resource_submitter, only: [:like]
+  before_action :require_pincher_or_creator, only: [:like]
 
   def new
     @learning_resource = LearningResource.new
@@ -22,32 +24,6 @@ class LearningResourcesController < ApplicationController
   end
 
   def like
-    if current_user == @learning_resource.submitter
-      respond_to do |format|
-        format.html do
-          flash.now[:error] = "You can't like a resource you submitted"
-          redirect_to :back and return
-        end
-        format.js do
-          @message = "You cannot like a resource you submitted"
-          return
-        end
-      end
-    end
-
-    if !@goal.pincher?(current_user) && current_user != @goal.creator
-      respond_to do |format|
-        format.html do
-          flash.now[:error] = 'You have to pinch the goal in order to like this resource!'
-          redirect_to :back and return
-        end
-        format.js do
-          @message = 'You have to pinch the goal in order to like this resource!'
-          return
-        end
-      end
-    end
-
     @like = Like.create(creator: current_user, likeable: @learning_resource)
 
     respond_to do |format|
@@ -82,6 +58,34 @@ class LearningResourcesController < ApplicationController
     if current_user != @goal.creator && !@goal.contributor?(current_user)
       flash[:error] = "You don't have permission to do that"
       redirect_to root_path
+    end
+  end
+
+  def disallow_resource_submitter
+    if current_user == @learning_resource.submitter
+      respond_to do |format|
+        format.html do
+          flash.now[:error] = "You can't like a resource you submitted"
+          redirect_to :back
+        end
+        format.js do
+          @message = "You cannot like a resource you submitted"
+        end
+      end
+    end
+  end
+
+  def require_pincher_or_creator
+    if !@goal.pincher?(current_user) && current_user != @goal.creator
+      respond_to do |format|
+        format.html do
+          flash.now[:error] = 'You have to pinch the goal in order to like this resource!'
+          redirect_to :back
+        end
+        format.js do
+          @message = 'You have to pinch the goal in order to like this resource!'
+        end
+      end
     end
   end
 end
