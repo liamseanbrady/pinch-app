@@ -15,7 +15,7 @@ class LearningResourcesController < ApplicationController
 
     if @learning_resource.save
       flash[:notice] = 'Your new resource was added to the goal'
-      redirect_to goals_path
+      redirect_to goal_path(@goal)
     else
       render :new
     end
