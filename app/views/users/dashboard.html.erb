@@ -1,8 +1,16 @@
 <%= render 'shared/header', title: 'Your Goals' %>
 <div class="row">
-  <% @user.goals.each do |goal| %>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <%= render 'goals/goal', goal: goal, show_visibility: true %>
+  <% if @user.goals.any? %>
+    <% @user.goals.each do |goal| %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <%= render 'goals/goal', goal: goal, show_visibility: true %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="col-lg-3 col-md-4 col-sm-12">
+      <%= link_to new_goal_path, class: 'btn btn-success btn-block' do %>
+        <span class="glyphicon glyphicon-plus"></span> Create Your First Goal
+      <% end %>
     </div>
   <% end %>
 </div>
