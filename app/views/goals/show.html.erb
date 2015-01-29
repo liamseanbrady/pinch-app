@@ -13,9 +13,18 @@
 <br/>
 
 <div class="row resources col-md-8">
-  <h4 class="generic-subheading">Resources</h4>
-  <br/>
+  <% if !@goal.learning_resources_empty? %>
+    <h4 class="generic-subheading">Resources</h4>
+    <br/>
+  <% end %>
   <div class="row">
+    <% if @goal.learning_resources_empty? %>
+      <div class="empty-message text-center">
+        <span class="glyphicon glyphicon-tree-deciduous glyphicon-lg"></span>
+        <br/>
+        <h4>If a tree falls in the forest, does anybody hear it?</h4>
+      </div>
+    <% end %>
     <% @goal.learning_resources.each do |resource| %>
       <div class="col-lg-6 col-md-6 col-sm-6 goal-grid">
         <div class="well">
