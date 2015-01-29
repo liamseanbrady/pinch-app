@@ -17,7 +17,7 @@ module Gravatarable
     private
 
     def gravatar_path(hsh)
-      "http://www.gravatar.com/avatar/#{hsh}"
+      "https://www.gravatar.com/avatar/#{hsh}"
     end
 
     def hash_email(email)
