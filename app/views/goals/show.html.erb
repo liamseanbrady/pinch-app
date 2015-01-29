@@ -59,7 +59,7 @@
   </div>
   <% if @goal.contributors.any? %>
     <% @goal.contributors.each do |user| %>
-      <div class="col-md-4 col-sm-3 col-xs-4 img-center">
+      <div class="col-md-4 col-sm-3 col-xs-4 img-center-padded">
         <%= link_to user_path(user) do %>
           <img src= <%= "#{user.gravatar_url}" %> alt="contributor image" title=<%= user.username %> class="img-responsive img-circle" data-toggle="tooltip" data-placement="top" title= <%= "#{user.username}" %> >
         <% end %>
