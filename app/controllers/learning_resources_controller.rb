@@ -24,6 +24,7 @@ class LearningResourcesController < ApplicationController
   end
 
   def like
+    bidning.pry
     @like = Like.create(creator: current_user, likeable: @learning_resource)
 
     respond_to do |format|
@@ -70,6 +71,8 @@ class LearningResourcesController < ApplicationController
         end
         format.js do
           @message = "You cannot like a resource you submitted"
+          render :like
+          return
         end
       end
     end
@@ -84,6 +87,8 @@ class LearningResourcesController < ApplicationController
         end
         format.js do
           @message = 'You have to pinch the goal in order to like this resource!'
+          render :like
+          return
         end
       end
     end
