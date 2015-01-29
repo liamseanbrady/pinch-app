@@ -170,6 +170,8 @@ $danger: #E63048;
       }
       &:link {
         color: white;
+        font-weight: 500;
+        font-size: 14px;
       }
     }
     &.current a {
@@ -187,9 +189,11 @@ $danger: #E63048;
 
   .dropdown .dropdown-menu {
     li a {
-      color: #333;
+      color: darken($dark-grey, 10);
+      font-weight: 400;
+      font-size: 14px;
       &:link {
-        color: #333;
+        color: $dark-grey;
       }
       &:hover, &:active {
         color: #FFF;
