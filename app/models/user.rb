@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   validates :password, length: {minimum: 8}, on: :create
   validates :username, length: {minimum: 3, maximum: 18}, uniqueness: { case_sensitive: false }
-  validates :email, presence: true, format: { with: %r{\A[\w\d]+[@][a-zA-Z]+\.[a-zA-Z]+\z} }
+  validates :email, presence: true, format: { with: %r{\A[a-z\d]+[@][a-z]+\.[a-z]+\z} }, uniqueness: true
   validates :tagline, length: {maximum: 35}, allow_blank: true
   validates :github_username, format: { with: %r{\A[^-][a-zA-Z1-9-]+\z} }, allow_blank: true
 
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
 
   # Can't set default at db level because it will show up in the registration form instead of placeholder
   # This callback still runs even when the record's persisted? == true. Strange.
-  # before_save :default_tagline_if_tagline_empty if :new_record?
+  before_save :default_tagline_if_tagline_empty if :new_record?
 
 
   def admin?
