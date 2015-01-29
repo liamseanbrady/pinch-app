@@ -71,8 +71,7 @@ class LearningResourcesController < ApplicationController
         end
         format.js do
           @message = "You cannot like a resource you submitted"
-          render :like
-          return
+          render :like and return
         end
       end
     end
@@ -87,8 +86,7 @@ class LearningResourcesController < ApplicationController
         end
         format.js do
           @message = 'You have to pinch the goal in order to like this resource!'
-          render :like
-          return
+          render :like and return
         end
       end
     end
