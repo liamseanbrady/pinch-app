@@ -94,6 +94,10 @@ $danger: #E63048;
   color: lighten($main-theme, 28);
 }
 
+.glyphicon-disabled {
+  cursor: pointer;
+}
+
 .glyphicon-md {
   font-size: 18px;
   margin-left: 4px;
@@ -238,6 +242,7 @@ $danger: #E63048;
 }
 
 .nav-pills {
+  margin-bottom: 20px;
   a {
     background: #DDD;
     color: #AAA;
@@ -255,6 +260,7 @@ $danger: #E63048;
 }
 
 .profile .nav-pills {
+  margin-bottom: 10px;
   a {
     background: #DDD;
     color: #AAA;
@@ -476,6 +482,7 @@ $danger: #E63048;
 .list-group-item-padded {
   padding-top: 25px;
   padding-bottom: 25px;
+  background: $x-light-grey;
 }
 
 input[type="text"], input[type="password"], textarea.form-control {
@@ -534,16 +541,17 @@ input:-webkit-autofill {
 }
 
 .btn-default {
-  background: $grey;
-  color: #FFF;
+  background: #DDD;
+  color: #AAA;
+  font-weight: 500;
   border: none;
   &:link, &:visited {
-    background: $grey;
-    color: #FFF;
+    background: #DDD;
+    color: #AAA;
   }
   &:hover, &:active {
-    background: lighten($grey, 7);
-    color: #FFF;
+    background: #E1E1E1;
+    color: #888;
   }
 }
 
@@ -564,6 +572,7 @@ input:-webkit-autofill {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 15px;
+  font-weight: 400;
   &:link, &:visited {
     color: #FFF;
   }
@@ -576,18 +585,19 @@ input:-webkit-autofill {
 }
 
 .btn-more {
-  background: $grey;
-  color: #FFF;
+  background: lighten($grey, 7);
+  color: #888;
   border: none;
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 15px;
+  font-weight: 400;
   &:link, &:visited {
-    color: #FFF;
+    color: #666;
   }
   &:hover, &:active {
-    background: lighten($grey, 5);
-    color: #FFF;
+    background: lighten($grey, 12);
+    color: #888;
   }
   margin-top: 5px;
   margin-bottom: 5px;
@@ -677,15 +687,6 @@ nav button.btn-login {
   font-weight: 100;
 }
 
-.notification-panel {
-  padding: 5px 50px;
-}
-
-.notification-text {
-  font-size: 18px;
-  color: $dark-grey;
-}
-
 .jumbotron {
   background: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0)), url('http://7-themes.com/data_images/out/36/6894141-blurred.jpg') no-repeat right bottom;
   background-size: 100% 100%;
@@ -732,6 +733,15 @@ p.jumbotron-text {
     text-align: center;
     margin: 0 auto;
     display: block;
+  }
+}
+
+.img-center-padded {
+  img {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 40px;
   }
 }
 
@@ -806,6 +816,51 @@ a {
   margin-right: -3px;
 }
 
+table {
+  margin-top: 0;
+  padding-top: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.notification-panel {
+  padding: 0px 15px;
+  margin-bottom: 20px;
+}
+
+.notification-text {
+  font-size: 18px;
+  color: $dark-grey;
+}
+
+.notification-panel .table-responsive {
+  border-radius: 4px 4px 0 0;
+  white-space: normal;
+}
+
+.notification-panel .table-striped {
+  th {
+    color: #FFF;
+    background: $main-theme;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: none;
+  }
+  td {
+    padding-top: 10px;
+  }
+  .notification-buttons-unread {
+    width: 18%;
+  }
+
+  .notification-buttons-read {
+    width: 16%;
+  }
+}
+
 .nav-gravatar {
   display: inline;
   width: 30px;
@@ -835,5 +890,11 @@ ul.nav.navbar-nav .dropdown-menu > li {
 
 ul.nav.navbar-nav li a.dropdown-toggle {
   padding-top: 16px
+}
+
+.table-responsive > .table > thead > tr > th, .table-responsive > .table > thead > tr > td, 
+.table-responsive > .table > tbody > tr > th, .table-responsive > .table > tbody > tr > td, 
+.table-responsive > .table > tfoot > tr > th, .table-responsive > .table > tfoot > tr > td {
+  white-space: normal;
 }
 
