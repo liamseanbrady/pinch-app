@@ -70,7 +70,7 @@ class Goal < ActiveRecord::Base
   def total_likes
     # First version nice, but not performant. Don't like calling LearningResource from here, but still cleaner.
     # self.learning_resources_empty? ? 0 : self.learning_resources.map(&:like_count).inject('+')
-    LearningResource.where(goal_id: 2).joins(:likes).count
+    LearningResource.where(goal_id: self.id).joins(:likes).count
   end
   
   def learning_resource_count
