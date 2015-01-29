@@ -86,6 +86,14 @@ $danger: #E63048;
   margin-right: 3px;
 }
 
+.glyphicon-notification {
+  font-size: 18px;
+  padding-left: 2px;
+  position: relative;
+  top: 4px;
+  color: lighten($main-theme, 28);
+}
+
 .glyphicon-md {
   font-size: 18px;
   margin-left: 4px;
