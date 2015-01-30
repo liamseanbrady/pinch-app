@@ -43,7 +43,7 @@
           <li class="dropdown">
             <%= link_to '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown', 'role' => 'button', 'aria-expanded' => 'false' do %>
               <img src=<%= current_user.gravatar_url %> class="img-responsive img-circle nav-gravatar">
-              <% if current_user.new_notification_count.zero? %>
+              <% if current_user.unread_notification_count.zero? %>
                 <%= current_user.username %>
               <% else %>
                 <%= current_user.username %>  <div class="glyphicon glyphicon-bell glyphicon-notification"></div>
@@ -54,7 +54,7 @@
               <li>
                 <%= link_to notifications_path do %>
                   <span class="glyphicon glyphicon-envelope"></span>
-                  <%= current_user.new_notification_count.zero? ? "Notifications" : "Notifications (#{current_user.new_notification_count})" %>
+                  <%= current_user.unread_notification_count.zero? ? "Notifications" : "Notifications (#{current_user.unread_notification_count})" %>
                 <% end %>
               </li>
               <li>
