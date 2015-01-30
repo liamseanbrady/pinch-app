@@ -1,10 +1,11 @@
 class LearningResourcesController < ApplicationController
-  before_action :set_learning_resource, only: [:like]
-  before_action :set_goal, only: [:new, :create, :like]
-  before_action :require_user, only: [:new, :create, :like]
+  before_action :set_learning_resource, only: [:like, :destroy]
+  before_action :set_goal, only: [:new, :create, :like, :destroy]
+  before_action :require_user, only: [:new, :create, :like, :destroy]
   before_action :require_goal_creator_or_contributor, only: [:new, :create]
   before_action :disallow_resource_submitter, only: [:like]
   before_action :require_pincher_or_creator, only: [:like]
+  before_action :require_submitter_and_active_contributor, only: [:destroy]
 
   def new
     @learning_resource = LearningResource.new
@@ -24,7 +25,6 @@ class LearningResourcesController < ApplicationController
   end
 
   def like
-    bidning.pry
     @like = Like.create(creator: current_user, likeable: @learning_resource)
 
     respond_to do |format|
@@ -39,6 +39,16 @@ class LearningResourcesController < ApplicationController
       end
       format.js
     end
+  end
+
+  def destroy
+    if @learning_resource.destroy
+      flash[:notice] = 'You successfully deleted your resource'
+    else
+      flash[:error] = 'The resource could not be deleted'
+    end
+
+    redirect_to :back
   end
 
   private
@@ -89,6 +99,13 @@ class LearningResourcesController < ApplicationController
           render :like and return
         end
       end
+    end
+  end
+
+  def require_submitter_and_active_contributor
+    unless @learning_resource.submitter == current_user && (@goal.contributor?(current_user) || @goal.creator)
+      flash[:error] = 'You can only delete this resource if you submitted it and are an active contributor to this goal...'
+      redirect_to :back
     end
   end
 end
