@@ -13,7 +13,7 @@
       </li>
       <li class=<%= 'active' if params[:tab] == 'read' %>>
         <%= link_to notifications_path(tab: 'read') do %>
-          Awaiting Action <span class="pull-right badge"><%= current_user.read_request_count %></span>
+          Awaiting Action <span class="pull-right badge"><%= current_user.read_requests_count %></span>
         <% end %>
       </li>
     </ul>
