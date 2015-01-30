@@ -9,7 +9,7 @@ class ContributionRequest < ActiveRecord::Base
   scope :read, -> { where.not viewed_at: nil }
 
   def dependent_goal_dropped
-    self.delete
+    self.destroy
   end
 
   def mark_as_accepted

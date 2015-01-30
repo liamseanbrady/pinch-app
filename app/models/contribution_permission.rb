@@ -3,6 +3,6 @@ class ContributionPermission < ActiveRecord::Base
   belongs_to :goal
 
   def dependent_goal_dropped
-    self.delete
+    self.destroy
   end
 end
