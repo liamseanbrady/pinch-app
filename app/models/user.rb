@@ -42,11 +42,11 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.role == 'admin' if !self.role.blank?
+    self.role == 'admin' if self.role.present?
   end
 
   def github_username_provided?
-    !self.github_username.blank?
+    self.github_username.present?
   end
 
   def incoming_contribution_requests_pending_unread

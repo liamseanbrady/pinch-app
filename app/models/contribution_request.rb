@@ -29,6 +29,6 @@ class ContributionRequest < ActiveRecord::Base
   end
 
   def read?
-    !self.viewed_at.nil?
+    self.viewed_at.present?
   end
 end
