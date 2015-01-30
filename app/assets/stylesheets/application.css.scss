@@ -321,6 +321,10 @@ $danger: #E63048;
     border: 1px solid #FFF;
     padding-top: 5px;
     padding-bottom: 5px;
+    color: #FFF;
+    &:link, &:visited {
+      color: #FFF;
+    }
     &:hover, &:active {
       background: lighten($main-theme, 5);
     }
@@ -426,6 +430,7 @@ $danger: #E63048;
     &:hover, &:active {
       color: $main-theme;
     }
+    margin-left: 5px;
   }
   .fill a {
     &:link, &:visited {
@@ -434,6 +439,7 @@ $danger: #E63048;
     &:hover, &:active {
       color: $main-theme;
     }
+    margin-left: 5px;
   }
   .highlight {
     color: $main-theme;
