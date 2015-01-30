@@ -37,4 +37,5 @@ PinchApp::Application.routes.draw do
   end
   resources :categories, except: [:destroy]
   resources :pinch_notifications, only: [:destroy]
+  resources :feedback, only: [:new, :create, :destroy]
 end
