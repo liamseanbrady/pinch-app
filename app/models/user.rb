@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :outgoing_contribution_requests, foreign_key: 'sender_id', class_name: 'ContributionRequest'
 
   has_many :contribution_permissions
-  has_many :contributing_goals, through: :contribution_permissions, source: :goal
+  has_many :goals_contributing_to, through: :contribution_permissions, source: :goal
 
   has_many :pinch_relationships
   has_many :pinches, through: :pinch_relationships, source: :goal

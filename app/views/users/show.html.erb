@@ -18,7 +18,7 @@
       Goals created
     </li>
     <li class="list-group-item">
-      <span class="badge"><%= @user.contributing_goals.size %></span>
+      <span class="badge"><%= @user.goals_contributing_to.size %></span>
       Goals contributing to
     </li>
     <li class="list-group-item">
@@ -66,7 +66,7 @@
     <% end %>
   <% end %>
   <% if params[:tab] == 'contributing' %>
-    <% @user.contributing_goals.each do |goal| %>
+    <% @user.goals_contributing_to.each do |goal| %>
       <%= render 'goals/goal', goal: goal %>
     <% end %>
   <% end %>
