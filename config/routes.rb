@@ -22,7 +22,7 @@ PinchApp::Application.routes.draw do
     collection do
       get :search
     end
-    resources :learning_resources, only: [:new, :create] do
+    resources :learning_resources, only: [:new, :create, :destroy] do
       member do
         post :like
       end
