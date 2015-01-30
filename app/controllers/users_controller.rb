@@ -35,7 +35,9 @@ class UsersController < ApplicationController
 
   def dashboard; end
 
-  def notifications; end
+  def notifications
+    @feedback = Feedback.all
+  end
 
   private
 
