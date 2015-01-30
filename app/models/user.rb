@@ -35,49 +35,42 @@ class User < ActiveRecord::Base
   before_save :default_tagline_if_tagline_empty if :new_record?
 
 
-  def admin?
-    self.role == 'admin' if !self.role.blank?
-  end
-
-  def github?
-    !self.github_username.blank?
-  end
-
   def default_tagline_if_tagline_empty
     self.tagline = 'Here to learn...' if self.tagline.empty?
   end
 
-  def incoming_contribution_requests_pending
-    incoming_contribution_requests.pending
+  def admin?
+    self.role == 'admin' if !self.role.blank?
+  end
+
+  def github_username_provided?
+    !self.github_username.blank?
   end
 
   def incoming_contribution_requests_pending_unread
-    incoming_contribution_requests_pending.unread
+    incoming_contribution_requests.pending.unread
   end
 
   def incoming_contribution_requests_pending_read
-    incoming_contribution_requests_pending.read
+    incoming_contribution_requests.pending.read
   end
 
   def outgoing_contribution_requests_accepted_unread
     outgoing_contribution_requests.accepted.unread
   end
 
-  # TODO: Needs better name
-  def requests_activity_count
-    incoming_contribution_requests_pending_unread.count + outgoing_contribution_requests_accepted_unread.count
-  end
-
-  def read_request_count
+  def read_requests_count
     incoming_contribution_requests_pending_read.count
   end
 
-  def notification_count
-    requests_activity_count + pinched_notifications.count
+  def unread_notification_count
+    total_unread_requests_count + pinched_notifications.unread.count
   end
 
-  def new_notification_count
-    requests_activity_count + pinched_notifications.unread.count
+  private
+
+  def total_unread_requests_count
+    incoming_contribution_requests_pending_unread.count + outgoing_contribution_requests_accepted_unread.count
   end
 end
 
