@@ -8,7 +8,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li class=<%= 'active' if params[:tab].nil? %>>
         <%= link_to notifications_path do %>
-          Unread <span class="badge pull-right"><%= current_user.new_notification_count %></span>
+          Unread <span class="badge pull-right"><%= current_user.unread_notification_count %></span>
         <% end %>
       </li>
       <li class=<%= 'active' if params[:tab] == 'read' %>>
@@ -26,14 +26,14 @@
   <% if params[:tab].nil? %>
     <div class="table-responsive">
       <table id="mytable" class="table table-striped">
-        <% if current_user.new_notification_count.zero? %>
+        <% if current_user.unread_notification_count.zero? %>
           <div class="empty-message text-center text-muted">
             <span class="glyphicon glyphicon-inbox glyphicon-lg"></span>
             <br/>
             <h4>You have no unread notifications</h4>
           </div>
         <% end %>
-        <% if !current_user.new_notification_count.zero? || current_user.pinched_notifications.any? %>
+        <% if !current_user.unread_notification_count.zero? || current_user.pinched_notifications.any? %>
           <thead>
             <th>Sender</th>
             <th>Message</th>
@@ -44,7 +44,7 @@
 
         <tbody>
 
-          <% if !current_user.new_notification_count.zero? %>
+          <% if !current_user.unread_notification_count.zero? %>
             <% current_user.incoming_contribution_requests_pending_unread.each do |request| %>
               <tr>
                 <td><%= link_to request.sender.username, user_path(request.sender) %></td>
@@ -93,7 +93,7 @@
     <div class="table-responsive">
       <table id="mytable" class="table table-striped">
 
-        <% if !current_user.read_request_count.zero? || current_user.incoming_contribution_requests_pending_read.any? %>
+        <% if !current_user.read_requests_count.zero? || current_user.incoming_contribution_requests_pending_read.any? %>
           <thead>
             <th>Sender</th>
             <th>Message</th>
@@ -104,7 +104,7 @@
       
         <tbody>
 
-          <% if current_user.read_request_count.zero? %>
+          <% if current_user.read_requests_count.zero? %>
               <div class="empty-message text-center text-muted">
                 <span class="glyphicon glyphicon-ok glyphicon-lg glyphicon-success"></span>
                 <br/>
