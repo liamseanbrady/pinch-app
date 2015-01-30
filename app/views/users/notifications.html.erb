@@ -44,6 +44,17 @@
 
         <tbody>
 
+          <% if current_user.admin? %>
+            <% @feedback.each do |feedback| %>
+              <tr>
+                <td><%= link_to feedback.sender.username, user_path(feedback.sender) %></td>
+                <td ><%= feedback.content %></td>
+                <td><%= display_datetime(feedback.created_at) %></td>
+                <td><%= link_to 'Delete', feedback_path(feedback), method: 'delete', class: 'btn btn-default btn-block' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+
           <% if !current_user.unread_notification_count.zero? %>
             <% current_user.incoming_contribution_requests_pending_unread.each do |request| %>
               <tr>
@@ -67,7 +78,7 @@
             <% current_user.outgoing_contribution_requests_accepted_unread.each do |request| %>
               <tr>
                 <td><%= link_to request.recipient.username, user_path(request.recipient) %></td>
-                <td class="">Your request for contribution status on <%= link_to request.goal.title, goal_path(request.goal) %> was <%= request.accepted ? 'accepted' : 'rejected' %></td>
+                <td>Your request for contribution status on <%= link_to request.goal.title, goal_path(request.goal) %> was <%= request.accepted ? 'accepted' : 'rejected' %></td>
                 <td><%= display_datetime(request.created_at) %></td>
                 <td><%= link_to 'Okay', goal_contribution_request_path(request.goal, request), method: 'delete', class: 'btn btn-default btn-block' %></td>
               </tr>
@@ -78,7 +89,7 @@
             <% current_user.pinched_notifications.each do |pinched_notif| %>
               <tr>
                 <td><%= link_to pinched_notif.pincher.username, user_path(pinched_notif.pincher) %></td>
-                <td class="">Hey, I pinched your goal <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %></td>
+                <td>Hey, I pinched your goal <%= link_to pinched_notif.goal.title, goal_path(pinched_notif.goal) %></td>
                 <td><%= display_datetime(pinched_notif.created_at) %></td>
                 <td><%= link_to 'Okay', pinch_notification_path(pinched_notif), method: 'delete', class: 'btn btn-default btn-block' %></td>
               </tr>
