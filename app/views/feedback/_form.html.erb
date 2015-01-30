@@ -1,0 +1,8 @@
+<%= form_for @feedback do |f| %>
+  <div class="form-group">
+    <%= f.label :content, class: 'sr-only' %>
+    <%= f.text_area :content, rows: 8, placeholder: 'Thanks for taking the time to provide feedback. Type your feedback here...', class: 'form-control' %>
+  </div>
+  <br/>
+  <%= f.submit 'Submit feedback', class: 'btn btn-success btn-block' %>
+<% end %>
