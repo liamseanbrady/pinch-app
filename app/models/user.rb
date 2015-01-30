@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   include Gravatarable
   include Sluggable
 
+  DEFAULT_TAGLINE = 'Here to learn...'
+
   has_secure_password validations: false
 
   has_many :goals
@@ -36,7 +38,7 @@ class User < ActiveRecord::Base
 
 
   def default_tagline_if_tagline_empty
-    self.tagline = 'Here to learn...' if self.tagline.empty?
+    self.tagline = DEFAULT_TAGLINE if self.tagline.empty?
   end
 
   def admin?
