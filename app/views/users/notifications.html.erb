@@ -33,7 +33,7 @@
             <h4>You have no unread notifications</h4>
           </div>
         <% end %>
-        <% if !current_user.unread_notification_count.zero? || current_user.pinched_notifications.any? %>
+        <% if current_user.unread_notification_count.nonzero? || current_user.pinched_notifications.any? %>
           <thead>
             <th>Sender</th>
             <th>Message</th>
@@ -55,7 +55,7 @@
             <% end %>
           <% end %>
 
-          <% if !current_user.unread_notification_count.zero? %>
+          <% if current_user.unread_notification_count.nonzero? %>
             <% current_user.incoming_contribution_requests_pending_unread.each do |request| %>
               <tr>
                 <td><%= link_to request.sender.username, user_path(request.sender) %></td>
@@ -104,7 +104,7 @@
     <div class="table-responsive">
       <table id="mytable" class="table table-striped">
 
-        <% if !current_user.read_requests_count.zero? || current_user.incoming_contribution_requests_pending_read.any? %>
+        <% if current_user.read_requests_count.nonzero? || current_user.incoming_contribution_requests_pending_read.any? %>
           <thead>
             <th>Sender</th>
             <th>Message</th>
